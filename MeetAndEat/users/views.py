@@ -3,7 +3,8 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from datetime import date, timedelta
 from .forms import UserRegisterForm, UserLoginForm
 from .models import NewUser
@@ -13,11 +14,9 @@ def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            user = User.objects.filter(username=username)
-            newuser = NewUser(user=user)
-            newuser.save()
+            user = form.save()
+            user.refresh_from_db()
+            user.save()
             messages.success(request, f'Twoje konto zostało założone, możesz sie teraz zalogować!')
             return redirect('login')
     else:
@@ -35,11 +34,12 @@ def login_user(request):
             username = request.POST['username']
             password = request.POST['password']
             user = authenticate(request, username=username, password=password)
-            newuser = NewUser.objects.filter(user=user)
             if user is not None:
                 if user.is_active:
-                    if date.today() - newuser.password_date > timedelta(days=30):
-                        return redirect('password_change')
+                    if date.today() - user.newuser.password_date > timedelta(days=30):
+                        login(request, user)
+                        messages.error(request, "Twoje hasło wygasło. Proszę wprowadzić nowe hasło.")
+                        return redirect('change_password')
                     else:
                         login(request, user)
                         return redirect('home')
@@ -49,6 +49,22 @@ def login_user(request):
     else:
        login_form = UserLoginForm();
     return render(request, 'users/login.html', {'form': login_form})
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Twoje hasło zostało pomyślnie zmienione :)')
+            user.newuser.password_date = date.today()
+            user.save()
+            return redirect('home')
+        else:
+            messages.error(request, 'Nieprawidłowe dane :(')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'users/change_pass.html', {'form':form})
 
 
 

@@ -26,4 +26,5 @@ urlpatterns = [
     path('home/', home_views.home, name='home'),
     path('login/', user_views.login_user, name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
+    path('pass_change/', user_views.change_password, name='change_password')
 ]
