@@ -6,9 +6,8 @@
     "\\home\\templates\\home",
     "\\MeetAndEat",
     "\\users",
-    "\\users\\templates",
-    "\\users\\templates\\users"
+    "\\users\\migrations"
   ],
-  "SelectedNode": "\\users\\templates\\users\\register.html",
+  "SelectedNode": "\\users\\views.py",
   "PreviewInSolutionExplorer": false
 }
