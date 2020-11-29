@@ -1,0 +1,259 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<title>Rezerwacje</title>
+	<meta name="description" content="Tutaj wpisujemy opis" />
+	<meta name="keywords" content="słowa kluczowe, tagi, o czym strona" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="jquery.scrollTo.min.js"></script>
+	
+	<script>
+	jQuery(function($)
+		{
+			//zresetuj scrolla
+			$.scrollTo(0);
+			$('.scrollup').click(function() { $.scrollTo($('body'), 1000); });
+		}
+		);
+	$(window).scroll(function()
+		{
+			if($(this).scrollTop()>300) $('.scrollup').fadeIn();
+			else $('.scrollup').fadeOut();		
+		}
+		);	
+	</script>
+	
+</head>
+
+<body>
+	<header>
+			<div id="logo">
+				Meet&Eat </br>
+				<a href="#" class="scrollup"></a>
+			</div> 
+			<nav>
+				<ol>
+						<li><a href="index.html">Strona główna</a></li>
+						<li><a href="menu.html">Menu </a>
+							<ul>
+								<li><a href="menu-pizze.html">Pizze</a></li>
+								<li><a href="menu-makarony.html">Makarony</a></li>
+								<li><a href="menu-kanapki.html">Włoskie kanapki</a></li>
+								<li><a href="menu.html">Napoje</a></li>
+								<li><a href="menu-desery.html">Desery</a></li>
+							</ul>
+						</li>
+						<li><a href="restauracja.html">Restauracja</a>
+							<ul>
+								<li><a href="restauracja.html">Cała restauracja</a></li>
+								<li><a href="restauracja.html">Stolik 1</a></li>
+								<li><a href="restauracja.html">Stolik 2</a></li>
+								<li><a href="restauracja.html">Stolik 3</a></li>
+								<li><a href="restauracja.html">Stolik 4</a></li>
+							</ul>
+						</li>
+						<li><a href="rezerwacje.html">Zarezerwuj</a></li>
+						<li><a href="kontakt.html">Kontakt</a></li>
+						<li><a href="#">Moje Konto</a>
+							<ul>
+								<li><a href="#">Moje konto</a></li>
+								<li><a href="#">Moje rezerwacje</a></li>
+								<li><a href="niezalogowany.html">Wyloguj</a></li>
+							</ul>
+						</li>
+				</ol>
+			</nav>
+	</header>
+	
+	<main>
+		<section>
+			<div id="container">
+				<div id="rezerwacje">
+				
+					<section>
+						<div class="parametry_zamowienia"> 
+						<div class="menu_tekst">Co Cię interesuje?</div>
+							<form action="" method="post">
+								
+								<div id="ile_osob">								
+									<fieldset>
+										<legend> Ile miejsc przy stoliku? </legend>
+										<div><label><input type="radio" value="1" name="miejsca">Jedno</label></div>
+										<div><label><input type="radio" value="2" name="miejsca">Dwa</label></div>
+										<div><label><input type="radio" value="3" name="miejsca">Trzy</label></div>
+										<div><label><input type="radio" value="4" name="miejsca">Cztery</label></div>
+										<div><label><input type="radio" value="5" name="miejsca">Pięć</label></div>
+									</fieldset> 
+								</div>
+								
+								<div class="ktora_godzina">
+									<fieldset>
+										<legend> Od której godziny? </legend>
+										<div id="godziny"><label><select id="godzina_start" name="godzina_start">
+												<option value="16">16</option>
+												<option value="17">17</option>
+												<option value="18">18</option>
+												<option value="19">19</option>
+												<option value="20">20</option>
+												<option value="21">21</option>
+										</select></label></div>
+										
+										<div id="minuty"><label><select id="minuty_start" name="minuty_start">
+												<option value="00">00</option>
+												<option value="15">15</option>
+												<option value="30">30</option>
+												<option value="45">45</option>
+										</select></label></div>
+										<div style="clear:both;"></div>
+									</fieldset> 
+								</div>
+								
+								<div class="ktora_godzina">
+									<fieldset>
+										<legend> Do której godziny? </legend>
+										<div id="godziny"><label><select id="godzina_koniec" name="godzina_koniec">
+												<option value="16">16</option>
+												<option value="17">17</option>
+												<option value="18">18</option>
+												<option value="19">19</option>
+												<option value="20">20</option>
+												<option value="21">21</option>
+										</select></label></div>
+										
+										<div id="minuty"><label><select id="minuty_koniec" name="minuty_koniec">
+												<option value="00">00</option>
+												<option value="15">15</option>
+												<option value="30">30</option>
+												<option value="45">45</option>
+										</select></label></div>
+										
+									</fieldset> 
+								</div>
+								
+							</form>
+						<div class="menu_tekst">Zaznacz stolik na planie restauracji</div>
+						</div>
+						
+						<div class="mapa_restauracji_kontener">
+							<div class="menu_tekst">Plan Restauracji</div>
+						</div>
+						
+						
+						<div style="clear:both;"></div>
+					</section>
+					
+					<section>
+						<div class="parametry_zamowienia">
+							<div class="menu_tekst">Dodaj danie</div>
+						</div> 
+						
+						<div class="parametry_zamowienia_menu">
+							<div class="menu_tekst">Menu</div>
+							<div class="menu_zamawianie">Pizze:</br>
+								<div class="zawartosc_zamawianie">Pizza Wiejska</div>
+								<div class="zawartosc_zamawianie">Pizza Grzybobranie</div>
+								<div class="zawartosc_zamawianie">Pizza Zemsta Szefa</div>
+								<div class="zawartosc_zamawianie">Pizza Hawajka</div>
+								<div class="zawartosc_zamawianie">Pizza Tunno</div>
+								<div class="zawartosc_zamawianie">Pizza 4ser</div>
+								<div class="zawartosc_zamawianie">Pizza Pepperoni</div>
+								<div class="zawartosc_zamawianie">Pizza Mięsna</div>
+								<div style="clear:both;"></div>
+							</div>
+							<div class="menu_zamawianie">Makarony: </br>
+								<div class="zawartosc_zamawianie">Tagiatelle</div>
+								<div class="zawartosc_zamawianie">Spaghetti</div>
+								<div class="zawartosc_zamawianie">Łazanki</div>
+								<div class="zawartosc_zamawianie">Z Kurczakiem</div>
+								<div class="zawartosc_zamawianie">Carbonara</div>
+								<div class="zawartosc_zamawianie">Z Owocami Morza</div>
+								<div class="zawartosc_zamawianie">Cannelloni</div>
+								<div class="zawartosc_zamawianie">Z Grzybami</div>
+								<div style="clear:both;"></div>
+							</div>
+							<div class="menu_zamawianie">Włoskie kanapki:</br>
+								<div class="zawartosc_zamawianie">Banh Mi</div>
+								<div class="zawartosc_zamawianie">Kati Roll</div>
+								<div class="zawartosc_zamawianie">Bunny Chow</div>
+								<div class="zawartosc_zamawianie">Kanapka Kubańska</div>
+								<div style="clear:both;"></div>
+							</div>							
+							<div class="menu_zamawianie">Napoje:</br>
+								<div class="zawartosc_zamawianie">Woda</div>
+								<div class="zawartosc_zamawianie">CocaCola</div>
+								<div class="zawartosc_zamawianie">Fanta</div>
+								<div class="zawartosc_zamawianie">Sok jabłkowy</div>
+								<div class="zawartosc_zamawianie">Kawa</div>
+								<div class="zawartosc_zamawianie">Sprite</div>
+								<div class="zawartosc_zamawianie">Piwo Lager</div>
+								<div class="zawartosc_zamawianie">Piwo Ciemne</div>
+								<div class="zawartosc_zamawianie">Wino Białe</div>
+								<div class="zawartosc_zamawianie">Wino Czerwone</div>
+								<div style="clear:both;"></div>
+							</div>
+							<div class="menu_zamawianie">Desery:</br>
+								<div class="zawartosc_zamawianie">Lody</div>
+								<div class="zawartosc_zamawianie">Szarlotka</div>
+								<div class="zawartosc_zamawianie">Ciasto Bananowe</div>
+								<div class="zawartosc_zamawianie">Sernik</div>
+								<div class="zawartosc_zamawianie">Ciastko Francuzkie</div>
+								<div class="zawartosc_zamawianie">Czekoladowe marzenie</div>
+								<div class="zawartosc_zamawianie">Piwo Lager</div>
+								<div class="zawartosc_zamawianie">Piwo Ciemne</div>
+								<div class="zawartosc_zamawianie">Wino Białe</div>
+								
+								<div style="clear:both;"></div>
+							</div>
+						</div>
+						
+						<div class="parametry_zamowienia2">
+							<div class="menu_tekst">Edytuj danie</div>
+						</div>
+						
+						<div style="clear:both;"></div>
+						
+						<div class="akceptuj">
+							Akceptuj
+						</div>
+					</section>
+					
+				</div>
+			</div>
+		</section>
+	</main>
+	
+	<footer>
+		<div id="stopka">
+				Meet & Eat </br>
+		</div>
+	</footer>	
+	
+	<script src="jquery-1.11.3.min.js"></script>	
+		<script>
+			$(document).ready(function() {
+			var NavY = $('nav').offset().top;
+			 
+			var stickyNav = function(){
+			var ScrollY = $(window).scrollTop();
+				  
+			if (ScrollY > NavY) { 
+				$('nav').addClass('sticky');
+			} else {
+				$('nav').removeClass('sticky'); 
+			}
+			};
+			 
+			stickyNav();
+			 
+			$(window).scroll(function() {
+				stickyNav();
+			});
+			});
+		</script>
+	
+</body>
+</html>

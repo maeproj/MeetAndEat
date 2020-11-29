@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<title>Menu-Napoje</title>
+	<meta name="description" content="Tutaj wpisujemy opis" />
+	<meta name="keywords" content="słowa kluczowe, tagi, o czym strona" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<header>
+		<div id="logo">
+			Meet&Eat </br>
+		</div> 
+		<nav>
+			<ol>
+					<li><a href="index.html">Strona główna</a></li>
+					<li><a href="menu.html">Menu </a>
+						<ul>
+							<li><a href="menu-pizze.html">Pizze</a></li>
+							<li><a href="menu-makarony.html">Makarony</a></li>
+							<li><a href="menu-kanapki.html">Włoskie kanapki</a></li>
+							<li><a href="menu.html">Napoje</a></li>
+							<li><a href="menu-desery.html">Desery</a></li>
+						</ul>
+					</li>
+					<li><a href="restauracja.html">Restauracja</a>
+						<ul>
+							<li><a href="restauracja.html">Cała restauracja</a></li>
+							<li><a href="restauracja.html">Stolik 1</a></li>
+							<li><a href="restauracja.html">Stolik 2</a></li>
+							<li><a href="restauracja.html">Stolik 3</a></li>
+							<li><a href="restauracja.html">Stolik 4</a></li>
+						</ul>
+					</li>
+					<li><a href="rezerwacje.html">Zarezerwuj</a></li>
+					<li><a href="kontakt.html">Kontakt</a></li>
+					<li><a href="#">Moje Konto</a>
+						<ul>
+							<li><a href="#">Moje konto</a></li>
+							<li><a href="#">Moje rezerwacje</a></li>
+							<li><a href="niezalogowany.html">Wyloguj</a></li>
+						</ul>
+					</li>
+			</ol>
+		</nav>
+	</header>
+	
+	<main>
+		<section>
+			<div id="container">
+				<div id="strona_glowna">	
+					<div id="pole_menu">
+						<div class="zawartosc">Woda</div>
+						<div class="zawartosc">CocaCola</div>
+						<div class="zawartosc">Fanta</div>
+						<div class="zawartosc">Sok jabłkowy</div>
+						<div class="zawartosc">Kawa</div>
+						<div class="zawartosc">Sprite</div>
+						<div class="zawartosc">Piwo Lager</div>
+						<div class="zawartosc">Piwo Ciemne</div>
+						<div class="zawartosc">Wino Białe</div>
+						<div class="zawartosc">Wino Czerwone</div>
+						<div style="clear:both;"></div>
+					</div>
+					<div style="clear:both;"></div>
+				</div>	
+			</div>
+		</section>
+	</main>
+	
+	<footer>
+		<div id="stopka">
+				Meet & Eat </br>
+		</div>
+	</footer>
+	
+	<script src="jquery-1.11.3.min.js"></script>	
+		<script>
+			$(document).ready(function() {
+			var NavY = $('nav').offset().top;
+			 
+			var stickyNav = function(){
+			var ScrollY = $(window).scrollTop();
+				  
+			if (ScrollY > NavY) { 
+				$('nav').addClass('sticky');
+			} else {
+				$('nav').removeClass('sticky'); 
+			}
+			};
+			 
+			stickyNav();
+			 
+			$(window).scroll(function() {
+				stickyNav();
+			});
+			});
+		</script>
+	
+</body>
+
+</html>
