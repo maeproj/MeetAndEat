@@ -27,10 +27,18 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+BOOTSTRAP4 = {
+    'include_jquery': True,
+    }
+
 
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap_datepicker_plus',
+    'bootstrap4',
+    'reservation.apps.ReservationConfig',
+    'menu.apps.MenuConfig',
     'home.apps.HomeConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
@@ -83,6 +91,8 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+ALLOWED_HOSTS = ["localhost", "192.168.0.10"]
 
 
 # Password validation

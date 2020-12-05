@@ -1,11 +1,6 @@
 from django import forms
-from django.conf import settings
-from django.contrib.auth.hashers import check_password
-from django.contrib.auth.models import models, User
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.backends import BaseBackend
-from datetime import date
-from .models import NewUser
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
