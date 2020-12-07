@@ -15,10 +15,6 @@
 						<div class="menu_tekst">Co Cię interesuje?</div>
 						<form action="" method="post">
 							{% csrf_token %}
-							{% load bootstrap4 %}
-							{% bootstrap_css %}
-							{% bootstrap_javascript jquery='full' %}
-							{{form.media}}
 							<div id="ile_osob">
 								<fieldset>
 									<!--<legend> Ile miejsc przy stoliku? </legend>
@@ -41,23 +37,23 @@
 							<div class="ktora_godzina">
 								<fieldset>
 									<legend> Od której godziny? </legend>
-									{{ form.time_begin }}
-									<!--<div id="godziny">-->
-										
+									
+									<div id="godziny">
+										{{ form.begin_h }}
 										<!--<label>
-		<select id="godzina_start" name="godzina_start">
-			<option value="16">16</option>
-			<option value="17">17</option>
-			<option value="18">18</option>
-			<option value="19">19</option>
-			<option value="20">20</option>
-			<option value="21">21</option>
-		</select>
-	</label>-->
-									<!--</div>
+											<select id="godzina_start" name="godzina_start">
+												<option value="16">16</option>
+												<option value="17">17</option>
+												<option value="18">18</option>
+												<option value="19">19</option>
+												<option value="20">20</option>
+												<option value="21">21</option>
+											</select>
+										</label>-->
+									</div>
 
-									<div id="minuty">-->
-										
+									<div id="minuty">
+										{{form.begin_m}}
 										<!--<label>
 											<select id="minuty_start" name="minuty_start">
 												<option value="00">00</option>
@@ -66,17 +62,17 @@
 												<option value="45">45</option>
 											</select>
 										</label>-->
-									<!--</div>
-									<div style="clear:both;"></div>-->
+									</div>
+									<div style="clear:both;"></div>
 								</fieldset>
 							</div>
 
 							<div class="ktora_godzina">
 								<fieldset>
 									<legend> Do której godziny? </legend>
-									{{ form.time_end }}
-									<!--<div id="godziny">-->
-										
+									
+									<div id="godziny">
+										{{ form.end_h }}
 										<!--<label>
 											<select id="godzina_koniec" name="godzina_koniec">
 												<option value="16">16</option>
@@ -87,10 +83,10 @@
 												<option value="21">21</option>
 											</select>
 										</label>-->
-									<!--</div>
+									</div>
 
-									<div id="minuty">-->
-									
+									<div id="minuty">
+									{{form.end_m}}
 										<!--<label>
 											<select id="minuty_koniec" name="minuty_koniec">
 												<option value="00">00</option>
@@ -99,7 +95,7 @@
 												<option value="45">45</option>
 											</select>
 										</label>-->
-									<!--</div>-->
+									</div>
 
 								</fieldset>
 							</div>
