@@ -6,10 +6,10 @@ from datetime import date, datetime
 from django.http import HttpResponse
 
 class NewUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    password_date = models.DateField(default=date(2018, 10, 19))
-    entries = models.IntegerField(default=0)
-    timeout = models.DateTimeField(null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True) #związek z encją User 1:1
+    password_date = models.DateField(default=date(2018, 10, 19)) #data ustanowienia hasła
+    entries = models.IntegerField(default=0) #próby logowania
+    timeout = models.DateTimeField(null=True) #czasowa blokada w razie przekroczenia maksymalnej liczby prób logowania
 
     def __str__(self):
         return "{}:{}".format(self.user, self.password_date)

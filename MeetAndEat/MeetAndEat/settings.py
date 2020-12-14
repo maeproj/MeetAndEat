@@ -31,6 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap4',
+    'bootstrap_datepicker_plus',
+    'menu.apps.MenuConfig',
+    'reservation.apps.ReservationConfig',
     'home.apps.HomeConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
@@ -84,7 +88,7 @@ DATABASES = {
     }
 }
 
-ALLOWED_HOSTS = ["localhost", "192.168.0.10"]
+ALLOWED_HOSTS = ["localhost"]
 
 
 # Password validation

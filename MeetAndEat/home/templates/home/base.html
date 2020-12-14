@@ -31,8 +31,6 @@
 	</script>
 	
 </head>
-
-
 <body>
 	<header>
 		<div id="logo">
@@ -43,14 +41,14 @@
 				<li><a href="{% url 'home' %}">Strona główna</a></li>
 				<li><a href="#">Menu </a>
 					<ul>
-						<li><a href="#">Pizze</a></li>
-						<li><a href="#">Makarony</a></li>
-						<li><a href="#">Włoskie kanapki</a></li>
-						<li><a href="#">Napoje</a></li>
-						<li><a href="#">Desery</a></li>
+						<li><a href="{% url 'menu_pizze' %}">Pizze</a></li>
+						<li><a href="{% url 'menu_makarony' %}">Makarony</a></li>
+						<li><a href="{% url 'menu_kanapki' %}">Włoskie kanapki</a></li>
+						<li><a href="{% url 'menu_napoje' %}">Napoje</a></li>
+						<li><a href="{% url 'menu_desery' %}">Desery</a></li>
 					</ul>
 				</li>
-				<li><a href="#">Restauracja</a>
+				<li><a href="{% url 'restauracja' %}">Restauracja</a>
 					<ul>
 						<li><a href="#">Cała restauracja</a></li>
 						<li><a href="#">Stolik 1</a></li>
@@ -59,8 +57,8 @@
 						<li><a href="#">Stolik 4</a></li>
 					</ul>
 				</li>
-				<li><a href="#">Zarezerwuj</a></li>
-				<li><a href="#">Kontakt</a></li>
+				<li><a href="{% url 'reservation1' %}">Zarezerwuj</a></li>
+				<li><a href="{% url 'kontakt' %}">Kontakt</a></li>
 				<li><a href="#">Moje Konto</a>
 					<ul>
 						{% if user.is_authenticated %}
@@ -86,9 +84,11 @@
 	<a href="#" class="scrollup"></a>
 	{% block content %}{% endblock %}
 
+	<footer>
 		<div id="footer">
 			Meet & Eat </br>
 		</div>
+	</footer>
 
 	<script src="{% static 'jquery-1.11.3.min.js' %}"></script>	
 		<script>

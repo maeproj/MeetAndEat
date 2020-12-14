@@ -5,11 +5,11 @@
     "\\home\\templates",
     "\\home\\templates\\home",
     "\\MeetAndEat",
-    "\\users",
-    "\\users\\migrations",
-    "\\users\\templates",
-    "\\users\\templates\\users"
+    "\\reservation",
+    "\\reservation\\templates",
+    "\\reservation\\templates\\reservation",
+    "\\users"
   ],
-  "SelectedNode": "\\users\\views.py",
+  "SelectedNode": "\\reservation\\models.py",
   "PreviewInSolutionExplorer": false
 }

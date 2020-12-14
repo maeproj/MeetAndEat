@@ -4,3 +4,9 @@ from users.models import NewUser
 
 def home(request):
     return render(request, 'home/home.html')
+
+def kontakt(request):
+    return render(request, 'home/kontakt.html')
+
+def restauracja(request):
+    return render(request, 'home/restauracja.html')
