@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<title>Zarzadzanie</title>
+	<meta name="description" content="Tutaj wpisujemy opis" />
+	<meta name="keywords" content="słowa kluczowe, tagi, o czym strona" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="jquery.scrollTo.min.js"></script>
+	
+	<script>
+	jQuery(function($)
+		{
+			//zresetuj scrolla
+			$.scrollTo(0);
+			$('.scrollup').click(function() { $.scrollTo($('body'), 1000); });
+		}
+		);
+	$(window).scroll(function()
+		{
+			if($(this).scrollTop()>300) $('.scrollup').fadeIn();
+			else $('.scrollup').fadeOut();		
+		}
+		);	
+	</script>
+	
+</head>
+
+<body>
+	<header>
+			<div id="logo">
+				Meet&Eat </br>
+				<a href="#" class="scrollup"></a>
+			</div> 
+			<nav>
+				<ol class="nav">
+						<li class="nav"><a href="index.html">Strona główna</a></li>
+						<li class="nav"><a href="menu.html">Menu </a></li>
+						<li class="nav"><a href="restauracja.html">Restauracja</a></li>
+						<li class="nav"><a href="rezerwacje.html">Zarezerwuj</a></li>
+						<li class="nav"><a href="kontakt.html">Kontakt</a></li>
+						<li class="nav"><a href="#">Moje Konto</a>
+							<ul class="nav">
+								<li class="nav"><a href="#">Moje konto</a></li>
+								<li class="nav"><a href="#">Moje rezerwacje</a></li>
+								<li class="nav"><a href="niezalogowany.html">Wyloguj</a></li>
+							</ul>
+						</li>
+				</ol>
+			</nav>
+	</header>
+	
+	<main>
+		<section>
+			<div id="container">
+				<div id="rezerwacje">
+					
+					<section>
+						<div class="parametry_zamowienia">
+							<div class="menu_tekst">Godziny i pracownicy</div>
+						</div> 
+						
+						<div class="parametry_zamowienia2">
+							<div class="menu_tekst">Dodaj potrawe</div>
+						</div>
+						
+						
+						<div class="parametry_zamowienia_menu">
+							<div class="menu_tekst">Edytuj Menu</div>
+							<div class="menu_zamawianie">Pizze:</br>
+								<div class="zawartosc_zamawianie">Pizza Wiejska</div>
+								<div class="zawartosc_zamawianie">Pizza Grzybobranie</div>
+								<div class="zawartosc_zamawianie">Pizza Zemsta Szefa</div>
+								<div class="zawartosc_zamawianie">Pizza Hawajka</div>
+								<div class="zawartosc_zamawianie">Pizza Tunno</div>
+								<div class="zawartosc_zamawianie">Pizza 4ser</div>
+								<div class="zawartosc_zamawianie">Pizza Pepperoni</div>
+								<div class="zawartosc_zamawianie">Pizza Mięsna</div>
+								<div style="clear:both;"></div>
+							</div>
+							<div class="menu_zamawianie">Makarony: </br>
+								<div class="zawartosc_zamawianie">Tagiatelle</div>
+								<div class="zawartosc_zamawianie">Spaghetti</div>
+								<div class="zawartosc_zamawianie">Łazanki</div>
+								<div class="zawartosc_zamawianie">Z Kurczakiem</div>
+								<div class="zawartosc_zamawianie">Carbonara</div>
+								<div class="zawartosc_zamawianie">Z Owocami Morza</div>
+								<div class="zawartosc_zamawianie">Cannelloni</div>
+								<div class="zawartosc_zamawianie">Z Grzybami</div>
+								<div style="clear:both;"></div>
+							</div>
+							<div class="menu_zamawianie">Włoskie kanapki:</br>
+								<div class="zawartosc_zamawianie">Banh Mi</div>
+								<div class="zawartosc_zamawianie">Kati Roll</div>
+								<div class="zawartosc_zamawianie">Bunny Chow</div>
+								<div class="zawartosc_zamawianie">Kanapka Kubańska</div>
+								<div style="clear:both;"></div>
+							</div>							
+							<div class="menu_zamawianie">Napoje:</br>
+								<div class="zawartosc_zamawianie">Woda</div>
+								<div class="zawartosc_zamawianie">CocaCola</div>
+								<div class="zawartosc_zamawianie">Fanta</div>
+								<div class="zawartosc_zamawianie">Sok jabłkowy</div>
+								<div class="zawartosc_zamawianie">Kawa</div>
+								<div class="zawartosc_zamawianie">Sprite</div>
+								<div class="zawartosc_zamawianie">Piwo Lager</div>
+								<div class="zawartosc_zamawianie">Piwo Ciemne</div>
+								<div class="zawartosc_zamawianie">Wino Białe</div>
+								<div class="zawartosc_zamawianie">Wino Czerwone</div>
+								<div style="clear:both;"></div>
+							</div>
+							<div class="menu_zamawianie">Desery:</br>
+								<div class="zawartosc_zamawianie">Lody</div>
+								<div class="zawartosc_zamawianie">Szarlotka</div>
+								<div class="zawartosc_zamawianie">Ciasto Bananowe</div>
+								<div class="zawartosc_zamawianie">Sernik</div>
+								<div class="zawartosc_zamawianie">Ciastko Francuzkie</div>
+								<div class="zawartosc_zamawianie">Czekoladowe marzenie</div>
+								<div class="zawartosc_zamawianie">Piwo Lager</div>
+								<div class="zawartosc_zamawianie">Piwo Ciemne</div>
+								<div class="zawartosc_zamawianie">Wino Białe</div>
+								<div style="clear:both;"></div>
+								<div class="zawartosc_zamawianie">USUN</div>
+								
+								<div style="clear:both;"></div>
+							</div>
+						</div>
+						<div style="clear:both;"></div>
+						
+						<div class="akceptuj">
+							Akceptuj zmiany
+						</div>
+					</section>
+					
+				</div>
+			</div>
+		</section>
+	</main>
+	
+	<footer>
+		<div id="stopka">
+				Meet & Eat </br>
+		</div>
+	</footer>	
+	
+	<script src="jquery-1.11.3.min.js"></script>	
+		<script>
+			$(document).ready(function() {
+			var NavY = $('nav').offset().top;
+			 
+			var stickyNav = function(){
+			var ScrollY = $(window).scrollTop();
+				  
+			if (ScrollY > NavY) { 
+				$('nav').addClass('sticky');
+			} else {
+				$('nav').removeClass('sticky'); 
+			}
+			};
+			 
+			stickyNav();
+			 
+			$(window).scroll(function() {
+				stickyNav();
+			});
+			});
+		</script>
+	
+</body>
+</html>
