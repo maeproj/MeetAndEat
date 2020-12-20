@@ -134,11 +134,27 @@ nav
 	background-image: url("obrazy/prawo.png");
  } 
  
+ .srodek_strona_glowna
+ {
+	font-size: 17px;
+	width: 1100px;
+	min-height: 750px;
+	background-color: #00A579;
+	padding: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	padding-top: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 30px;
+ }
+ 
  .srodek
  {
 	font-size: 17px;
 	width: 1100px;
-	min-height: 1000px;
+	min-height: 750px;
 	background-color: #00A579;
 	padding: 5px;
 	margin-left: auto;
@@ -217,6 +233,7 @@ nav
 	 text-align: center;
 	 font-family: 'Dancing Script', cursive;
  }
+ 
  .menu_zamawianie
  {
 	 font-size:30px;
@@ -367,72 +384,110 @@ ol.lista_jedzenie
 	height: 30px;
 	line-height: 300%;
 	display: inline-block;
-	
-	
+	font-family: 'Dancing Script', cursive, bold;	
+	display: block;	
 }
 
 ol.lista_jedzenie > li.element_jedzenie
 {
 	float: left;
 	margin: 5px;
-	margin-top: 5px;
-	margin-bottom:5px;
+	margin-top: 4px;
+	margin-bottom:4px;
 	color: black;
-	font-size: 17px;
-	padding:1px;
+	font-size: 20px;
 	background-color:#F0EEE9;
 	padding-left: 5px;
 	padding-right: 5px;
+	transition: all 0.2s ease-in-out;
+	list-style-type: none;
+	border: 1px solid black;
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	min-width:140px;
+	text-align:center;
+	-webkit-box-shadow: 4px 1px 16px 4px rgba(0,0,0,0.37); 
+	box-shadow: 4px 1px 16px 4px rgba(0,0,0,0.37);
 }
 
 ol.lista_jedzenie > li.element_jedzenie:hover
 {
-	background-color:#9FDECD;
+	background-color:#B6FFED;
+	transform: scale(1.1);
 	cursor: pointer;
-}
-
-ol.lista_jedzenie > li.element_jedzenie:hover > ul.opis 
-{
-	display: block;
-}
-
-ol.lista_jedzenie > li.element_jedzenie > ul.opis > li.opis
-{
-	position: relative;
-	z-index: 100;
-	weight: auto;
-	height: auto;
-}
-
-ol.lista_jedzenie > li.element_jedzenie > ul.opis > li.opis > ul.skladniki
-{
-	text-align:center;
-	weight: auto;
-	height: auto;
-
-}
-
-ol.lista_jedzenie > li.element_jedzenie > ul.opis > li.opis > ul.skladniki > li.skladniki
-{
-	text-align: center; 
-	border-top: 1px dashed black;
-	weight: auto;
-	height: auto;
+	-webkit-box-shadow: 9px 1px 21px -1px #000000; 
+	box-shadow: 9px 1px 21px -1px #000000;
 	
 }
 
-ol.lista_jedzenie > li.element_jedzenie> ul.opis 
+ol.lista_jedzenie > li.element_jedzenie > ul.dymek
+ {
+	display:none;
+    position: absolute;
+    bottom: 100%;
+	left: -12%;
+	background: #9AD6C7;
+	background: -moz-linear-gradient(top, #9AD6C7 0%, #9FDECD 50%, #9AD6C7 100%);
+	background: -webkit-linear-gradient(top, #9AD6C7 0%, #9FDECD 50%, #9AD6C7 100%);
+	background: linear-gradient(to bottom, #9AD6C7 0%, #9FDECD 50%, #9AD6C7 100%);
+	width: 140px;
+    height: 180px;
+    border-radius: 50%;
+	border: 1px solid black;
+	margin-bottom:4px;
+	  
+ }
+
+ol.lista_jedzenie > li.element_jedzenie:hover > ul.dymek
 {
+	display: block;
+	-webkit-box-shadow: 9px 1px 21px -1px #000000; 
+	box-shadow: 9px 1px 21px -1px #000000;
+}
+
+ol.lista_jedzenie > li.element_jedzenie:hover > ul.skladniki
+{
+	display: block;
+	-webkit-box-shadow: 9px 1px 21px -1px #000000; 
+	box-shadow: 9px 1px 21px -1px #000000;
+}
+
+ol.lista_jedzenie > li.element_jedzenie > ul.skladniki
+{
+	width: auto;
+	height: auto;
 	list-style-type: none;
-	padding: 0;
-	margin: 0;
-	font-size: 15px;
-	height-min: 100px;
-	width: 150px;
 	display: none;
-	background-color:#9FDECD;
 	position: absolute;
 	box-sizing: border-box;
+	background-color:#9FDECD;
+	padding: 0;
+	text-align: center;
+	margin-top: 4px;
+	border: 1px solid black;
+   -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	
+}
+
+ol.lista_jedzenie > li.element_jedzenie > ul.skladniki > li.skladniki
+{
+	height: auto;
+	min-width:138px;
+	background: #9AD6C7;
+	background: -moz-linear-gradient(top, #9AD6C7 0%, #9FDECD 50%, #9AD6C7 100%);
+	background: -webkit-linear-gradient(top, #9AD6C7 0%, #9FDECD 50%, #9AD6C7 100%);
+	background: linear-gradient(to bottom, #9AD6C7 0%, #9FDECD 50%, #9AD6C7 100%);
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+ol.lista_jedzenie > li.element_jedzenie > ul.skladniki > li.skladniki:hover
+{
+	background:#B6FFED;
 }
 
 ol.nav
@@ -441,7 +496,7 @@ ol.nav
 	padding: 0;
 	list-style-type: none;
 	font-size: 18px;
-	height: 50px;
+	min-height: 50px;
 	line-height: 300%;
 	display: inline-block;
 	
@@ -522,10 +577,10 @@ ol.nav>li.nav>ul>li:hover>a
 	padding: 10px;
 	font-family: 'Dancing Script', cursive;
 	text-shadow: 
-	2px 2px 0 black,
-	-2px 2px 0 black,
-	-2px -2px 0 black,
-	2px -2px 0 black;
+	0.5px 0.5px 0 black,
+	-0.5px 0.5px 0 black,
+	-0.5px -0.5px 0 black,
+	0.5px -0.5px 0 black;
 }
 
 .kontakt_window_adres
@@ -549,7 +604,7 @@ ol.nav>li.nav>ul>li:hover>a
 	margin-top:40px;
 	text-align: center;
 	float: left;
-	margin-left: 150px;
+	margin-left: 170px;
 	margin-right: 25px;
 	margin-top: 50px;
 	width: 450px;
@@ -561,16 +616,18 @@ ol.nav>li.nav>ul>li:hover>a
 {
 	text-align: center;
 	float: left;
-	margin-left: 270px;
+	margin-left: 170px;
 	margin-right: 0px;
 	margin-top: 100px;
 	width: 250px;
 	height:240px;
 	background-color: #3b5998;
+	transition: all 0.2s ease-in-out;
 }
 .kontakt_window_facebook:hover
 {
-	background-color: #6d84b4
+	background-color: #6d84b4;
+	transform: scale(1.1);
 }
 
 .kontakt_window_insta
@@ -583,10 +640,12 @@ ol.nav>li.nav>ul>li:hover>a
 	width: 250px;
 	height:240px;
 	background-color: black;
+	transition: all 0.2s ease-in-out;
 }
 .kontakt_window_insta:hover
 {
 	background-color: #54232D;
+	transform: scale(1.1);
 }
 
  
