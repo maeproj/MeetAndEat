@@ -10,6 +10,10 @@ from .models import NewUser
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
+    def __init__(self, *args, **kwargs):
+        super(UserRegisterForm, self).__init__(*args, **kwargs)
+        self.fields['password1'].help_text = 'Potrzebne dziwne znaki'
+
     class Meta:
         model = User
         fields = ['username', 'first_name', 'email', 'password1', 'password2']

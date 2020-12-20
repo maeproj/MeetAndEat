@@ -81,7 +81,7 @@
 								</fieldset>
 							</div>
 							<div class="input_field">
-								<input type="submit" value="OK" />
+								<input type="submit" name="date_submit" value="OK" />
 							</div>
 						</form>
 						{% if sugg.suc == "reserve" %}
@@ -97,41 +97,15 @@
 					<div style="clear:both;"></div>
 				</section>
 				{% if sugg.suc == "ayy" %}
-				{% autoescape off %}
 				<div class="pustydiv">
-					<div class="parametry_zamowienia_stoliki">
-						Stolik 1
-						<div class="parametry_zamowienia_stoliki_dostepnosc">
-							{{sugg.alt1.second}}
+					<form method="post">
+						{% csrf_token %}
+						{{form2.as_p}}
+						<div class="input_field">
+							<input type="submit" name="place_submit" value="OK" />
 						</div>
-					</div>
-					<div class="parametry_zamowienia_stoliki">
-						Stolik 2
-						<div class="parametry_zamowienia_stoliki_dostepnosc">
-							{{sugg.alt2.second}}
-						</div>
-					</div>
-					<div class="parametry_zamowienia_stoliki">
-						Stolik 3
-						<div class="parametry_zamowienia_stoliki_dostepnosc">
-							{{sugg.alt3.second}}
-						</div>
-					</div>
-					<div class="parametry_zamowienia_stoliki">
-						Stolik 4
-						<div class="parametry_zamowienia_stoliki_dostepnosc">
-							{{sugg.alt4.second}}
-						</div>
-					</div>
-					<div class="parametry_zamowienia_stoliki">
-						Stolik 5
-						<div class="parametry_zamowienia_stoliki_dostepnosc">
-							{{sugg.alt5.second}}
-						</div>
-					</div>
-					<div style="clear:both;"></div>
+					</form>
 				</div>
-				{% endautoescape %}
 				{% endif %}
 			</div>
 		</div>

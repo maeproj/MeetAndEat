@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import ReservationForm
+from .forms import ReservationForm, PickForm
 from datetime import date, time
 from django.contrib import messages
 from .models import Reservation, Stolik_item
 from copy import deepcopy
 import numpy as np
 import pdb
-#dodać odległość między godziną begin i end
 class AvailableDate: 
     def __init__(self, begin_time, end_time, day, reservations, stolik):
         self.times = [[16, 0],
@@ -83,7 +82,7 @@ class AvailableDate:
             if success:
                 h = (new_time[0]*60 + new_time[1]) - (self.begin_time[0] * 60 + self.begin_time[1])
                 if h >= 45:
-                    self.alternatives[self.stolik.stolik_miejsca - 1] = [self.stolik.stolik_miejsca, f'Możliwa rezerwacja na wybrany termin na <b>{h}</b> minut\n zamiast na <b>{self.time_in_minutes}</b> minut']
+                    self.alternatives[self.stolik.stolik_miejsca - 1] = [self.stolik.stolik_miejsca, f'Możliwa rezerwacja na wybrany termin na {h} minut zamiast na {self.time_in_minutes} minut']
                     search_further = False
                 
 
@@ -124,9 +123,9 @@ class AvailableDate:
                     if success:
                         time = (new_end_time[0]*60 + new_end_time[1]) - (new_time[0]*60 + new_time[1])
                         if time == self.time_in_minutes:
-                            self.alternatives[self.stolik.stolik_miejsca - 1] = [self.stolik.stolik_miejsca, f'Możliwa rezerwacja na godzine <b>{new_time[0]}:{new_time[1]}</b> na <b>{time}</b> minut']
+                            self.alternatives[self.stolik.stolik_miejsca - 1] = [self.stolik.stolik_miejsca, f'Możliwa rezerwacja na godzine {new_time[0]}:{new_time[1]} na {time} minut']
                         else:
-                            self.alternatives[self.stolik.stolik_miejsca - 1] = [self.stolik.stolik_miejsca, f'Możliwa rezerwacja na godzine <b>{new_time[0]}:{new_time[1]}</b> na <b>{time}</b> minut\n zamiast na <b>{self.time_in_minutes}</b> minut']
+                            self.alternatives[self.stolik.stolik_miejsca - 1] = [self.stolik.stolik_miejsca, f'Możliwa rezerwacja na godzine {new_time[0]}:{new_time[1]} na {time} minut\n zamiast na {self.time_in_minutes} minut']
                         break
 
                 new_time = [new_time[0], new_time[1] + 15]
@@ -180,7 +179,7 @@ class AvailableDate:
                 if success:
                     h = (new_time[0]*60 + new_time[1]) - (self.begin_time[0] * 60 + self.begin_time[1])
                     if h >= 45:
-                        self.alternatives[i] = [i+1, f'Możliwa rezerwacja na wybrany termin na <b>{h}</b> minut\n zamiast na <b>{self.time_in_minutes}</b> minut']
+                        self.alternatives[i] = [i+1, f'Możliwa rezerwacja na wybrany termin na {h} minut\n zamiast na {self.time_in_minutes} minut']
                         search_further = True
 
             if search_further:
@@ -220,9 +219,9 @@ class AvailableDate:
                         if success:
                             time = (new_end_time[0]*60 + new_end_time[1]) - (new_time[0]*60 + new_time[1])
                             if time == self.time_in_minutes:
-                                self.alternatives[i] = [i+1, f'Możliwa rezerwacja na godzine <b>{new_time[0]}:{new_time[1]}</b> na <b>{time}</b> minut']
+                                self.alternatives[i] = [i+1, f'Możliwa rezerwacja na godzine {new_time[0]}:{new_time[1]} na {time} minut']
                             else:
-                                self.alternatives[i] = [i+1, f'Możliwa rezerwacja na godzine <b>{new_time[0]}:{new_time[1]}</b> na <b>{time}</b> minut\n zamiast na <b>{self.time_in_minutes}</b> minut']
+                                self.alternatives[i] = [i+1, f'Możliwa rezerwacja na godzine {new_time[0]}:{new_time[1]} na {time} minut\n zamiast na {self.time_in_minutes} minut']
                             break
                        
                     new_time = [new_time[0], new_time[1] + 15]
@@ -236,40 +235,51 @@ class AvailableDate:
 def reservation(request):
     sug = {'suc': '', 'alt1': {}, 'alt2': {}, 'alt3': {}, 'alt4': {}, 'alt5': {}}
     short = ['alt' + str(i+1) for i in range(5)]
+    form2 = None
     if request.method == 'POST':
-        form = ReservationForm(request.POST)
-        if form.is_valid():
-            day = form.cleaned_data['day']
-            seats = form.cleaned_data['places_by_table']
-            begin_h = form.cleaned_data['begin_h']
-            begin_m = form.cleaned_data['begin_m']
-            end_h = form.cleaned_data['end_h']
-            end_m = form.cleaned_data['end_m']
-            err = (end_h * 60 + end_m) - (begin_h * 60 + begin_m)
-            #if day < date.today():
-            #    messages.error(request, f'Nie można wykonać rezerwacji na datę przeszłą :)')
-            #    return redirect('reservation1')
-            if err < 0: 
-                messages.error(request, f'Zakończenie rezerwacji nie może wypaść przed jej rozpoczęciem :)')
-                return redirect('reservation1')
-            if err < 45:
-                messages.error(request, f'Minimalny czas rezerwacji to 45 minut - podano {err} minut')
-                return redirect('reservation1')
+        if 'date_submit' in request.POST:
+            form = ReservationForm(request.POST)
+            if form.is_valid():
+                day = form.cleaned_data['day']
+                seats =form.cleaned_data['places_by_table']
+                begin_h = form.cleaned_data['begin_h']
+                begin_m = form.cleaned_data['begin_m']
+                end_h = form.cleaned_data['end_h']
+                end_m = form.cleaned_data['end_m']
+                err = (end_h * 60 + end_m) - (begin_h * 60 + begin_m)
+                #if day < date.today():
+                #    messages.error(request, f'Nie można wykonać rezerwacji na datę przeszłą :)')        #włączyć na produkcję
+                #    return redirect('reservation1')
+                if err < 0: 
+                    messages.error(request, f'Zakończenie rezerwacji nie może wypaść przed jej rozpoczęciem :)')
+                    return redirect('reservation1')
+                if err < 45:
+                    messages.error(request, f'Minimalny czas rezerwacji to 45 minut - podano {err} minut')
+                    return redirect('reservation1')
 
-            table = Stolik_item.objects.get(stolik_miejsca = seats)
-            reservations = Reservation.objects.filter(rezerwacja_dzien = day, stolik = table)
-            ad = AvailableDate([begin_h, begin_m], [end_h, end_m], day, reservations, table)
-            suggestions = ad.return_accept()
-            #return HttpResponse(f'{suggestions}')
-            if suggestions == 'reserve':
-                sug['suc'] = 'reserve'
-            else:
-                sug['suc'] = 'ayy'
-                for i in range(len(suggestions)):
-                    sug[short[i]] = {'first': suggestions[i][0], 'second': suggestions[i][1]}
+                table = Stolik_item.objects.get(stolik_miejsca = seats)
+                reservations = Reservation.objects.filter(rezerwacja_dzien = day, stolik = table)
+                ad = AvailableDate([begin_h, begin_m], [end_h, end_m], day, reservations, table)
+                suggestions = ad.return_accept()
+
+                if suggestions == 'reserve':
+                    sug['suc'] = 'reserve'
+                else:
+                    sug['suc'] = 'ayy'
+                    for i in range(len(suggestions)):
+                        sug[short[i]] = {'first': suggestions[i][0], 'second': suggestions[i][1]}
+                        request.session[short[i]] = suggestions[i][1]
+                suggestions = np.array(suggestions)
+                ch = list(zip([i+1 for i in range(5)], suggestions[:, 1]))
+                form2 = PickForm(choice = ch)
+        elif 'place_submit' in request.POST:
+            form2 = PickForm(request.POST)
+            if form2.is_valid():
+                return redirect('reservation2')
+
     else:
         form = ReservationForm()
-    return render(request, 'reservation/rezerwacje.html', {'form':form, 'sugg':sug})
+    return render(request, 'reservation/rezerwacje.html', {'form':form, 'form2': form2, 'sugg':sug})
 
 def reservation_items(request):
     return render(request, 'reservation/rezerwacje_jedzenie.html')

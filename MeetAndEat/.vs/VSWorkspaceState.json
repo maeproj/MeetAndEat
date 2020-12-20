@@ -10,6 +10,6 @@
     "\\reservation\\templates\\reservation",
     "\\users"
   ],
-  "SelectedNode": "\\reservation\\models.py",
+  "SelectedNode": "\\reservation\\forms.py",
   "PreviewInSolutionExplorer": false
 }
