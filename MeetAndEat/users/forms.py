@@ -6,9 +6,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.backends import BaseBackend
 from datetime import date
 from .models import NewUser
+from phonenumber_field.formfields import PhoneNumberField
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
+    telefon = PhoneNumberField()
 
     def __init__(self, *args, **kwargs):
         super(UserRegisterForm, self).__init__(*args, **kwargs)
@@ -16,7 +18,7 @@ class UserRegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'email', 'password1', 'password2']
+        fields = ['username', 'first_name', 'email', 'telefon', 'password1', 'password2']
 
 class UserLoginForm(forms.Form):
     username = forms.CharField(label='Login', max_length=100)
@@ -25,6 +27,9 @@ class UserLoginForm(forms.Form):
     class Meta:
         model = User
         fields = ['username', 'password']
+
+class ChangePassClick(forms.Form):
+    btn = forms.IntegerField()
 
 
     

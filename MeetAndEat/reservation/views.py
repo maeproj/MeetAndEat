@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import ReservationForm, PickForm
+from django.contrib.auth.decorators import login_required
 from datetime import date, time
 from django.contrib import messages
 from .models import Reservation, Stolik_item
@@ -231,7 +232,7 @@ class AvailableDate:
 
         return self.alternatives
 
-                    
+@login_required            
 def reservation(request):
     sug = {'suc': '', 'alt1': {}, 'alt2': {}, 'alt3': {}, 'alt4': {}, 'alt5': {}}
     short = ['alt' + str(i+1) for i in range(5)]
@@ -281,5 +282,6 @@ def reservation(request):
         form = ReservationForm()
     return render(request, 'reservation/rezerwacje.html', {'form':form, 'form2': form2, 'sugg':sug})
 
+@login_required
 def reservation_items(request):
     return render(request, 'reservation/rezerwacje_jedzenie.html')

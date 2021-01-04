@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
+from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -8,8 +9,11 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import forms
 from datetime import date, timedelta, datetime, timezone
-from .forms import UserRegisterForm, UserLoginForm
+from .forms import UserRegisterForm, UserLoginForm, ChangePassClick
 from .models import NewUser
+from MeetAndEat.settings import EMAIL_HOST_USER
+from django.template.loader import get_template
+from django.urls import reverse
 
 
 def register(request):
@@ -74,6 +78,7 @@ def login_user(request):
        login_form = UserLoginForm();
     return render(request, 'users/login.html', {'form': login_form})
 
+@login_required
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -99,7 +104,33 @@ def change_password(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    data = {}
+    user = request.user
+    user_ex = NewUser.objects.get(user=request.user)
+    s = list(user_ex.phone.as_e164)
+    s[-6:-1] = '*'
+    data['phone'] = s
+    data['username'] = user.username
+    data['email'] = user.email
+    data['first_name'] = user.first_name
+    
+    if request.method == 'POST':
+        form = ChangePassClick(request.POST)
+        if form.is_valid():
+            subject = 'Zmiana hasła'
+            from_email = EMAIL_HOST_USER
+            plain_text = get_template('email.txt')
+            htmly = get_template('email.html')
+            d = {'username': user, 'url': reverse('change_password')}
+            text_content = plain_text.render(d)
+            html_content = htmly.render(d)
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [user.email])
+            msg.attach_alternative(html_content, 'text/html')
+            msg.send()
+
+    else:
+        form = ChangePassClick()
+    return render(request, 'users/profile.html', {'data': data, 'form': form})
 
 
 

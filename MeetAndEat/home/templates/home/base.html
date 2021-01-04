@@ -37,37 +37,21 @@
 			Meet&Eat </br>
 		</div> 
 		<nav>
-			<ol>
-				<li><a href="{% url 'home' %}">Strona główna</a></li>
-				<li><a href="#">Menu </a>
-					<ul>
-						<li><a href="{% url 'menu_pizze' %}">Pizze</a></li>
-						<li><a href="{% url 'menu_makarony' %}">Makarony</a></li>
-						<li><a href="{% url 'menu_kanapki' %}">Włoskie kanapki</a></li>
-						<li><a href="{% url 'menu_napoje' %}">Napoje</a></li>
-						<li><a href="{% url 'menu_desery' %}">Desery</a></li>
-					</ul>
-				</li>
-				<li><a href="{% url 'restauracja' %}">Restauracja</a>
-					<ul>
-						<li><a href="#">Cała restauracja</a></li>
-						<li><a href="#">Stolik 1</a></li>
-						<li><a href="#">Stolik 2</a></li>
-						<li><a href="#">Stolik 3</a></li>
-						<li><a href="#">Stolik 4</a></li>
-					</ul>
-				</li>
-				<li><a href="{% url 'reservation1' %}">Zarezerwuj</a></li>
-				<li><a href="{% url 'kontakt' %}">Kontakt</a></li>
-				<li><a href="#">Moje Konto</a>
-					<ul>
+			<ol class="nav">
+				<li class="nav"><a href="{% url 'home' %}">Strona główna</a></li>
+				<li class="nav"><a href="{% url 'menu' %}">Menu</a>
+				<li class="nav"><a href="{% url 'restauracja' %}">Restauracja</a>
+				<li class="nav"><a href="{% url 'reservation1' %}">Zarezerwuj</a></li>
+				<li class="nav"><a href="{% url 'kontakt' %}">Kontakt</a></li>
+				<li class="nav"><a href="#">Moje Konto</a>
+					<ul class="nav">
 						{% if user.is_authenticated %}
-							<li><a href="{% url 'profile' %}">Moje konto</a></li>
-							<li><a href="#">Moje rezerwacje</a></li>
-							<li><a href="{% url 'logout' %}">Wyloguj</a></li>
+							<li class="nav"><a href="{% url 'profile' %}">Moje konto</a></li>
+							<li class="nav"><a href="#">Moje rezerwacje</a></li>
+							<li class="nav"><a href="{% url 'logout' %}">Wyloguj</a></li>
 						{% else %}
-							<li><a href="{% url 'login' %}">Zaloguj</a></li>
-							<li><a href="{% url 'register' %}">Zarejestruj się</a></li>
+							<li class="nav"><a href="{% url 'login' %}">Zaloguj</a></li>
+							<li class="nav"><a href="{% url 'register' %}">Zarejestruj się</a></li>
 						{% endif %}
 					</ul>
 				</li>
@@ -85,7 +69,7 @@
 	{% block content %}{% endblock %}
 
 	<footer>
-		<div id="footer">
+		<div id="stopka">
 			Meet & Eat </br>
 		</div>
 	</footer>

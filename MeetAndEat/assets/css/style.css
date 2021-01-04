@@ -88,7 +88,7 @@ nav
  {
 	font-size: 17px;
 	width: 230px;
-	min-height: 750px;
+	min-height: 1000px;
 	background-color: #00A579;'
 	padding: 5px;
 	float: left;
@@ -99,14 +99,71 @@ nav
  {
 	font-size: 17px;
 	width: 230px;
-	min-height: 750px;
+	min-height: 1000px;
 	background-color: #00A579;'
 	padding: 5px;
 	margin-left: 20px;
 	float: left;
 	margin-bottom: 10px;
 	margin-top: 10px;
+ } 
+ 
+ .lewo_obraz
+ {
+	font-size: 17px;
+	width: 230px;
+	min-height: 1000px;
+	background-color: #00A579;'
+	padding: 5px;
+	float: left;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	background-image: url("obrazy/lewo.png");
  }
+ .prawo_obraz
+ {
+	font-size: 17px;
+	width: 230px;
+	min-height: 1000px;
+	background-color: #00A579;'
+	padding: 5px;
+	margin-left: 20px;
+	float: left;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	background-image: url("obrazy/prawo.png");
+ } 
+ 
+ .srodek_strona_glowna
+ {
+	font-size: 17px;
+	width: 1100px;
+	min-height: 750px;
+	background-color: #00A579;
+	padding: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	padding-top: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-bottom: 30px;
+ }
+ 
+ .srodek
+ {
+	font-size: 17px;
+	width: 1100px;
+	min-height: 750px;
+	background-color: #00A579;
+	padding: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	padding-top: 10px;
+	text-align: center;
+ }
+ 
   .parametry_zamowienia_stoliki
  {
 	font-size: 25px;
@@ -124,7 +181,7 @@ nav
 	font-size: 17px;
 	width: 160px;
 	min-height: 130px;
-	background-color: #00A579;'
+	background-color: #00A579;
 	padding: 5px;
 	margin-bottom: 10px;
 	margin-top: 10px;
@@ -133,22 +190,22 @@ nav
   .mapa_restauracji_kontener
  {
 	font-size: 17px;
-	width: 950px;
-	min-height: 750px;
-	background-color: #00A579;'
+	width: 940px;
+	min-height: 990px;
+	background-color: #00A579;
 	padding: 5px;
 	margin-left: 20px;
 	margin-top: 10px;
 	float: left;
 	margin-bottom: 10px;
+	text-align: center;
  }
  .parametry_zamowienia_menu
  {
 	font-size: 17px;
 	width: 700px;
-	min-height: 750px;
-	background-color: #00A579;'
-	padding: 5px;
+	min-height: 1000px;
+	background-color: #00A579;
 	margin-left: 20px;
 	float: left;
 	margin-bottom: 10px;
@@ -161,6 +218,13 @@ nav
 	 text-align: center;
 	 margin-top: 10px;
  }
+ .input_field2
+ {
+	 margin-left: auto;
+	 margin-right: auto;
+	 text-align: center;
+	 margin-top: 20px;
+ }
  
 .menu_tekst
  {
@@ -169,12 +233,24 @@ nav
 	 text-align: center;
 	 font-family: 'Dancing Script', cursive;
  }
+ 
  .menu_zamawianie
  {
-	 font-size:20px;
+	 font-size:30px;
 	 margin-top: 10px;
 	 margin-left: 30px;
 	 margin-bottom: 10px;
+	 height:170px;
+	 font-family:'Dancing Script', cursive;
+ }
+ .menu_zamawianie_krotkie
+ {
+	 font-size:30px;
+	 margin-top: 10px;
+	 margin-left: 30px;
+	 margin-bottom: 10px;
+	 height: 105px;
+	 font-family:'Dancing Script', cursive;
  }
  
  .zawartosc_zamawianie
@@ -233,18 +309,21 @@ nav
   .zawartosc_zamawianie:hover
 {
 	background-color:#E2E0DC;
+	cursor: pointer;
 }
- 
- #ile_osob
+
+ #do_checkboxa
  {
 	width: 220px;
-	height: 160px;
+	height-min: 10px;
 	padding: 5px;
 	margin: 0px;
 	padding-top:10px;
 	border-color: black;
 	margin-top: 20px;
  }
+ 
+
  
   .ktora_godzina
  {
@@ -295,26 +374,142 @@ nav
 	
 }
 
-ol
+ol.lista_jedzenie
+{
+	font-family: 'Lato', sans-serif;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	font-size: 18px;
+	height: 30px;
+	line-height: 300%;
+	display: inline-block;
+	font-family: 'Dancing Script', cursive, bold;	
+	display: block;	
+}
+
+ol.lista_jedzenie > li.element_jedzenie
+{
+	float: left;
+	margin: 5px;
+	margin-top: 4px;
+	margin-bottom:4px;
+	color: black;
+	font-size: 20px;
+	background-color:#F0EEE9;
+	padding-left: 5px;
+	padding-right: 5px;
+	transition: all 0.2s ease-in-out;
+	list-style-type: none;
+	border: 1px solid black;
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	min-width:140px;
+	text-align:center;
+	-webkit-box-shadow: 4px 1px 16px 4px rgba(0,0,0,0.37); 
+	box-shadow: 4px 1px 16px 4px rgba(0,0,0,0.37);
+}
+
+ol.lista_jedzenie > li.element_jedzenie:hover
+{
+	background-color:#B6FFED;
+	transform: scale(1.1);
+	cursor: pointer;
+	-webkit-box-shadow: 9px 1px 21px -1px #000000; 
+	box-shadow: 9px 1px 21px -1px #000000;
+	
+}
+
+ol.lista_jedzenie > li.element_jedzenie > ul.dymek
+ {
+	display:none;
+    position: absolute;
+    bottom: 100%;
+	left: -12%;
+	background: #9AD6C7;
+	background: -moz-linear-gradient(top, #9AD6C7 0%, #9FDECD 50%, #9AD6C7 100%);
+	background: -webkit-linear-gradient(top, #9AD6C7 0%, #9FDECD 50%, #9AD6C7 100%);
+	background: linear-gradient(to bottom, #9AD6C7 0%, #9FDECD 50%, #9AD6C7 100%);
+	width: 140px;
+    height: 180px;
+    border-radius: 50%;
+	border: 1px solid black;
+	margin-bottom:4px;
+	  
+ }
+
+ol.lista_jedzenie > li.element_jedzenie:hover > ul.dymek
+{
+	display: block;
+	-webkit-box-shadow: 9px 1px 21px -1px #000000; 
+	box-shadow: 9px 1px 21px -1px #000000;
+}
+
+ol.lista_jedzenie > li.element_jedzenie:hover > ul.skladniki
+{
+	display: block;
+	-webkit-box-shadow: 9px 1px 21px -1px #000000; 
+	box-shadow: 9px 1px 21px -1px #000000;
+}
+
+ol.lista_jedzenie > li.element_jedzenie > ul.skladniki
+{
+	width: auto;
+	height: auto;
+	list-style-type: none;
+	display: none;
+	position: absolute;
+	box-sizing: border-box;
+	background-color:#9FDECD;
+	padding: 0;
+	text-align: center;
+	margin-top: 4px;
+	border: 1px solid black;
+   -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+	
+}
+
+ol.lista_jedzenie > li.element_jedzenie > ul.skladniki > li.skladniki
+{
+	height: auto;
+	min-width:138px;
+	background: #9AD6C7;
+	background: -moz-linear-gradient(top, #9AD6C7 0%, #9FDECD 50%, #9AD6C7 100%);
+	background: -webkit-linear-gradient(top, #9AD6C7 0%, #9FDECD 50%, #9AD6C7 100%);
+	background: linear-gradient(to bottom, #9AD6C7 0%, #9FDECD 50%, #9AD6C7 100%);
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+ol.lista_jedzenie > li.element_jedzenie > ul.skladniki > li.skladniki:hover
+{
+	background:#B6FFED;
+}
+
+ol.nav
 {
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
 	font-size: 18px;
-	height: 50px;
+	min-height: 50px;
 	line-height: 300%;
 	display: inline-block;
 	
 }
 
-ol a
+ol.nav a
 {
 	color: black;
 	text-decoration: none;
 	display: block;
 }
 
-ol > li
+ol.nav > li.nav
 {
 	float: left;
 	width: 180px;
@@ -322,22 +517,22 @@ ol > li
 	border-right: 1px dashed black;
 }
 
-ol > li:first-child
+ol.nav > li.nav:first-child
 {
 		border-left: 1px dashed black;
 }
 
-ol > li:hover
+ol.nav > li.nav:hover
 {
 	background-color: #9FDECD;
 }
 
-ol>li:hover>a
+ol.nav>li.nav:hover>a
 {
 	color:#black;
 }
 
-ol>li>ul
+ol.nav>li.nav>ul.nav
 {
 	list-style-type: none;
 	padding: 0;
@@ -346,12 +541,12 @@ ol>li>ul
 	display: none;
 }
 
-ol>li:hover>ul
+ol.nav>li.nav:hover>ul.nav
 {
 	display: block;
 }
 
-ol>li>ul>li 
+ol.nav>li.nav>ul.nav>li.nav
 {
 	background-color: #9FDECD;
 	position: relative;
@@ -359,13 +554,13 @@ ol>li>ul>li
 	border-top: 1px dashed black;
 }
 
-ol>li>ul>li:hover
+ol.nav>li.nav>ul>li.nav:hover
 {
 	background-color: #F0EEE9;
 	cursor: pointer;
 }
 
-ol>li>ul>li:hover>a
+ol.nav>li.nav>ul>li:hover>a
 {
 	color: #black;
 	cursor: pointer;
@@ -382,10 +577,10 @@ ol>li>ul>li:hover>a
 	padding: 10px;
 	font-family: 'Dancing Script', cursive;
 	text-shadow: 
-	2px 2px 0 black,
-	-2px 2px 0 black,
-	-2px -2px 0 black,
-	2px -2px 0 black;
+	0.5px 0.5px 0 black,
+	-0.5px 0.5px 0 black,
+	-0.5px -0.5px 0 black,
+	0.5px -0.5px 0 black;
 }
 
 .kontakt_window_adres
@@ -409,7 +604,7 @@ ol>li>ul>li:hover>a
 	margin-top:40px;
 	text-align: center;
 	float: left;
-	margin-left: 150px;
+	margin-left: 170px;
 	margin-right: 25px;
 	margin-top: 50px;
 	width: 450px;
@@ -421,16 +616,18 @@ ol>li>ul>li:hover>a
 {
 	text-align: center;
 	float: left;
-	margin-left: 270px;
+	margin-left: 170px;
 	margin-right: 0px;
 	margin-top: 100px;
 	width: 250px;
 	height:240px;
 	background-color: #3b5998;
+	transition: all 0.2s ease-in-out;
 }
 .kontakt_window_facebook:hover
 {
-	background-color: #6d84b4
+	background-color: #6d84b4;
+	transform: scale(1.1);
 }
 
 .kontakt_window_insta
@@ -443,10 +640,12 @@ ol>li>ul>li:hover>a
 	width: 250px;
 	height:240px;
 	background-color: black;
+	transition: all 0.2s ease-in-out;
 }
 .kontakt_window_insta:hover
 {
 	background-color: #54232D;
+	transform: scale(1.1);
 }
 
  

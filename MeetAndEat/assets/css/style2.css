@@ -126,7 +126,7 @@ ol {
                     color: #black;
                 }
 
-#footer {
+#stopka {
     text-align: center;
     font-size: 20px;
     letter-spacing: 3px;
@@ -135,5 +135,6 @@ ol {
     background-color: #CE2939;
     padding: 10px;
     font-family: 'Dancing Script', cursive;
-    text-shadow: 2px 2px 0 black, -2px 2px 0 black, -2px -2px 0 black, 2px -2px 0 black;
+    text-shadow: 0.5px 0.5px 0 black, -0.5px 0.5px 0 black, -0.5px -0.5px 0 black, 0.5px -0.5px 0 black;
 }
+
