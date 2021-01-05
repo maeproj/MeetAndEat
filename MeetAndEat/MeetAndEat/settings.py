@@ -62,12 +62,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-<<<<<<< HEAD
     'django.middleware.clickjacking.XFrameOptionsMiddleware'
-=======
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'maskurl.middleware.UnMaskURLMiddleware'
->>>>>>> refs/remotes/origin/master
 ]
 
 ROOT_URLCONF = 'MeetAndEat.urls'

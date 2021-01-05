@@ -42,14 +42,7 @@ urlpatterns = [
     path('rezerwacje1', reservation_views.reservation, name='reservation1'),
     path('rezerwacje2', reservation_views.reservation_items, name='reservation2'),
     path('kontakt/', home_views.kontakt, name='kontakt'),
-<<<<<<< HEAD
     path('restauracja/', home_views.restauracja, name='restauracja'),
-    path('skladnik_item/', rezerwacje_view.skladnik_item),
-    path('menu_items/', rezerwacje_view.menu_items),
-    path('menu_orgs/', rezerwacje_view.menu_orgs)
-=======
-    path('restauracja/', home_views.restauracja, name='restauracja')
->>>>>>> refs/remotes/origin/master
 ]
 
 urlpatterns += staticfiles_urlpatterns()

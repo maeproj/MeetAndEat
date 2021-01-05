@@ -1,9 +1,5 @@
 {
   "ExpandedNodes": [
-<<<<<<< HEAD
-    ""
-  ],
-=======
     "",
     "\\home",
     "\\home\\templates",
@@ -14,6 +10,5 @@
     "\\users\\templates\\users"
   ],
   "SelectedNode": "\\users\\templates\\users\\register.html",
->>>>>>> refs/remotes/origin/master
   "PreviewInSolutionExplorer": false
 }

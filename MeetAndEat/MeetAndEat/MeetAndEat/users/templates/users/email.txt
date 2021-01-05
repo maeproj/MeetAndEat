@@ -1,3 +1,0 @@
-<h3> Czeœæ <strong>{{username}}</strong> </h3>
-<p>disown kvdsvnsdov vknvisodvnsdv dsdov siod vsd. Tu jest twoj link do zmiany hasla:</p>
-<a href="http://192.168.0.15:8080/{{url}}">Kliknij tu</a>

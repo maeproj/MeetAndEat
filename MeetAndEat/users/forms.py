@@ -14,12 +14,8 @@ class UserRegisterForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(UserRegisterForm, self).__init__(*args, **kwargs)
-<<<<<<< HEAD
-        self.fields['password1'].help_text = 'Hasło powinno zawierać: <ul><li>Co najmniej 8 znaków</li><li>Co najmniej jedną wielką literę</li><li>Co najmniej\
-        jeden znak ./@/#/$/^/&/_</li><li>Co najmniej jedną cyfrę</li></ul>'
-=======
-        self.fields['password1'].help_text = 'Potrzebne dziwne znaki'
->>>>>>> refs/remotes/origin/master
+        self.fields['password1'].help_text = 'Hasło powinno zawierać: <ul><li>Co najmniej 8 znaków</li><li>Co najmniej jedną wielką literę</li>\
+        <li>Co najmniej jeden znak specjalny ./@/#/$/^/&</li><li>Co najmniej jedną cyfrę</li></ul>'
 
     class Meta:
         model = User

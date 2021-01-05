@@ -270,9 +270,9 @@ def reservation(request):
                     for i in range(len(suggestions)):
                         sug[short[i]] = {'first': suggestions[i][0], 'second': suggestions[i][1]}
                         request.session[short[i]] = suggestions[i][1]
-                suggestions = np.array(suggestions)
-                ch = list(zip([i+1 for i in range(5)], suggestions[:, 1]))
-                form2 = PickForm(choice = ch)
+                    suggestions = np.array(suggestions)
+                    ch = list(zip([i+1 for i in range(5)], suggestions[:, 1]))
+                    form2 = PickForm(choice = ch)
         elif 'place_submit' in request.POST:
             form2 = PickForm(request.POST)
             if form2.is_valid():
@@ -284,28 +284,4 @@ def reservation(request):
 
 @login_required
 def reservation_items(request):
-<<<<<<< HEAD
     return render(request, 'reservation/rezerwacje_jedzenie.html')
-
-
-
-from .models import Skladnik
-from .models import Menu_item
-from .models import Menu_org
-
-def skladnik_item(request):
-    obj=Skladnik.objects.all()
-    return render(request,"reservation/skladniki.html",{'obj':obj})
-
-
-def menu_items(request):
-    menu_items=Menu_item.objects.all()
-    return render(request,"reservation/rezerwacje_jedzenie.html",{'menu_items':menu_items})
-
-
-def menu_orgs(request):
-    menu_orgs=Menu_org.objects.all()
-    return render(request,"reservation/rezerwacje_jedzenie.html",{'menu_orgs':menu_orgs})
-=======
-    return render(request, 'reservation/rezerwacje_jedzenie.html')
->>>>>>> refs/remotes/origin/master

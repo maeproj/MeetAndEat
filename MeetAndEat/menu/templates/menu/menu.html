@@ -1,11 +1,7 @@
 ﻿{% extends 'home/base.html' %}
 {% load static %}
 {% block head %}
-<<<<<<< HEAD
-<title>MeetAndEat - Rezerwacja</title>
-=======
 <title>MeetAndEat - Napoje</title>
->>>>>>> refs/remotes/origin/master
 <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
 {% endblock head %}
 {% block content %}
@@ -19,29 +15,6 @@
 
 					</div>
 
-<<<<<<< HEAD
-					<div class="parametry_zamowienia_menu">
-						<div class="menu_tekst">Menu</div>
-						<div class="menu_zamawianie">
-							{% for menu in  menu_orgs %}
-							{{menu.typ}}</br>
-							<ol class="lista_jedzenie">
-								<li class="element_jedzenie">
-									{% for item in  menu.zawartosc.all %}
-									{{item}} ({{item.cena}} zl)
-									<ul class="dymek">
-										<img src="{{item.zdjecie.url}}" alt="{{item.zdjecie}}" style="width:220px; margin-left:-63px; margin-top:2px;">
-									</ul>
-									<ul class="skladniki">
-										{% for skladniki in  item.skladniki.all %}
-										<li class="skladniki"> {{skladniki}}</li>
-										{% endfor %}
-									</ul>
-								</li>
-								<div style="clear:both;"></div>
-								{% endfor %}
-								{% endfor %}
-=======
 
 					<div class="parametry_zamowienia_menu">
 						<div class="menu_tekst">Menu</div>
@@ -146,14 +119,10 @@
 									</ul>
 								</li>
 								<div style="clear:both;"></div>
->>>>>>> refs/remotes/origin/master
 							</ol>
 						</div>
 
 
-<<<<<<< HEAD
-					</div>
-=======
 						<div class="menu_zamawianie">
 							Makarony:</br>
 							<ol class="lista_jedzenie">
@@ -335,25 +304,13 @@
 
 
 
->>>>>>> refs/remotes/origin/master
 					<div class="prawo_obraz">
 
 					</div>
 
 					<div style="clear:both;"></div>
-<<<<<<< HEAD
-
-				</section>
-
-				</form>
-=======
->>>>>>> refs/remotes/origin/master
 			</div>
 		</div>
 	</section>
 </main>
-<<<<<<< HEAD
 {% endblock content %}
-=======
-{% endblock content %}
->>>>>>> refs/remotes/origin/master
