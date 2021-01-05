@@ -1,7 +1,7 @@
 ﻿{% extends 'home/base.html' %}
 {% load static %}
 {% block head %}
-<title>MeetAndEat - Napoje</title>
+<title>MeetAndEat - Rezerwacja</title>
 <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
 {% endblock head %}
 {% block content %}
@@ -15,302 +15,43 @@
 
 					</div>
 
-
 					<div class="parametry_zamowienia_menu">
 						<div class="menu_tekst">Menu</div>
 						<div class="menu_zamawianie">
-							Pizze:</br>
+							{% for menu in  menu_orgs %}
+							{{menu.typ}}</br>
 							<ol class="lista_jedzenie">
 								<li class="element_jedzenie">
-									Pizza Wiejska
+									{% for item in  menu.zawartosc.all %}
+									{{item}} ({{item.cena}} zl)
 									<ul class="dymek">
-										<img src="{% static 'images/pizza3.png' %}" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
+										<img src="{{item.zdjecie.url}}" alt="{{item.zdjecie}}" style="width:220px; margin-left:-63px; margin-top:2px;">
 									</ul>
 									<ul class="skladniki">
-										<li class="skladniki">Kiełasa</li>
-										<li class="skladniki">Ogórek kiszony</li>
-										<li class="skladniki">Ser</li>
-										<li class="skladniki">Ziemniaki</li>
-									</ul>
-								</li>
-								<li class="element_jedzenie">
-									Pizza Grzybobranie
-									<ul class="dymek">
-										<img src="{% static 'images/pizza3.png' %}" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Grzyby</li>
-										<li class="skladniki">Rukola</li>
-										<li class="skladniki">Ser</li>
-										<li class="skladniki">Ziemniaki</li>
-									</ul>
-								</li>
-								<li class="element_jedzenie">
-									Pizza Zemsta Szefa
-									<ul class="dymek">
-										<img src="{% static 'images/pizza3.png' %}" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Kiełasa</li>
-										<li class="skladniki">Jalapeno</li>
-										<li class="skladniki">Ser</li>
-										<li class="skladniki">Sos</li>
-									</ul>
-								</li>
-								<li class="element_jedzenie">
-									Pizza Hawajka
-									<ul class="dymek">
-										<img src="{% static 'images/pizza3.png' %}" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Ananas</li>
-										<li class="skladniki">Kurczak</li>
-										<li class="skladniki">Ser</li>
-										<li class="skladniki">Szynka</li>
-									</ul>
-								</li>
-								<li class="element_jedzenie">
-									Pizza Tunno
-									<ul class="dymek">
-										<img src="{% static 'images/pizza3.png' %}" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Tuńczyk</li>
-										<li class="skladniki">Sos</li>
-										<li class="skladniki">Ser</li>
-										<li class="skladniki">Papryka</li>
-									</ul>
-								</li>
-								<li class="element_jedzenie">
-									Pizza 4sery
-									<ul class="dymek">
-										<img src="{% static 'images/pizza3.png' %}" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Ser</li>
-										<li class="skladniki">Ser</li>
-										<li class="skladniki">Ser</li>
-										<li class="skladniki">Ser</li>
-									</ul>
-								</li>
-								<li class="element_jedzenie">
-									Pizza Pepperoni
-									<ul class="dymek">
-										<img src="{% static 'images/pizza3.png' %}" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Pepperoni</li>
-										<li class="skladniki">Ogórek kiszony</li>
-										<li class="skladniki">Ser</li>
-										<li class="skladniki">Jalapeno</li>
-									</ul>
-								</li>
-								<li class="element_jedzenie">
-									Pizza Mięsna
-									<ul class="dymek">
-										<img src="{% static 'images/pizza3.png' %}" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Kiełasa</li>
-										<li class="skladniki">Boczek</li>
-										<li class="skladniki">Kurczak</li>
-										<li class="skladniki">Salami</li>
-										<li class="skladniki">Ser</li>
+										{% for skladniki in  item.skladniki.all %}
+										<li class="skladniki"> {{skladniki}}</li>
+										{% endfor %}
 									</ul>
 								</li>
 								<div style="clear:both;"></div>
+								{% endfor %}
+								{% endfor %}
 							</ol>
 						</div>
 
-
-						<div class="menu_zamawianie">
-							Makarony:</br>
-							<ol class="lista_jedzenie">
-								<li class="element_jedzenie">
-									Tagiatelle
-									<ul class="dymek">
-										<img src="{% static 'images/makaron2.png' %}" alt="Italian Trulli" style="width:178px; margin-left:-39px; margin-top:2.5px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-									</ul>
-								</li>
-								<li class="element_jedzenie">
-									Spaghetti
-									<ul class="dymek">
-										<img src="{% static 'images/makaron2.png' %}" alt="Italian Trulli" style="width:178px; margin-left:-39px; margin-top:2.5px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-									</ul>
-								</li>
-								<li class="element_jedzenie">
-									Łazanki
-									<ul class="dymek">
-										<img src="{% static 'images/makaron2.png' %}" alt="Italian Trulli" style="width:178px; margin-left:-39px; margin-top:2.5px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-									</ul>
-								</li>
-								<li class="element_jedzenie">
-									Z kurczakiem
-									<ul class="dymek">
-										<img src="{% static 'images/makaron2.png' %}" alt="Italian Trulli" style="width:178px; margin-left:-39px; margin-top:2.5px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-									</ul>
-								</li>
-								<li class="element_jedzenie">
-									Carbonara
-									<ul class="dymek">
-										<img src="{% static 'images/makaron2.png' %}" alt="Italian Trulli" style="width:178px; margin-left:-39px; margin-top:2.5px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-									</ul>
-								</li>
-								<li class="element_jedzenie">
-									Cannellloni
-									<ul class="dymek">
-										<img src="{% static 'images/makaron2.png' %}" alt="Italian Trulli" style="width:178px; margin-left:-39px; margin-top:2.5px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-									</ul>
-								</li>
-								<li class="element_jedzenie">
-									Z grzybami
-									<ul class="dymek">
-										<img src="{% static 'images/makaron2.png' %}" alt="Italian Trulli" style="width:178px; margin-left:-39px; margin-top:2.5px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-									</ul>
-								</li>
-								<div style="clear:both;"></div>
-							</ol>
-						</div>
-
-						<div class="menu_zamawianie_krotkie">
-							Włoskie kanapki:</br>
-							<ol class="lista_jedzenie">
-								<li class="element_jedzenie">
-									Banh Mi
-									<ul class="dymek">
-										<img src="{% static 'images/kanapka2.png' %}" alt="Italian Trulli" style="width:178px; margin-left:-36px; margin-top:30px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-									</ul>
-								</li>
-								<li class="element_jedzenie">
-									Kati Roll
-									<ul class="dymek">
-										<img src="{% static 'images/kanapka2.png' %}" alt="Italian Trulli" style="width:178px; margin-left:-36px; margin-top:30px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-									</ul>
-								</li>
-								<li class="element_jedzenie">
-									Bunny Chow
-									<ul class="dymek">
-										<img src="{% static 'images/kanapka2.png' %}" alt="Italian Trulli" style="width:178px; margin-left:-36px; margin-top:30px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-									</ul>
-								</li>
-								<li class="element_jedzenie">
-									Kanapka Kubańska
-									<ul class="dymek">
-										<img src="{% static 'images/kanapka2.png' %}" alt="Italian Trulli" style="width:178px; margin-left:-36px; margin-top:30px;">
-									</ul>
-									<ul class="skladniki">
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-										<li class="skladniki">Składnik</li>
-									</ul>
-								</li>
-								<div style="clear:both;"></div>
-							</ol>
-						</div>
-
-						<div class="menu_zamawianie">
-							Napoje:</br>
-							<ol class="lista_jedzenie">
-								<li class="element_jedzenie">Woda</li>
-								<li class="element_jedzenie">CocaCola</li>
-								<li class="element_jedzenie">Fanta</li>
-								<li class="element_jedzenie">Sok jabłkowy</li>
-								<li class="element_jedzenie">Kawa</li>
-								<li class="element_jedzenie">Piwo Lager</li>
-								<li class="element_jedzenie">Piwo Ciemne</li>
-								<li class="element_jedzenie">Wino Białe</li>
-								<li class="element_jedzenie">Wino Czerwone</li>
-
-								<div style="clear:both;"></div>
-							</ol>
-						</div>
-						<div style="clear:both;"></div>
-
-						<div class="menu_zamawianie">
-							Desery:</br>
-							<ol class="lista_jedzenie">
-								<li class="element_jedzenie">Lody</li>
-								<li class="element_jedzenie">Szarlotka</li>
-								<li class="element_jedzenie">Ciasto Bananowe</li>
-								<li class="element_jedzenie">Sernik</li>
-								<li class="element_jedzenie">Ciastko francuzkie</li>
-
-								<div style="clear:both;"></div>
-							</ol>
-						</div>
 
 					</div>
-
-
-
 					<div class="prawo_obraz">
 
 					</div>
 
 					<div style="clear:both;"></div>
+
+				</section>
+
+				</form>
 			</div>
 		</div>
 	</section>
 </main>
-{% endblock content %}
+					{% endblock content %}

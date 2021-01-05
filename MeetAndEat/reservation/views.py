@@ -8,6 +8,8 @@ from .models import Reservation, Stolik_item
 from copy import deepcopy
 import numpy as np
 import pdb
+from global_modules.models import AllActions
+
 class AvailableDate: 
     def __init__(self, begin_time, end_time, day, reservations, stolik):
         self.times = [[16, 0],
@@ -250,12 +252,15 @@ def reservation(request):
                 err = (end_h * 60 + end_m) - (begin_h * 60 + begin_m)
                 #if day < date.today():
                 #    messages.error(request, f'Nie można wykonać rezerwacji na datę przeszłą :)')        #włączyć na produkcję
+                #    AllActions.objects.create(user=request.user, action_id=10, action="Rezerwacja: podano przeeszłą datę")
                 #    return redirect('reservation1')
                 if err < 0: 
                     messages.error(request, f'Zakończenie rezerwacji nie może wypaść przed jej rozpoczęciem :)')
+                    AllActions.objects.create(user=request.user, action_id=9, action="Rezerwacja: godzina zakończenia wcześniej od daty rozpoczęcia")
                     return redirect('reservation1')
                 if err < 45:
                     messages.error(request, f'Minimalny czas rezerwacji to 45 minut - podano {err} minut')
+                    AllActions.objects.create(user=request.user, action_id=11, action="Rezerwacja: podano za krótki czas rezerwacji")
                     return redirect('reservation1')
 
                 table = Stolik_item.objects.get(stolik_miejsca = seats)
@@ -276,6 +281,7 @@ def reservation(request):
         elif 'place_submit' in request.POST:
             form2 = PickForm(request.POST)
             if form2.is_valid():
+                AllActions.objects.create(user=request.user, action_id=12, action="Rezerwacja: pomyślny wybór daty i stolika")
                 return redirect('reservation2')
 
     else:

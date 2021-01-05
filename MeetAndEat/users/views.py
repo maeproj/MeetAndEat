@@ -5,9 +5,8 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User, models
-from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash, forms
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import forms
 from datetime import date, timedelta, datetime, timezone
 from .forms import UserRegisterForm, UserLoginForm, ChangePassClick
 from .models import NewUser
@@ -15,6 +14,7 @@ from MeetAndEat.settings import EMAIL_HOST_USER
 from django.template.loader import get_template
 from django.urls import reverse
 import re
+from global_modules.models import AllActions
 
 def register(request):
     if request.method == 'POST':
@@ -28,8 +28,9 @@ def register(request):
                     if re.search('[0-9]', form.cleaned_data['password1']) is not None:
                         newuser = NewUser.objects.create(user=users)
                         newuser.phone = form.cleaned_data['telefon']
-                        newuser.save()
+                        newuser.password_history = form.cleaned_data['password1']
                         messages.success(request, 'Twoje konto zostało założone, możesz sie teraz zalogować!')
+                        AllActions.objects.create(user=users, action_id=1, action=f"założenie konta")
                         return redirect('login')
                     else:
                         messages.error(request, 'Brak cyfry w haśle')
@@ -61,6 +62,7 @@ def login_user(request):
                         if datetime.now(timezone.utc) - person.timeout < timedelta(minutes=30):
                             left = 30 - (datetime.now().minute - person.timeout.minute)
                             messages.error(request, f'Przekroczono liczbe logowań, pozostały czas: {left} minut')
+                            AllActions.objects.create(user=user, action_id=4, action="proba logowania na blokadzie czasowej")
                             return redirect('login')
                         else:
                             person.entries = 0
@@ -69,9 +71,11 @@ def login_user(request):
                     if date.today() - person.password_date > timedelta(days=30):
                         login(request, user)
                         messages.error(request, "Twoje hasło wygasło. Proszę wprowadzić nowe hasło.")
+                        AllActions.objects.create(user=user, action_id=3, action="logowanie prowadzące do zmiany hasła")
                         return redirect('change_password')
                     else:
                         login(request, user)
+                        AllActions.objects.create(user=user, action_id=2, action="logowanie")
                         return redirect('home')
             else:
                 if User.objects.filter(username=username).exists():
@@ -83,6 +87,7 @@ def login_user(request):
                     if(person.entries >= 5):
                         person.timeout = datetime.now(timezone.utc)
                         person.save()
+                        AllActions.objects.create(user=user, action_id=5, action="przekroczenie liczby logowań")
                         messages.error(request, 'Przekroczono limit logowań, proszę poczekać 30 minut przed następną próbą')
                         return redirect('login')
                     messages.error(request, f'Nieprawidłowe dane, pozostało prób: {ent}')
@@ -103,15 +108,24 @@ def change_password(request):
                 messages.error(request, 'Nieprawidłowe dane :(')
             else:
                 user = form.save()
-                user.refresh_from_db()
-                user.save()
-                messages.success(request, 'Twoje hasło zostało pomyślnie zmienione :)')
                 person = NewUser.objects.get(user=user)
-                person.password_date = date.today()
-                person.save()
-                update_session_auth_hash(request, user)
-                login(request, user)
-                return redirect('home')
+                if form.cleaned_data['old_password'] not in person.password_history:
+                    AllActions.objects.create(user=user, action_id=6, action="Błąd przy zmianie hasła: stare hasło nie pasuje")
+                    messages.error(request, 'Błędne stare hasło')
+                if form.cleaned_data['new_password1'] in person.password_history:
+                    AllActions.objects.create(user=user, action_id=7, action="Błąd przy zmianie hasła: nowe hasło już było rejestrowane")
+                    messages.error(request, 'Hasło było już używane, proszę wpisać nowe hasło')
+                else:
+                    user.refresh_from_db()
+                    user.save()
+                    messages.success(request, 'Twoje hasło zostało pomyślnie zmienione :)')
+                    person.password_date = date.today()
+                    person.password_history += ',' + form.cleaned_data['new_password1']
+                    person.save()
+                    update_session_auth_hash(request, user)
+                    AllActions.objects.create(user=user, action_id=8, action="pomyślna zmiana hasła")
+                    login(request, user)
+                    return redirect('home')
         else:
             messages.error(request, 'Nieprawidłowe dane :(')
     else:

@@ -12,6 +12,7 @@ class NewUser(models.Model):
     password_date = models.DateField(default=date(2018, 10, 19)) #data ustanowienia hasła
     entries = models.IntegerField(default=0) #próby logowania
     timeout = models.DateTimeField(null=True) #czasowa blokada w razie przekroczenia maksymalnej liczby prób logowania
+    password_history = models.TextField()
 
     def __str__(self):
         return "{}:{}".format(self.user, self.password_date)

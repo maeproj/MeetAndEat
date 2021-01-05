@@ -35,12 +35,17 @@ EMAIL_HOST_USER = 'mitendit@gmail.com'
 EMAIL_HOST_PASSWORD = 'mocnehaslo'
 EMAIL_USE_SSL = False
 
+BOOTSTRAP4 = {
+    'include_jquery': True
+    }
+
 # Application definition
 
 INSTALLED_APPS = [
     'phonenumber_field',
     'bootstrap4',
     'bootstrap_datepicker_plus',
+    'global_modules.apps.GlobalModulesConfig',
     'menu.apps.MenuConfig',
     'reservation.apps.ReservationConfig',
     'home.apps.HomeConfig',
