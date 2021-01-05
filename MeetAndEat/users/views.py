@@ -14,7 +14,10 @@ from .models import NewUser
 from MeetAndEat.settings import EMAIL_HOST_USER
 from django.template.loader import get_template
 from django.urls import reverse
+<<<<<<< HEAD
 import re
+=======
+>>>>>>> refs/remotes/origin/master
 
 
 def register(request):
@@ -24,6 +27,7 @@ def register(request):
             users = form.save()
             users.refresh_from_db()
             users.save()
+<<<<<<< HEAD
             if re.search('[A-ZĄĆĘŁÓŃŻŹŚ]', form.cleaned_data['password1']) is not None:
                 if re.search('[.@#$&^_]', form.cleaned_data['password1']) is not None:
                     if re.search('[0-9]', form.cleaned_data['password1']) is not None:
@@ -44,6 +48,12 @@ def register(request):
         else:
             messages.error(request, 'Zbyt mała ilość znaków - minimum 8')
             return redirect('register')
+=======
+            newuser = NewUser.objects.create(user=users)
+            newuser.save()
+            messages.success(request, f'Twoje konto zostało założone, możesz sie teraz zalogować!')
+            return redirect('login')
+>>>>>>> refs/remotes/origin/master
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})

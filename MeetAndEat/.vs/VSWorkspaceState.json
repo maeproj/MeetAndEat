@@ -2,15 +2,22 @@
   "ExpandedNodes": [
     "",
     "\\MeetAndEat",
+<<<<<<< HEAD
     "\\menu",
     "\\menu\\templates",
     "\\menu\\templates\\menu",
     "\\projekt inżynierski 3",
+=======
+>>>>>>> refs/remotes/origin/master
     "\\reservation",
     "\\reservation\\templates",
     "\\reservation\\templates\\reservation",
     "\\users"
   ],
+<<<<<<< HEAD
   "SelectedNode": "\\reservation\\models.py",
+=======
+  "SelectedNode": "\\reservation\\forms.py",
+>>>>>>> refs/remotes/origin/master
   "PreviewInSolutionExplorer": false
 }

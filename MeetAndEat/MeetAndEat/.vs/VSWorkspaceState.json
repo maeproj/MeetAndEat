@@ -1,6 +1,19 @@
 {
   "ExpandedNodes": [
+<<<<<<< HEAD
     ""
   ],
+=======
+    "",
+    "\\home",
+    "\\home\\templates",
+    "\\home\\templates\\home",
+    "\\MeetAndEat",
+    "\\users",
+    "\\users\\templates",
+    "\\users\\templates\\users"
+  ],
+  "SelectedNode": "\\users\\templates\\users\\register.html",
+>>>>>>> refs/remotes/origin/master
   "PreviewInSolutionExplorer": false
 }

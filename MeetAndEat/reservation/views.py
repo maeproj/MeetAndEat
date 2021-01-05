@@ -284,6 +284,7 @@ def reservation(request):
 
 @login_required
 def reservation_items(request):
+<<<<<<< HEAD
     return render(request, 'reservation/rezerwacje_jedzenie.html')
 
 
@@ -305,3 +306,6 @@ def menu_items(request):
 def menu_orgs(request):
     menu_orgs=Menu_org.objects.all()
     return render(request,"reservation/rezerwacje_jedzenie.html",{'menu_orgs':menu_orgs})
+=======
+    return render(request, 'reservation/rezerwacje_jedzenie.html')
+>>>>>>> refs/remotes/origin/master
