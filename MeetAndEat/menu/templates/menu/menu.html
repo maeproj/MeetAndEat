@@ -1,0 +1,57 @@
+﻿{% extends 'home/base.html' %}
+{% load static %}
+{% block head %}
+<title>MeetAndEat - Rezerwacja</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
+{% endblock head %}
+{% block content %}
+<main>
+	<section>
+		<div id="container">
+			<div id="rezerwacje">
+
+				<section>
+					<div class="lewo_obraz">
+
+					</div>
+
+					<div class="parametry_zamowienia_menu">
+						<div class="menu_tekst">Menu</div>
+						<div class="menu_zamawianie">
+							{% for menu in  menu_orgs %}
+							{{menu.typ}}</br>
+							<ol class="lista_jedzenie">
+								<li class="element_jedzenie">
+									{% for item in  menu.zawartosc.all %}
+									{{item}} ({{item.cena}} zl)
+									<ul class="dymek">
+										<img src="{{item.zdjecie.url}}" alt="{{item.zdjecie}}" style="width:220px; margin-left:-63px; margin-top:2px;">
+									</ul>
+									<ul class="skladniki">
+										{% for skladniki in  item.skladniki.all %}
+										<li class="skladniki"> {{skladniki}}</li>
+										{% endfor %}
+									</ul>
+								</li>
+								<div style="clear:both;"></div>
+								{% endfor %}
+								{% endfor %}
+							</ol>
+						</div>
+
+
+					</div>
+					<div class="prawo_obraz">
+
+					</div>
+
+					<div style="clear:both;"></div>
+
+				</section>
+
+				</form>
+			</div>
+		</div>
+	</section>
+</main>
+{% endblock content %}

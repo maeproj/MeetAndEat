@@ -1,0 +1,421 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<title>Rezerwacje_jedzenie</title>
+	<meta name="description" content="Tutaj wpisujemy opis" />
+	<meta name="keywords" content="słowa kluczowe, tagi, o czym strona" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="jquery.scrollTo.min.js"></script>
+	
+	<script>
+	jQuery(function($)
+		{
+			//zresetuj scrolla
+			$.scrollTo(0);
+			$('.scrollup').click(function() { $.scrollTo($('body'), 1000); });
+		}
+		);
+	$(window).scroll(function()
+		{
+			if($(this).scrollTop()>300) $('.scrollup').fadeIn();
+			else $('.scrollup').fadeOut();		
+		}
+		);	
+	</script>
+	
+</head>
+
+<body>
+	<header>
+			<div id="logo">
+				Meet&Eat </br>
+				<a href="#" class="scrollup"></a>
+			</div> 
+			<nav>
+				<ol class="nav">
+						<li class="nav"><a href="index.html">Strona główna</a></li>
+						<li class="nav"><a href="menu.html">Menu </a></li>
+						<li class="nav"><a href="restauracja.html">Restauracja</a></li>
+						<li class="nav"><a href="rezerwacje.html">Zarezerwuj</a></li>
+						<li class="nav"><a href="kontakt.html">Kontakt</a></li>
+						<li class="nav"><a href="#">Moje Konto</a>
+							<ul class="nav">
+								<li class="nav"><a href="#">Moje konto</a></li>
+								<li class="nav"><a href="#">Moje rezerwacje</a></li>
+								<li class="nav"><a href="niezalogowany.html">Wyloguj</a></li>
+							</ul>
+						</li>
+				</ol>
+			</nav>
+	</header>
+	
+	<main>
+		<section>
+			<div id="container">
+				<div id="rezerwacje">
+					
+					<section>
+						<div class="parametry_zamowienia">
+							<div class="menu_tekst">Dodaj danie</div>
+						</div> 
+						
+						
+						<div class="parametry_zamowienia_menu">
+							<div class="menu_tekst">Menu</div>
+							<div class="menu_zamawianie">Pizze:</br>
+								<ol class="lista_jedzenie">
+									<li class="element_jedzenie">Pizza Wiejska
+										<ul class="dymek">
+											<img src="obrazy/pizza3.png" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Kiełasa</li>
+											<li class="skladniki">Ogórek kiszony</li>
+											<li class="skladniki">Ser</li>
+											<li class="skladniki">Ziemniaki</li>
+										</ul>
+									</li>
+									<li class="element_jedzenie">Pizza Grzybobranie	
+										<ul class="dymek">
+											<img src="obrazy/pizza3.png" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Grzyby</li>
+											<li class="skladniki">Rukola</li>
+											<li class="skladniki">Ser</li>
+											<li class="skladniki">Ziemniaki</li>
+										</ul>										
+									</li>
+									<li class="element_jedzenie">Pizza Zemsta Szefa		
+										<ul class="dymek">
+											<img src="obrazy/pizza3.png" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Kiełasa</li>
+											<li class="skladniki">Jalapeno</li>
+											<li class="skladniki">Ser</li>
+											<li class="skladniki">Sos</li>
+										</ul>										
+									</li>
+									<li class="element_jedzenie">Pizza Hawajka		
+										<ul class="dymek">
+											<img src="obrazy/pizza3.png" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Ananas</li>
+											<li class="skladniki">Kurczak</li>
+											<li class="skladniki">Ser</li>
+											<li class="skladniki">Szynka</li>
+										</ul>										
+									</li>
+									<li class="element_jedzenie">Pizza Tunno	
+										<ul class="dymek">
+											<img src="obrazy/pizza3.png" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Tuńczyk</li>
+											<li class="skladniki">Sos</li>
+											<li class="skladniki">Ser</li>
+											<li class="skladniki">Papryka</li>
+										</ul>										
+									</li>
+									<li class="element_jedzenie">Pizza 4sery	
+										<ul class="dymek">
+											<img src="obrazy/pizza3.png" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Ser</li>
+											<li class="skladniki">Ser</li>
+											<li class="skladniki">Ser</li>
+											<li class="skladniki">Ser</li>
+										</ul>										
+									</li>
+									<li class="element_jedzenie">Pizza Pepperoni	
+										<ul class="dymek">
+											<img src="obrazy/pizza3.png" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Pepperoni</li>
+											<li class="skladniki">Ogórek kiszony</li>
+											<li class="skladniki">Ser</li>
+											<li class="skladniki">Jalapeno</li>
+										</ul>										
+									</li>
+									<li class="element_jedzenie">Pizza Mięsna	
+										<ul class="dymek">
+											<img src="obrazy/pizza3.png" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Kiełasa</li>
+											<li class="skladniki">Boczek</li>
+											<li class="skladniki">Kurczak</li>
+											<li class="skladniki">Salami</li>
+											<li class="skladniki">Ser</li>
+										</ul>											
+									</li>
+									<div style="clear:both;"></div>
+								</ol>						
+							</div>
+							
+							
+							<div class="menu_zamawianie">Makarony:</br>
+								<ol class="lista_jedzenie">
+									<li class="element_jedzenie">Tagiatelle		
+										<ul class="dymek">
+											<img src="obrazy/makaron2.png" alt="Italian Trulli" style="width:178px; margin-left:-39px; margin-top:2.5px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+										</ul>											
+									</li>
+									<li class="element_jedzenie">Spaghetti		
+										<ul class="dymek">
+											<img src="obrazy/makaron2.png" alt="Italian Trulli" style="width:178px; margin-left:-39px; margin-top:2.5px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+										</ul>											
+									</li>
+									<li class="element_jedzenie">Łazanki		
+										<ul class="dymek">
+											<img src="obrazy/makaron2.png" alt="Italian Trulli" style="width:178px; margin-left:-39px; margin-top:2.5px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+										</ul>											
+									</li>
+									<li class="element_jedzenie">Z kurczakiem	
+										<ul class="dymek">
+											<img src="obrazy/makaron2.png" alt="Italian Trulli" style="width:178px; margin-left:-39px; margin-top:2.5px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+										</ul>											
+									</li>
+									<li class="element_jedzenie">Carbonara		
+										<ul class="dymek">
+											<img src="obrazy/makaron2.png" alt="Italian Trulli" style="width:178px; margin-left:-39px; margin-top:2.5px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+										</ul>											
+									</li>
+									<li class="element_jedzenie">Cannellloni	
+										<ul class="dymek">
+											<img src="obrazy/makaron2.png" alt="Italian Trulli" style="width:178px; margin-left:-39px; margin-top:2.5px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+										</ul>											
+									</li>
+									<li class="element_jedzenie">Z grzybami	
+										<ul class="dymek">
+											<img src="obrazy/makaron2.png" alt="Italian Trulli" style="width:178px; margin-left:-39px; margin-top:2.5px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+										</ul>											
+									</li>
+									<div style="clear:both;"></div>
+								</ol>
+							</div>
+							
+							<div class="menu_zamawianie_krotkie">Włoskie kanapki:</br>
+								<ol class="lista_jedzenie">
+									<li class="element_jedzenie">Banh Mi 	
+										<ul class="dymek">
+											<img src="obrazy/kanapka2.png" alt="Italian Trulli" style="width:178px; margin-left:-36px; margin-top:30px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+										</ul>											
+									</li>
+									<li class="element_jedzenie">Kati Roll	
+										<ul class="dymek">
+											<img src="obrazy/kanapka2.png" alt="Italian Trulli" style="width:178px; margin-left:-36px; margin-top:30px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+										</ul>											
+									</li>
+									<li class="element_jedzenie">Bunny Chow	
+										<ul class="dymek">
+											<img src="obrazy/kanapka2.png" alt="Italian Trulli" style="width:178px; margin-left:-36px; margin-top:30px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+										</ul>											
+									</li>
+									<li class="element_jedzenie">Kanapka Kubańska 	
+										<ul class="dymek">
+											<img src="obrazy/kanapka2.png" alt="Italian Trulli" style="width:178px; margin-left:-36px; margin-top:30px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+											<li class="skladniki">Składnik</li>
+										</ul>											
+									</li>
+									<div style="clear:both;"></div>
+								</ol>
+							</div>
+							
+							<div class="menu_zamawianie">Napoje:</br>
+								<ol class="lista_jedzenie">
+									<li class="element_jedzenie">Woda</li>
+									<li class="element_jedzenie">CocaCola</li>
+									<li class="element_jedzenie">Fanta</li>
+									<li class="element_jedzenie">Sok jabłkowy</li>
+									<li class="element_jedzenie">Kawa</li>
+									<li class="element_jedzenie">Piwo Lager</li>
+									<li class="element_jedzenie">Piwo Ciemne</li>
+									<li class="element_jedzenie">Wino Białe</li>
+									<li class="element_jedzenie">Wino Czerwone</li>
+									
+									<div style="clear:both;"></div>
+								</ol>						
+							</div>
+							<div style="clear:both;"></div>
+							
+							<div class="menu_zamawianie">Desery:</br>
+								<ol class="lista_jedzenie">
+									<li class="element_jedzenie">Lody</li>
+									<li class="element_jedzenie">Szarlotka</li>
+									<li class="element_jedzenie">Ciasto Bananowe</li>
+									<li class="element_jedzenie">Sernik</li>
+									<li class="element_jedzenie">Ciastko francuzkie</li>
+									
+									<div style="clear:both;"></div>
+								</ol>						
+							</div>
+							
+						</div>
+						
+						
+						<div class="parametry_zamowienia2">
+							<form action="" method="post">
+								<div class="menu_tekst">Edytuj danie</div>
+								
+								<div id="do_checkboxa">	
+									<fieldset>
+											<legend> Dodatki mięsne </legend>
+											<div><label><input type="checkbox" value="1" name="dodatki">Szynka +4zł</label></div>
+											<div><label><input type="checkbox" value="2" name="dodatki">Salami +4zł</label></div>
+											<div><label><input type="checkbox" value="3" name="dodatki">Boczek +4zł</label></div>
+											<div><label><input type="checkbox" value="4" name="dodatki">Pepperoni +5zł</label></div>
+											<div><label><input type="checkbox" value="5" name="dodatki">Kurczak +5zł</label></div>
+											<div><label><input type="checkbox" value="6" name="dodatki">Kiełasa +3zł</label></div>
+									</fieldset>  
+								</div>
+								<div id="do_checkboxa">	
+									<fieldset>
+											<legend> Dodatki warzywne </legend>
+											<div><label><input type="checkbox" value="7" name="dodatki">Papryka +3zł</label></div>
+											<div><label><input type="checkbox" value="8" name="dodatki">Brokuł +3zł</label></div>
+											<div><label><input type="checkbox" value="9" name="dodatki">Rukola +2zł</label></div>
+											<div><label><input type="checkbox" value="10" name="dodatki">Pomidor +3zł</label></div>
+											<div><label><input type="checkbox" value="11" name="dodatki">Zieminaki +2zł</label></div>
+											<div><label><input type="checkbox" value="12" name="dodatki">Kapary  +4zł</label></div>
+									</fieldset>  
+								</div>
+								<div id="do_checkboxa">	
+									<fieldset>
+											<legend> Inne dodatki </legend>
+											<div><label><input type="checkbox" value="13" name="dodatki">Krewetki +7zł</label></div>
+											<div><label><input type="checkbox" value="14" name="dodatki">Małże +6zł</label></div>
+											<div><label><input type="checkbox" value="15" name="dodatki">Ananas +3zł</label></div>
+									</fieldset>  
+								</div>
+								<div id="do_checkboxa">	
+									<fieldset>
+											<legend> Skład Pizzy </legend>
+											<div><label><input type="checkbox" value="1" name="sklad" checked>ser </label></div>
+											<div><label><input type="checkbox" value="2" name="sklad" checked>sos</label></div>
+											<div><label><input type="checkbox" value="3" name="sklad" checked>szynka</label></div>
+											<div><label><input type="checkbox" value="4" name="sklad" checked>pieczarki </label></div>
+									</fieldset>  
+								</div>
+								<div class="input_field2"> 
+									<input type="submit"></input>
+								</div>
+							</div>
+							
+							<div style="clear:both;"></div>
+							
+							<div class="akceptuj">
+								Akceptuj
+							</div>
+						</section>
+						
+						</form>
+				</div>
+			</div>
+		</section>
+	</main>
+	
+	<footer>
+		<div id="stopka">
+				Meet & Eat </br>
+		</div>
+	</footer>	
+	
+	<script src="jquery-1.11.3.min.js"></script>	
+		<script>
+			$(document).ready(function() {
+			var NavY = $('nav').offset().top;
+			 
+			var stickyNav = function(){
+			var ScrollY = $(window).scrollTop();
+				  
+			if (ScrollY > NavY) { 
+				$('nav').addClass('sticky');
+			} else {
+				$('nav').removeClass('sticky'); 
+			}
+			};
+			 
+			stickyNav();
+			 
+			$(window).scroll(function() {
+				stickyNav();
+			});
+			});
+		</script>
+	
+</body>
+</html>
