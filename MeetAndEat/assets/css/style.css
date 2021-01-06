@@ -1,7 +1,7 @@
 body
 {
 	/* Background pattern from Toptal Subtle Patterns */
-	background-image: url("obrazy/tlo.png");
+	background-image: url("images/tlo.png");
 	color: black;
 	font-family: 'Lato', sans-serif;
 	font-size: 20px;
@@ -50,7 +50,7 @@ nav
 	width: 64px;
 	height: 64px;
 	text-decoration: none;
-	background: url("obrazy/upup.png"); width=50px; height=50px; no-repeat 0px 0px;
+	background: url("images/upup.png"); width=50px; height=50px; no-repeat 0px 0px;
 	position: fixed;
 	right: 50px;
 	bottom: 50px;
@@ -70,7 +70,7 @@ nav
 	min-height: 750px;
 }
 
- #rezerwacje
+#rezerwacje
 {
 	font-size: 15px;
 	margin-left: auto;
@@ -84,8 +84,8 @@ nav
 	padding-right: 50px;
 }
  
- .parametry_zamowienia
- {
+.parametry_zamowienia
+{
 	font-size: 17px;
 	width: 230px;
 	min-height: 1000px;
@@ -94,34 +94,20 @@ nav
 	float: left;
 	margin-bottom: 10px;
 	margin-top: 10px;
- }
- .parametry_zamowienia2
- {
+} 
+.parametry_zamowienia4
+{
 	font-size: 17px;
 	width: 230px;
-	min-height: 1000px;
-	background-color: #00A579;'
-	padding: 5px;
-	margin-left: 20px;
-	float: left;
-	margin-bottom: 10px;
-	margin-top: 10px;
- } 
- 
- .lewo_obraz
- {
-	font-size: 17px;
-	width: 230px;
-	min-height: 1000px;
+	min-height: 900px;
 	background-color: #00A579;'
 	padding: 5px;
 	float: left;
 	margin-bottom: 10px;
 	margin-top: 10px;
-	background-image: url("obrazy/lewo.png");
- }
- .prawo_obraz
- {
+}
+.parametry_zamowienia2
+{
 	font-size: 17px;
 	width: 230px;
 	min-height: 1000px;
@@ -131,11 +117,36 @@ nav
 	float: left;
 	margin-bottom: 10px;
 	margin-top: 10px;
-	background-image: url("obrazy/prawo.png");
- } 
+} 
  
- .srodek_strona_glowna
- {
+.lewo_obraz
+{
+	font-size: 17px;
+	width: 230px;
+	min-height: 1000px;
+	background-color: #00A579;'
+	padding: 5px;
+	float: left;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	background-image: url("images/lewo.png");
+}
+.prawo_obraz
+{
+	font-size: 17px;
+	width: 230px;
+	min-height: 1000px;
+	background-color: #00A579;'
+	padding: 5px;
+	margin-left: 20px;
+	float: left;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	background-image: url("images/prawo.png");
+} 
+ 
+.srodek_strona_glowna
+{
 	font-size: 17px;
 	width: 1100px;
 	min-height: 750px;
@@ -148,10 +159,10 @@ nav
 	padding-left: 30px;
 	padding-right: 30px;
 	padding-bottom: 30px;
- }
+}
  
- .srodek
- {
+.srodek
+{
 	font-size: 17px;
 	width: 1100px;
 	min-height: 750px;
@@ -162,10 +173,10 @@ nav
 	margin-top: 30px;
 	padding-top: 10px;
 	text-align: center;
- }
+}
  
-  .parametry_zamowienia_stoliki
- {
+.parametry_zamowienia_stoliki
+{
 	font-size: 25px;
 	width: 170px;
 	min-height: 150px;
@@ -175,9 +186,9 @@ nav
 	float: left;
 	margin-bottom: 10px;
 	margin-top: 10px;
- }
- .parametry_zamowienia_stoliki_dostepnosc
- {
+}
+.parametry_zamowienia_stoliki_dostepnosc
+{
 	font-size: 17px;
 	width: 160px;
 	min-height: 130px;
@@ -186,12 +197,12 @@ nav
 	margin-bottom: 10px;
 	margin-top: 10px;
 	font-family: 'Lato', sans-serif;
- }
-  .mapa_restauracji_kontener
- {
+}
+.mapa_restauracji_kontener
+{
 	font-size: 17px;
 	width: 940px;
-	min-height: 990px;
+	min-height: 890px;
 	background-color: #00A579;
 	padding: 5px;
 	margin-left: 20px;
@@ -199,9 +210,9 @@ nav
 	float: left;
 	margin-bottom: 10px;
 	text-align: center;
- }
- .parametry_zamowienia_menu
- {
+}
+.parametry_zamowienia_menu
+{
 	font-size: 17px;
 	width: 700px;
 	min-height: 1000px;
@@ -210,50 +221,121 @@ nav
 	float: left;
 	margin-bottom: 10px;
 	margin-top: 10px;
- }
- .input_field
- {
-	 margin-left: auto;
-	 margin-right: auto;
-	 text-align: center;
-	 margin-top: 10px;
- }
- .input_field2
- {
-	 margin-left: auto;
-	 margin-right: auto;
-	 text-align: center;
-	 margin-top: 20px;
- }
+}
+.input_field
+{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	margin-top: 10px;
+}
+.input_field2
+{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	margin-top: 20px;
+}
  
 .menu_tekst
- {
-	 margin-top:20px;
-	 font-size:40px;
-	 text-align: center;
-	 font-family: 'Dancing Script', cursive;
- }
+{
+	margin-top:20px;
+	font-size:40px;
+	text-align: center;
+	font-family: 'Dancing Script', cursive;
+}
+.menu_tekst_duzy
+{
+	margin-top:20px;
+	font-size:50px;
+	text-align: center;
+	font-family: 'Dancing Script', cursive;
+}
+.konto_element
+{
+	padding-top:20px;
+	margin-top:20px;
+	font-size:40px;
+	text-align: center;
+	font-family: 'Dancing Script', cursive;
+	background-color: #F0EEE9;
+	height: 70px;
+	width: 830px; 
+	float: left;
+	-webkit-box-shadow: 5px 5px 15px -1px rgba(0,0,0,0.18); 
+	box-shadow: 5px 5px 15px -1px rgba(0,0,0,0.18);
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+
+} 
+.konto_maly
+{
+	padding-top:20px;
+	margin-top:20px;
+	font-size:40px;
+	text-align: center;
+	font-family: 'Dancing Script', cursive;
+	background-color: #F0EEE9;
+	height: 70px;
+	width: 250px; 
+	float: left;
+	margin-left: 20px;
+	text-decoration:none;
+	color: black;
+	display: block;
+	-webkit-box-shadow: 5px 5px 15px -1px rgba(0,0,0,0.18); 
+	box-shadow: 5px 5px 15px -1px rgba(0,0,0,0.18);
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
  
- .menu_zamawianie
- {
-	 font-size:30px;
-	 margin-top: 10px;
-	 margin-left: 30px;
-	 margin-bottom: 10px;
-	 height:170px;
-	 font-family:'Dancing Script', cursive;
- }
- .menu_zamawianie_krotkie
- {
-	 font-size:30px;
-	 margin-top: 10px;
-	 margin-left: 30px;
-	 margin-bottom: 10px;
-	 height: 105px;
-	 font-family:'Dancing Script', cursive;
- }
+.moje_rezerwacje
+{
+	padding-top:20px;
+	margin-top:20px;
+	font-size:40px;
+	text-align: center;
+	font-family: 'Dancing Script', cursive;
+	background-color: #F0EEE9;
+	min-height: 80px;
+	width: 1100px; 
+	float: left;
+	-webkit-box-shadow: 5px 5px 15px -1px rgba(0,0,0,0.18); 
+	box-shadow: 5px 5px 15px -1px rgba(0,0,0,0.18);
+	-moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
  
- .zawartosc_zamawianie
+.konto_maly:hover
+{
+	background-color: #9FDECD;
+	transform: scale(1.1);
+	cursor: pointer;
+}
+ 
+.menu_zamawianie
+{
+	font-size:30px;
+	margin-top: 10px;
+	margin-left: 30px;
+	margin-bottom: 10px;
+	height:170px;
+	font-family:'Dancing Script', cursive;
+}
+.menu_zamawianie_krotkie
+{
+	font-size:30px;
+	margin-top: 10px;
+	margin-left: 30px;
+	margin-bottom: 10px;
+	height: 105px;
+	font-family:'Dancing Script', cursive;
+}
+ 
+.zawartosc_zamawianie
 {
 	float: left;
 	margin: 5px;
@@ -306,14 +388,14 @@ nav
 	cursor: pointer;
 }
  
-  .zawartosc_zamawianie:hover
+.zawartosc_zamawianie:hover
 {
 	background-color:#E2E0DC;
 	cursor: pointer;
 }
 
- #do_checkboxa
- {
+#do_checkboxa
+{
 	width: 220px;
 	height-min: 10px;
 	padding: 5px;
@@ -321,29 +403,27 @@ nav
 	padding-top:10px;
 	border-color: black;
 	margin-top: 20px;
- }
+}
  
-
- 
-  .ktora_godzina
- {
+.ktora_godzina
+{
 	width: 220px;
 	height: 50px;
 	padding: 5px;
 	margin: 0px;
 	padding-top:20px;
 	padding-bottom:25px;
- }
+}
  
- #minuty
- {
+#minuty
+{
 	padding-top: 2px;
 	float: left; 
- }
-  #godziny
- {
-	float: left; 
- }
+}
+#godziny
+{
+	float: left;
+}
 
 .zawartosc
 {
@@ -359,19 +439,116 @@ nav
 	padding-top: 55px;
 }
 
- .zawartosc:hover
+.zawartosc:hover
 {
 	background-color:#E2E0DC;
 	cursor: pointer;
 }
-
 
 #container
 {
 	width: 1300px;
 	margin-left: auto;
 	margin-right: auto;
-	
+}
+
+.mapa
+{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	width: 700px;
+	height: 680px;
+	background-image: url("images/restauracja z góry 3.png");
+}
+
+.stolik1
+{
+	margin-left:194px;
+	margin-top:148px;
+	width: 80px;
+    height: 80px;
+	border-radius: 50%;
+	position:absolute;
+
+}
+.stolik1:hover
+{
+	cursor:pointer;
+	background-color:black;
+	opacity: 99%;
+}
+
+.stolik2:hover
+{
+	cursor:pointer;
+	background-color:black;
+	opacity: 99%;
+}
+.stolik2
+{
+	margin-left:472px;
+	margin-top:154px;
+	width: 80px;
+    height: 80px;
+	border-radius: 50%;
+	position:absolute;
+	-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; 
+	box-shadow: 0px 0px 2px 19px #05F2B1;
+}
+
+.stolik3:hover
+{
+	cursor:pointer;
+	background-color:black;
+	opacity: 99%;
+}
+.stolik3
+{
+	margin-left:295px;
+	margin-top:344px;
+	width: 80px;
+    height: 80px;
+	border-radius: 50%;
+	position:absolute;
+	-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; 
+	box-shadow: 0px 0px 2px 19px #05F2B1;
+}
+
+.stolik4:hover
+{
+	cursor:pointer;
+	background-color:black;
+	opacity: 99%;
+}
+.stolik4
+{
+	margin-left:195px;
+	margin-top:544px;
+	width: 80px;
+    height: 80px;
+	border-radius: 50%;
+	position:absolute;
+	-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; 
+	box-shadow: 0px 0px 2px 19px #05F2B1;
+}
+
+.stolik5:hover
+{
+	cursor:pointer;
+	background-color:black;
+	opacity: 99%;
+}
+.stolik5
+{
+	margin-left:495px;
+	margin-top:544px;
+	width: 80px;
+    height: 80px;
+	border-radius: 50%;
+	position:absolute;
+	-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; 
+	box-shadow: 0px 0px 2px 19px #05F2B1;
 }
 
 ol.lista_jedzenie
@@ -418,11 +595,10 @@ ol.lista_jedzenie > li.element_jedzenie:hover
 	cursor: pointer;
 	-webkit-box-shadow: 9px 1px 21px -1px #000000; 
 	box-shadow: 9px 1px 21px -1px #000000;
-	
 }
 
 ol.lista_jedzenie > li.element_jedzenie > ul.dymek
- {
+{
 	display:none;
     position: absolute;
     bottom: 100%;
@@ -435,9 +611,8 @@ ol.lista_jedzenie > li.element_jedzenie > ul.dymek
     height: 180px;
     border-radius: 50%;
 	border: 1px solid black;
-	margin-bottom:4px;
-	  
- }
+	margin-bottom:4px;  
+}
 
 ol.lista_jedzenie > li.element_jedzenie:hover > ul.dymek
 {

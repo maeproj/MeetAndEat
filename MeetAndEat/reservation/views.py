@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import ReservationForm, PickForm
 from django.contrib.auth.decorators import login_required
-from datetime import date, time
+from datetime import date, time, datetime, timedelta
 from django.contrib import messages
 from .models import Reservation, Stolik_item
 from copy import deepcopy
@@ -236,6 +236,7 @@ class AvailableDate:
 
 @login_required            
 def reservation(request):
+    dates = {'min': date.today().strftime('%Y-%m-%d'), 'max': (date.today() + timedelta(days=10)).strftime('%Y-%m-%d')}
     sug = {'suc': '', 'alt1': {}, 'alt2': {}, 'alt3': {}, 'alt4': {}, 'alt5': {}}
     short = ['alt' + str(i+1) for i in range(5)]
     form2 = None
@@ -243,12 +244,17 @@ def reservation(request):
         if 'date_submit' in request.POST:
             form = ReservationForm(request.POST)
             if form.is_valid():
-                day = form.cleaned_data['day']
+                #day = form.cleaned_data['day']
                 seats =form.cleaned_data['places_by_table']
-                begin_h = form.cleaned_data['begin_h']
-                begin_m = form.cleaned_data['begin_m']
-                end_h = form.cleaned_data['end_h']
-                end_m = form.cleaned_data['end_m']
+                #time_begin = form.cleaned_data['time_begin']
+                #time_end = form.cleaned_data['time_end']
+                time_begin = datetime.strptime(request.POST.get('czas-start'), '%H:%M').time()
+                time_end = datetime.strptime(request.POST.get('czas-koniec'), '%H:%M').time()
+                day = datetime.strptime(request.POST.get('dzien'), '%Y-%m-%d').date()
+                begin_h = time_begin.hour
+                begin_m = time_begin.minute
+                end_h = time_end.hour
+                end_m = time_end.minute
                 err = (end_h * 60 + end_m) - (begin_h * 60 + begin_m)
                 #if day < date.today():
                 #    messages.error(request, f'Nie można wykonać rezerwacji na datę przeszłą :)')        #włączyć na produkcję
@@ -278,16 +284,34 @@ def reservation(request):
                     suggestions = np.array(suggestions)
                     ch = list(zip([i+1 for i in range(5)], suggestions[:, 1]))
                     form2 = PickForm(choice = ch)
-        elif 'place_submit' in request.POST:
-            form2 = PickForm(request.POST)
-            if form2.is_valid():
-                AllActions.objects.create(user=request.user, action_id=12, action="Rezerwacja: pomyślny wybór daty i stolika")
-                return redirect('reservation2')
+            elif 'place_submit' in request.POST:
+                form2 = PickForm(request.POST)
+                if form2.is_valid():
+                    AllActions.objects.create(user=request.user, action_id=12, action="Rezerwacja: pomyślny wybór daty i stolika")
+                    return redirect('reservation2')
 
     else:
         form = ReservationForm()
-    return render(request, 'reservation/rezerwacje.html', {'form':form, 'form2': form2, 'sugg':sug})
+    return render(request, 'reservation/rezerwacje.html', {'form':form, 'form2': form2, 'sugg':sug, 'dates': dates})
 
 @login_required
 def reservation_items(request):
     return render(request, 'reservation/rezerwacje_jedzenie.html')
+
+from .models import Skladnik
+from .models import Menu_item
+from .models import Menu_org
+
+def skladnik_item(request):
+    obj=Skladnik.objects.all()
+    return render(request,"reservation/skladniki.html",{'obj':obj})
+
+
+def menu_items(request):
+    menu_items=Menu_item.objects.all()
+    return render(request,"reservation/rezerwacje_jedzenie.html",{'menu_items':menu_items})
+
+
+def menu_orgs(request):
+    menu_orgs=Menu_org.objects.all()
+    return render(request,"reservation/rezerwacje_jedzenie.html",{'menu_orgs':menu_orgs})
