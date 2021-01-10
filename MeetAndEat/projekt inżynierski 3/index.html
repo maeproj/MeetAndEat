@@ -12,6 +12,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato&display=swap" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="jquery.scrollTo.min.js"></script>
+	<link rel="stylesheet" href="font2/css/fontello.css" type="text/css" />
 	
 	<script>
 	jQuery(function($)
@@ -29,8 +30,28 @@
 		);	
 	</script>
 	
+	<script type="text/javascript">
+	function otworz_czat()
+	{
+		var x=document.getElementById("czat_okno").style.display
+		console.log(x);
+		if (x === "none" || !x)
+		{
+			document.getElementById("czat_okno").style.display="block";
+		}
+		else
+		{
+			document.getElementById("czat_okno").style.display="none";
+		}
+	}
+	</script>
+	
 </head>
 
+	<div id="czat" onclick="otworz_czat()"><i class="icon-comment" style="font-size:40px;"></i></div>
+	<div id="czat_okno">
+		<div id="miejsce_dla_jedruli"></div>
+	</div>
 
 <body>
 	<header>
@@ -54,7 +75,7 @@
 				</ol>
 			</nav>
 	</header>
-
+		
 	<main>	
 		<a href="#" class="scrollup"></a>
 		<div id="strona_glowna">
@@ -70,7 +91,7 @@
 					</br>
 					<div class="menu_tekst"> Od strony obsługi </div> </br>
 					<img src="obrazy/widok zza lady.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black; margin-left:130px;">
-					</br>
+					</br></br>
 					<h3>Donec imperdiet</h3> nisl sem, nec ultricies felis hendrerit non. Pellentesque efficitur augue in urna imperdiet viverra. Nunc venenatis enim quis diam dapibus sodales. Pellentesque ac sapien a magna maximus placerat fringilla eu tellus. Praesent hendrerit ante lacus, ac finibus est semper eu. Aliquam dapibus tristique sollicitudin. Etiam vehicula erat nulla, vitae posuere leo ornare non. Vivamus sodales nisl mauris, nec tempor nulla gravida sed. Donec quis massa orci. Maecenas laoreet, magna at sagittis vehicula, sapien ligula aliquam velit, a accumsan lectus libero et ex. Ut posuere sed orci vitae sagittis. Fusce sed tellus sed nibh aliquet placerat. Nulla quis urna maximus, facilisis odio ac, mollis sapien.
 
 					<h3>Vestibulum ante</h3> ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla orci odio, semper sit amet varius in, malesuada ac sem. In risus odio, porttitor ut sollicitudin sed, tincidunt ut arcu. Aenean nec justo efficitur eros cursus sodales nec rutrum turpis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam porta lacus leo, quis laoreet turpis elementum vel. Curabitur dictum egestas risus nec tempor. Nunc vel massa dolor. Etiam id nisl id mauris egestas volutpat sit amet sit amet augue. Phasellus pharetra lobortis eros suscipit ultrices. Phasellus gravida fermentum nibh ut euismod. Phasellus vel ultricies quam, nec convallis mauris. Nam sodales tortor mi.
@@ -95,7 +116,7 @@
 					</br>
 					<div class="menu_tekst"> Z rogu </div> </br>
 					<img src="obrazy/widok z rogu.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black; margin-left:130px;">
-					</br>	
+					</br></br></br>	
 					Nulla quis tellus velit. Nunc rhoncus augue ac elit volutpat cursus. Donec tincidunt imperdiet arcu et porta. Sed sed magna ipsum. Donec neque ante, interdum non massa at, fermentum efficitur quam. Nam id est libero. Vestibulum pellentesque sit amet massa vel vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam non ante sapien. Aenean vestibulum dapibus magna imperdiet gravida.
 					
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vitae ullamcorper erat, a mattis lorem. Suspendisse potenti. Donec consectetur, magna a aliquam tempus, magna dolor lobortis est, id congue sem arcu a velit. Mauris rutrum purus eget felis tempus, et rhoncus tellus suscipit. Donec a mauris cursus, maximus risus scelerisque, vestibulum felis. Praesent et diam elit. Duis laoreet, justo in vehicula feugiat, ipsum quam imperdiet sem, gravida ullamcorper mi risus in nunc. Vivamus in neque facilisis, sagittis leo a, accumsan est. Interdum et malesuada fames ac ante ipsum primis in faucibus.

@@ -8,8 +8,31 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<link rel="stylesheet" href="style.css" type="text/css" />
 	<link rel="stylesheet" href="css/fontello.css" type="text/css" />
+	<link rel="stylesheet" href="font2/css/fontello.css" type="text/css" />
 	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="font2/css/fontello.css" type="text/css" />
+	
+	<script type="text/javascript">
+	function otworz_czat()
+	{
+		var x=document.getElementById("czat_okno").style.display
+		console.log(x);
+		if (x === "none" || !x)
+		{
+			document.getElementById("czat_okno").style.display="block";
+		}
+		else
+		{
+			document.getElementById("czat_okno").style.display="none";
+		}
+	}
+	</script>
 </head>
+
+	<div id="czat" onclick="otworz_czat()"><i class="icon-comment" style="font-size:40px;"></i></div>
+	<div id="czat_okno">
+		<div id="miejsce_dla_jedruli"></div>
+	</div>
 
 <body>
 	<header>

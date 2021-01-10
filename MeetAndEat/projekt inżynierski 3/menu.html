@@ -10,6 +10,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato&display=swap" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="jquery.scrollTo.min.js"></script>
+	<link rel="stylesheet" href="font2/css/fontello.css" type="text/css" />
 	
 	<script>
 	jQuery(function($)
@@ -27,8 +28,29 @@
 		);	
 	</script>
 	
+	<script type="text/javascript">
+	function otworz_czat()
+	{
+		var x=document.getElementById("czat_okno").style.display
+		console.log(x);
+		if (x === "none" || !x)
+		{
+			document.getElementById("czat_okno").style.display="block";
+		}
+		else
+		{
+			document.getElementById("czat_okno").style.display="none";
+		}
+	}
+	</script>
+	
 </head>
 
+	<div id="czat" onclick="otworz_czat()"><i class="icon-comment" style="font-size:40px;"></i></div>
+	<div id="czat_okno">
+		<div id="miejsce_dla_jedruli"></div>
+	</div>
+	
 <body>
 	<header>
 			<div id="logo">
@@ -60,7 +82,7 @@
 					
 					<section>
 						<div class="lewo_obraz">
-							
+								
 						</div> 
 						
 						

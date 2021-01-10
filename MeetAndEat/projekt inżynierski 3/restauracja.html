@@ -10,6 +10,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato&display=swap" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="jquery.scrollTo.min.js"></script>
+	<link rel="stylesheet" href="font2/css/fontello.css" type="text/css" />
 	
 	<script>
 	jQuery(function($)
@@ -27,9 +28,72 @@
 		);	
 	</script>
 	
-</head>
+	<script type="text/javascript">
+	function otworz_czat()
+	{
+		var x=document.getElementById("czat_okno").style.display
+		console.log(x);
+		if (x === "none" || !x)
+		{
+			document.getElementById("czat_okno").style.display="block";
+		}
+		else
+		{
+			document.getElementById("czat_okno").style.display="none";
+		}
+	}
+	</script>
+	
+	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript">
+		
+			var numer = 1
+			
+			function schowaj()
+			{
+				$("#slider1").fadeOut(300);
+				$("#slider2").fadeOut(300);
+				$("#slider3").fadeOut(300);
+				$("#slider4").fadeOut(300);
+				$("#slider5").fadeOut(300);
+			}
+		
+			function zmienslajd()
+			{
+				numer++; if (numer>2) numer=1;
+				var plik1 = "<img src=\"obrazy/stolik przy drzwiach " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
+				var plik2 = "<img src=\"obrazy/stolik w rogu " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
+				var plik3 = "<img src=\"obrazy/stolik na środku " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
+				var plik4 = "<img src=\"obrazy/stolik przy kuchni " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
+				var plik5 = "<img src=\"obrazy/stolik w wnęce " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
+				
+				document.getElementById("slider1").innerHTML = plik1;
+				document.getElementById("slider2").innerHTML = plik2;
+				document.getElementById("slider3").innerHTML = plik3;
+				document.getElementById("slider4").innerHTML = plik4;
+				document.getElementById("slider5").innerHTML = plik5;
 
-<body>
+				$("#slider1").fadeIn(300); 
+				$("#slider2").fadeIn(300); 
+				$("#slider3").fadeIn(300); 
+				$("#slider4").fadeIn(300);
+				$("#slider5").fadeIn(300);
+				
+				setTimeout("zmienslajd()", 4000);
+				setTimeout("schowaj()", 3700);
+			
+			}
+			
+		</script>
+	
+</head>
+	
+	<div id="czat" onclick="otworz_czat()"><i class="icon-comment" style="font-size:40px;"></i></div>
+	<div id="czat_okno">
+		<div id="miejsce_dla_jedruli"></div>
+	</div>
+
+<body onload="zmienslajd()">
 
 	<header>
 			<div id="logo">
@@ -65,26 +129,22 @@
 						<img src="obrazy/widok zza lady.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
 						<div class="menu_tekst"> Z rogu </div> </br>
 						<img src="obrazy/widok z rogu.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
+						
 						<div class="menu_tekst"> Stolik 1 </div> </br>
-						<img src="obrazy/stolik przy drzwiach.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
-						</br> </br>  
-						<img src="obrazy/stolik przy drzwiach2.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
+						<div id="slider1"> </div>
+						
 						<div class="menu_tekst"> Stolik 2 </div> </br>
-						<img src="obrazy/stolik w rogu 2.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
-						</br> </br>  
-						<img src="obrazy/stolik w rogu.png" alt="Italian Trulli" style="width:800px; border: 1px solid black;">
+						<div id="slider2"> </div>
+						
 						<div class="menu_tekst"> Stolik 3 </div> </br>
-						<img src="obrazy/stolik na środku.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
-						</br> </br>  
-						<img src="obrazy/stolik na środku 2.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
+						<div id="slider3"> </div>
+
 						<div class="menu_tekst"> Stolik 4 </div> </br>
-						<img src="obrazy/stolik przy kuchni.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
-						</br> </br>  
-						<img src="obrazy/stolik przy kuchni 2.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
+						<div id="slider4"> </div>
+		
 						<div class="menu_tekst"> Stolik 5 </div> </br>
-						<img src="obrazy/stolik w wnęce.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
-						</br> </br>  
-						<img src="obrazy/stolik w wnęce 2.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
+						<div id="slider5"> </div>
+						</br></br>
 						
 					</div>
 				</div>
