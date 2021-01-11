@@ -30,7 +30,7 @@ class UserLoginForm(forms.Form):
         fields = ['username', 'password']
 
 class ChangePassClick(forms.Form):
-    btn = forms.IntegerField()
+    password = forms.CharField()
 
 
     

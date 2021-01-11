@@ -12,29 +12,50 @@
 	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato&display=swap" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="{% static 'js/jquery.scrollTo.min.js' %}"></script>
-	
+	<link rel="stylesheet" href="{% static 'font2/css/fontello.css' %}" type="text/css" />
+
 	<script>
-	jQuery(function($)
-		{
+		jQuery(function ($) {
 			//zresetuj scrolla
 			$.scrollTo(0);
-			$('.scrollup').click(function() { $.scrollTo($('body'), 1000); });
+			$('.scrollup').click(function () { $.scrollTo($('body'), 1000); });
 		}
 		);
-	$(window).scroll(function()
-		{
-			if($(this).scrollTop()>300) $('.scrollup').fadeIn();
-			else $('.scrollup').fadeOut();		
+		$(window).scroll(function () {
+			if ($(this).scrollTop() > 300) $('.scrollup').fadeIn();
+			else $('.scrollup').fadeOut();
 		}
-		);	
+		);
 	</script>
-	
+	<script type="text/javascript">
+		function zamknij_okno() {
+			document.getElementById("powiadomienia").style.display = "none";
+		}
+
+		function otworz_czat() {
+			var x = document.getElementById("czat_okno").style.display
+			console.log(x);
+			if (x === "none" || !x) {
+				document.getElementById("czat_okno").style.display = "block";
+			}
+			else {
+				document.getElementById("czat_okno").style.display = "none";
+			}
+		}
+	</script>
+
+	{% block scripts %}{% endblock %}
+
 </head>
-<body>
+	<div id="czat" onclick="otworz_czat()"><i class="icon-comment" style="font-size:40px;"></i></div>
+	<div id="czat_okno">
+		<div id="miejsce_dla_jedruli"></div>
+	</div>
+<body onload="zmienslajd()">
 	<header>
 		<div id="logo">
 			Meet&Eat </br>
-		</div> 
+		</div>
 		<nav>
 			<ol class="nav">
 				<li class="nav"><a href="{% url 'home' %}">Strona główna</a></li>
@@ -42,15 +63,16 @@
 				<li class="nav"><a href="{% url 'restauracja' %}">Restauracja</a>
 				<li class="nav"><a href="{% url 'reservation1' %}">Zarezerwuj</a></li>
 				<li class="nav"><a href="{% url 'kontakt' %}">Kontakt</a></li>
-				<li class="nav"><a href="#">Moje Konto</a>
+				<li class="nav">
+					<a href="#">Moje Konto</a>
 					<ul class="nav">
 						{% if user.is_authenticated %}
-							<li class="nav"><a href="{% url 'profile' %}">Moje konto</a></li>
-							<li class="nav"><a href="#">Moje rezerwacje</a></li>
-							<li class="nav"><a href="{% url 'logout' %}">Wyloguj</a></li>
+						<li class="nav"><a href="{% url 'profile' %}">Moje konto</a></li>
+						<li class="nav"><a href="#">Moje rezerwacje</a></li>
+						<li class="nav"><a href="{% url 'logout' %}">Wyloguj</a></li>
 						{% else %}
-							<li class="nav"><a href="{% url 'login' %}">Zaloguj</a></li>
-							<li class="nav"><a href="{% url 'register' %}">Zarejestruj się</a></li>
+						<li class="nav"><a href="{% url 'login' %}">Zaloguj</a></li>
+						<li class="nav"><a href="{% url 'register' %}">Zarejestruj się</a></li>
 						{% endif %}
 					</ul>
 				</li>
@@ -58,11 +80,14 @@
 		</nav>
 	</header>
 	{% if messages %}
+	<ol id="powiadomienia">
 		{% for message in messages %}
-			<div class="alert alert-{{message.tags}}">
-				{{message}}
-			</div>
+		<li id="tekst">
+			{{message}}
+		</li>
 		{% endfor %}
+		<li id="zamknij" onclick="zamknij_okno()">Zamknij</li>
+	</ol>
 	{% endif %}
 	<a href="#" class="scrollup"></a>
 	{% block content %}{% endblock %}
@@ -73,27 +98,27 @@
 		</div>
 	</footer>
 
-	<script src="{% static 'jquery-1.11.3.min.js' %}"></script>	
-		<script>
-			$(document).ready(function() {
+	<script src="{% static 'jquery-1.11.3.min.js' %}"></script>
+	<script>
+		$(document).ready(function () {
 			var NavY = $('nav').offset().top;
-			 
-			var stickyNav = function(){
-			var ScrollY = $(window).scrollTop();
-				  
-			if (ScrollY > NavY) { 
-				$('nav').addClass('sticky');
-			} else {
-				$('nav').removeClass('sticky'); 
-			}
+
+			var stickyNav = function () {
+				var ScrollY = $(window).scrollTop();
+
+				if (ScrollY > NavY) {
+					$('nav').addClass('sticky');
+				} else {
+					$('nav').removeClass('sticky');
+				}
 			};
-			 
+
 			stickyNav();
-			 
-			$(window).scroll(function() {
+
+			$(window).scroll(function () {
 				stickyNav();
 			});
-			});
-		</script>
+		});
+	</script>
 </body>
 </html>

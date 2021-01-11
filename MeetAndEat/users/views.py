@@ -21,14 +21,12 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             users = form.save()
-            users.refresh_from_db()
             users.save()
             if re.search('[A-ZĄĆĘŁÓŃŻŹŚ]', form.cleaned_data['password1']) is not None:
                 if re.search('[.@#$&^_]', form.cleaned_data['password1']) is not None:
                     if re.search('[0-9]', form.cleaned_data['password1']) is not None:
-                        newuser = NewUser.objects.create(user=users)
-                        newuser.phone = form.cleaned_data['telefon']
-                        newuser.password_history = form.cleaned_data['password1']
+                        newuser = NewUser.objects.create(user=users, phone=form.cleaned_data['telefon'], password_history = form.cleaned_data['password1'])
+                        newuser.save()
                         messages.success(request, 'Twoje konto zostało założone, możesz sie teraz zalogować!')
                         AllActions.objects.create(user=users, action_id=1, action=f"założenie konta")
                         return redirect('login')
@@ -41,9 +39,7 @@ def register(request):
             else:
                 messages.error(request, 'Brak wielkiej litery w haśle')
                 return redirect('register')
-        else:
-            messages.error(request, 'Zbyt mała ilość znaków - minimum 8')
-            return redirect('register')
+
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
@@ -112,7 +108,7 @@ def change_password(request):
                 if form.cleaned_data['old_password'] not in person.password_history:
                     AllActions.objects.create(user=user, action_id=6, action="Błąd przy zmianie hasła: stare hasło nie pasuje")
                     messages.error(request, 'Błędne stare hasło')
-                if form.cleaned_data['new_password1'] in person.password_history:
+                elif form.cleaned_data['new_password1'] in person.password_history:
                     AllActions.objects.create(user=user, action_id=7, action="Błąd przy zmianie hasła: nowe hasło już było rejestrowane")
                     messages.error(request, 'Hasło było już używane, proszę wpisać nowe hasło')
                 else:
@@ -135,32 +131,39 @@ def change_password(request):
 @login_required
 def profile(request):
     data = {}
-    user = request.user
+    user = User.objects.get(username=request.user.username)
     user_ex = NewUser.objects.get(user=request.user)
     s = list(user_ex.phone.as_e164)
-    s[-6:-1] = '*'
-    data['phone'] = s
+    s.insert(3, ' ')
+    s[7:] = '*' * len(s[7:])
+    num = ''.join(s)
+    data['phone'] = num
     data['username'] = user.username
     data['email'] = user.email
     data['first_name'] = user.first_name
     
-    if request.method == 'POST':
+    if request.method == 'POST' and 'pass_change_butt' in request.POST:
         form = ChangePassClick(request.POST)
         if form.is_valid():
-            subject = 'Zmiana hasła'
-            from_email = EMAIL_HOST_USER
-            plain_text = get_template('email.txt')
-            htmly = get_template('email.html')
-            d = {'username': user, 'url': reverse('change_password')}
-            text_content = plain_text.render(d)
-            html_content = htmly.render(d)
-            msg = EmailMultiAlternatives(subject, text_content, from_email, [user.email])
-            msg.attach_alternative(html_content, 'text/html')
-            msg.send()
+            if user.check_password(form.cleaned_data['password']):
+                breakpoint()
+                subject = 'Zmiana hasła'
+                from_email = EMAIL_HOST_USER
+                plain_text = get_template('email.txt')
+                htmly = get_template('email.html')
+                breakpoint()
+                d = {'username': user, 'url': reverse('change_password')}
+                text_content = plain_text.render(d)
+                html_content = htmly.render(d)
+                breakpoint()
+                msg = EmailMultiAlternatives(subject, text_content, from_email, ['ooracuchoo@gmail.com'])
+                msg.attach_alternative(html_content, 'text/html')
+                msg.send()
+                breakpoint()
 
     else:
         form = ChangePassClick()
     return render(request, 'users/profile.html', {'data': data, 'form': form})
 
-
-
+def moje_rezerwacje(request):
+    pass

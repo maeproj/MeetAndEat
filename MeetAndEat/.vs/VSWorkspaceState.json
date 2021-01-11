@@ -1,16 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\assets",
-    "\\assets\\css",
-    "\\home",
+    "\\addons",
+    "\\home\\templates",
+    "\\home\\templates\\home",
     "\\MeetAndEat",
-    "\\projekt inżynierski 3",
     "\\reservation",
-    "\\static",
+    "\\static\\css",
     "\\users",
-    "\\users\\migrations"
+    "\\users\\templates",
+    "\\users\\templates\\users"
   ],
-  "SelectedNode": "\\home\\templates\\home\\base.html",
+  "SelectedNode": "\\users\\views.py",
   "PreviewInSolutionExplorer": false
 }

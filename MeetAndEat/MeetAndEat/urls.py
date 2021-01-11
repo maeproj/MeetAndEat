@@ -43,6 +43,7 @@ urlpatterns = [
     path('rezerwacje2', reservation_views.menu_orgs, name='reservation2'),
     path('kontakt/', home_views.kontakt, name='kontakt'),
     path('restauracja/', home_views.restauracja, name='restauracja'),
+    path('moje_rezerwacje/', user_views.moje_rezerwacje, name='moje_rezerwacje'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

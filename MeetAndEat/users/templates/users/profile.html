@@ -1,9 +1,59 @@
 {% extends "home/base.html" %}
-{% load crispy_forms_tags %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/style2.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
 {% endblock head %}
+{% block scripts %}
+<script>
+    function zamknij_otworz_okno_srodek() {
+        var y = document.getElementById("okno_srodek").style.display
+        if (y === "none" || !y) {
+            document.getElementById("okno_srodek").style.display = "block";
+        }
+        else {
+            document.getElementById("okno_srodek").style.display = "none";
+        }
+    }
+</script>
+{% endblock scripts %}
 {% block content %}
-    <h1>{{user.username}}</h1>
+<div id="okno_srodek">
+    Podaj haslo. Jesli bedzie poprawne, wyslemy na twoj email link do jego zmiany. </br>
+    <form method="post">
+        {% csrf_token %}
+        {{form.password}}
+
+        </br><input type="submit" name="pass_change_butt" value="Potwierdz"/>
+    </form>
+</div>
+<main>
+    <a href="#" class="scrollup"></a>
+    <div id="strona_glowna">
+        <div class="srodek_strona_glowna">
+            <section>
+                <div class="menu_tekst_duzy">Moje konto</div>
+                </br>
+                <div class="konto_element">Nazwa uzywkownika: {{data.username}}</div>
+                <a href="#"><div class="konto_maly">Zmien</div></a>
+                <div style="clear:both;"></div>
+                <div class="konto_element">Imie: {{data.first_name}}</div>
+                <a href="#"><div class="konto_maly">Zmien</div></a>
+                <div style="clear:both;"></div>
+                <div class="konto_element">Adres e-mail: {{data.email}}</div>
+                <a href="#"><div class="konto_maly">Zmien</div></a>
+                <div style="clear:both;"></div>
+                <div class="konto_element">Numer telefonu: {{data.phone}}</div>
+                <a href="#"><div class="konto_maly">Zmien</div></a>
+                <div style="clear:both;"></div>
+                <div class="konto_element">Haslo: *******</div>
+                <div class="konto_maly" onclick="zamknij_otworz_okno_srodek()">Zmien</div>
+                <div style="clear:both;"></div>
+                <div class="konto_element">Moje rezerwacje</div>
+                <a href="{% url 'moje_rezerwacje' %}"><div class="konto_maly">Przejdz</div></a>
+                <div style="clear:both;"></div>
+            </section>
+        </div>
+    </div>
+</main>
 {% endblock content %}

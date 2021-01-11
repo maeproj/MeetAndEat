@@ -1,0 +1,25 @@
+﻿{% extends "home/base.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
+{% endblock head %}
+{% block scripts %}
+<div id="czat" onclick="otworz_czat()"><i class="icon-comment" style="font-size:40px;"></i></div>
+<div id="czat_okno">
+	<div id="miejsce_dla_jedruli"></div>
+</div>
+{% endblock scripts %}
+{% block content %}
+	<main>
+		<a href="#" class="scrollup"></a>
+		<div id="strona_glowna">
+			<div class="srodek_strona_glowna">
+				<section>
+					<div class="menu_tekst_duzy">Moje Rezerwacje</div>
+					</br>
+					<div class="moje_rezerwacje"></div>
+				</section>
+			</div>
+		</div>
+	</main>
+{% endblock content %}

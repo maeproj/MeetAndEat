@@ -244,10 +244,7 @@ def reservation(request):
         if 'date_submit' in request.POST:
             form = ReservationForm(request.POST)
             if form.is_valid():
-                #day = form.cleaned_data['day']
                 seats =form.cleaned_data['places_by_table']
-                #time_begin = form.cleaned_data['time_begin']
-                #time_end = form.cleaned_data['time_end']
                 time_begin = datetime.strptime(request.POST.get('czas-start'), '%H:%M').time()
                 time_end = datetime.strptime(request.POST.get('czas-koniec'), '%H:%M').time()
                 day = datetime.strptime(request.POST.get('dzien'), '%Y-%m-%d').date()
