@@ -2,14 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\addons",
-    "\\home\\templates",
-    "\\home\\templates\\home",
     "\\MeetAndEat",
-    "\\reservation",
-    "\\static\\css",
-    "\\users",
-    "\\users\\templates",
-    "\\users\\templates\\users"
+    "\\users"
   ],
   "SelectedNode": "\\users\\views.py",
   "PreviewInSolutionExplorer": false

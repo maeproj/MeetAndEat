@@ -21,6 +21,7 @@ from reservation import views as reservation_views
 from menu import views as menu_view
 from django.contrib.auth import views as auth_views
 from django.conf import settings
+from django.conf.urls import url
 from django.conf.urls.static import static
 from reservation import views as rezerwacje_view
 from django.contrib.staticfiles.urls import static
@@ -44,6 +45,8 @@ urlpatterns = [
     path('kontakt/', home_views.kontakt, name='kontakt'),
     path('restauracja/', home_views.restauracja, name='restauracja'),
     path('moje_rezerwacje/', user_views.moje_rezerwacje, name='moje_rezerwacje'),
+    url(r'^activate_account/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+                user_views.auth_change_password, name='auth_pass_change'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

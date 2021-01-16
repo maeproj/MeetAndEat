@@ -39,18 +39,10 @@ class ReservationForm(forms.Form):
                      (30, '30'),
                      (45, '45')]
     places_by_table = forms.ChoiceField(choices=PLACE_CHOICES, widget=forms.RadioSelect)
-    #day = forms.DateField(widget=DatePickerInput(format = '%d.%m.%Y', options = {'locale': 'pl', 'minDate': date.today().isoformat(),
-    #                                                       'maxDate': (date.today() + timedelta(days=10)).strftime('%m-%d-%Y')}))
-    #time_begin = forms.TimeField(widget=TimePickerInput(options = {'enabledHours': [16, 17, 18, 19, 20, 21]}))
-    #time_end = forms.TimeField(widget=TimePickerInput(options = {'enabledHours': [16, 17, 18, 19, 20, 21]}))
-
-    #day = forms.DateField(widget=DateInput())
-    #time_begin = forms.TimeField(widget=TimeInput())
-    #time_end = forms.TimeField(widget=TimeInput())
 
     class Meta:
         model = User
-        fields = ['places_by_table', 'day', 'time_begin', 'time_end']
+        fields = ['places_by_table']
 
 class PickForm(forms.Form):
     CHOICES = []

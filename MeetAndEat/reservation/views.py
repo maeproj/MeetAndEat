@@ -4,7 +4,7 @@ from .forms import ReservationForm, PickForm
 from django.contrib.auth.decorators import login_required
 from datetime import date, time, datetime, timedelta
 from django.contrib import messages
-from .models import Reservation, Stolik_item
+from .models import Temp_Reservation, Stolik_item, Reservation
 from copy import deepcopy
 import numpy as np
 import pdb
@@ -43,15 +43,15 @@ class AvailableDate:
         self.begin_time = begin_time
         self.end_time = end_time
         self.stolik = stolik
-        self.alternatives = [(0, 0), (0, 0), (0, 0), (0, 0), (0, 0)]
+        self.alternatives = [(0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0), (0, 0, 0, 0)]
         self.save_begin = None
         self.save_end = None
         for d in self.res:
             self.save_begin, self.save_end = None, None
             for i, time in enumerate(self.times):
-                if time[0] == int(d.begin_h) and time[1] == int(d.begin_m):
+                if time[0] == int(d.time_begin[0:2]) and time[1] == int(d.time_begin[-2:]):
                     self.save_begin = i
-                elif time[0] == int(d.end_h) and time[1] == int(d.end_m):
+                elif time[0] == int(d.time_end[0:2]) and time[1] == int(d.time_end[-2:]):
                     self.save_end = i + 1
 
             if self.save_begin is not None and self.save_end is not None:
@@ -74,7 +74,7 @@ class AvailableDate:
                     start = False
                     break
                 if new_time in self.times:
-                    start=False
+                    start = False
                     success = True
                     break
                 new_time = [new_time[0], new_time[1] - 15]
@@ -85,7 +85,8 @@ class AvailableDate:
             if success:
                 h = (new_time[0]*60 + new_time[1]) - (self.begin_time[0] * 60 + self.begin_time[1])
                 if h >= 45:
-                    self.alternatives[self.stolik.stolik_miejsca - 1] = [self.stolik.stolik_miejsca, f'Możliwa rezerwacja na wybrany termin na {h} minut zamiast na {self.time_in_minutes} minut']
+                    self.alternatives[self.stolik.stolik_miejsca - 1] = [self.stolik.stolik_miejsca, f'Możliwa rezerwacja na wybrany termin na {h} minut zamiast na {self.time_in_minutes} minut',\
+                       f'{self.begin_time[0]}' + ':' + f'{self.begin_time[1]}', f'{new_time[0]}' + ':' + f'{new_time[1]}']
                     search_further = False
                 
 
@@ -98,7 +99,7 @@ class AvailableDate:
             while(start):
                 if new_time[0] > 21:
                     start = False
-                    self.alternatives[self.stolik.stolik_miejsca - 1] = [self.stolik.stolik_miejsca, f'Brak możliwości na dany dzień']
+                    self.alternatives[self.stolik.stolik_miejsca - 1] = [self.stolik.stolik_miejsca, f'Brak możliwości na dany dzień', '0', '0']
                     break
                 if new_time in self.times:
                     new_end_time = [new_time[0], new_time[1] + 30]
@@ -126,9 +127,11 @@ class AvailableDate:
                     if success:
                         time = (new_end_time[0]*60 + new_end_time[1]) - (new_time[0]*60 + new_time[1])
                         if time == self.time_in_minutes:
-                            self.alternatives[self.stolik.stolik_miejsca - 1] = [self.stolik.stolik_miejsca, f'Możliwa rezerwacja na godzine {new_time[0]}:{new_time[1]} na {time} minut']
+                            self.alternatives[self.stolik.stolik_miejsca - 1] = [self.stolik.stolik_miejsca, f'Możliwa rezerwacja na godzine {new_time[0]}:{new_time[1]} na {time} minut',\
+                               f'{new_time[0]}' + ':' + f'{new_time[1]}', f'{new_end_time[0]}' + ':' + f'{new_end_time[1]}']
                         else:
-                            self.alternatives[self.stolik.stolik_miejsca - 1] = [self.stolik.stolik_miejsca, f'Możliwa rezerwacja na godzine {new_time[0]}:{new_time[1]} na {time} minut\n zamiast na {self.time_in_minutes} minut']
+                            self.alternatives[self.stolik.stolik_miejsca - 1] = [self.stolik.stolik_miejsca, f'Możliwa rezerwacja na godzine {new_time[0]}:{new_time[1]} na {time} minut\n zamiast na {self.time_in_minutes} minut',\
+                               f'{new_time[0]}' + ':' + f'{new_time[1]}', f'{new_end_time[0]}' + ':' + f'{new_end_time[1]}']
                         break
 
                 new_time = [new_time[0], new_time[1] + 15]
@@ -148,16 +151,16 @@ class AvailableDate:
             for j, d in enumerate(r):
                 self.save_begin, self.save_end = None, None
                 for k, time in enumerate(self.times_table[i]):
-                    if time[0] == int(d.begin_h) and time[1] == int(d.begin_m):
+                    if time[0] == int(d.time_begin[0:2]) and time[1] == int(d.time_begin[-2:]):
                         self.save_begin = k
-                    elif time[0] == int(d.end_h) and time[1] == int(d.end_m):
+                    elif time[0] == int(d.time_end[0:2]) and time[1] == int(d.time_end[-2:]):
                         self.save_end = k + 1
 
                 if self.save_begin is not None and self.save_end is not None:
                     del self.times_table[i][self.save_begin:self.save_end]
 
             if self.begin_time in self.times_table[i] and self.end_time in self.times_table[i]:
-                self.alternatives[i] = [i+1, 'Stolik dostępny na wybrany termin']
+                self.alternatives[i] = [i+1, 'Stolik dostępny na wybrany termin', f'{self.begin_time[0]}' + ':' + f'{self.begin_time[1]}', f'{self.end_time[0]}' + ':' + f'{self.end_time[1]}']
                 continue
             elif self.begin_time in self.times_table[i]:
                 start, success = True, False
@@ -182,7 +185,8 @@ class AvailableDate:
                 if success:
                     h = (new_time[0]*60 + new_time[1]) - (self.begin_time[0] * 60 + self.begin_time[1])
                     if h >= 45:
-                        self.alternatives[i] = [i+1, f'Możliwa rezerwacja na wybrany termin na {h} minut\n zamiast na {self.time_in_minutes} minut']
+                        self.alternatives[i] = [i+1, f'Możliwa rezerwacja na wybrany termin na {h} minut\n zamiast na {self.time_in_minutes} minut',\
+                            f'{self.begin_time[0]}' + ':' + f'{self.begin_time[1]}', f'{new_time[0]}' + ':' + f'{new_time[1]}']
                         search_further = True
 
             if search_further:
@@ -194,7 +198,7 @@ class AvailableDate:
                 while(start):
                     if new_time[0] > 21:
                         start = False
-                        self.alternatives[i] = [i+1, f'Brak możliwości na dany dzień']
+                        self.alternatives[i] = [i+1, f'Brak możliwości na dany dzień', '0', '0']
                         break
                     if new_time in self.times_table[i]:
                         new_end_time = [new_time[0], new_time[1] + 45]
@@ -222,9 +226,11 @@ class AvailableDate:
                         if success:
                             time = (new_end_time[0]*60 + new_end_time[1]) - (new_time[0]*60 + new_time[1])
                             if time == self.time_in_minutes:
-                                self.alternatives[i] = [i+1, f'Możliwa rezerwacja na godzine {new_time[0]}:{new_time[1]} na {time} minut']
+                                self.alternatives[i] = [i+1, f'Możliwa rezerwacja na godzine {new_time[0]}:{new_time[1]} na {time} minut',\
+                                    f'{new_time[0]}' + ':' + f'{new_time[1]}', f'{new_end_time[0]}' + ':' + f'{new_end_time[1]}']
                             else:
-                                self.alternatives[i] = [i+1, f'Możliwa rezerwacja na godzine {new_time[0]}:{new_time[1]} na {time} minut\n zamiast na {self.time_in_minutes} minut']
+                                self.alternatives[i] = [i+1, f'Możliwa rezerwacja na godzine {new_time[0]}:{new_time[1]} na {time} minut\n zamiast na {self.time_in_minutes} minut',\
+                                    f'{new_time[0]}' + ':' + f'{new_time[1]}', f'{new_end_time[0]}' + ':' + f'{new_end_time[1]}']
                             break
                        
                     new_time = [new_time[0], new_time[1] + 15]
@@ -266,26 +272,56 @@ def reservation(request):
                     AllActions.objects.create(user=request.user, action_id=11, action="Rezerwacja: podano za krótki czas rezerwacji")
                     return redirect('reservation1')
 
+                if err > 90 and err < 150:
+                    messages.warning(request, 'Przy rezerwacji o czasie przekraczającym 1.5h minimalny koszt rezerwacji musi wynieść co najmniej 180 zł')
+                    AllActions.objects.create(user=request.user, action_id=12, action='Rezerwacja: rezerwacja przekraczająca 1.5h')
+
+                elif err >= 150 and err < 210:
+                    messages.warning(request, 'Przy rezerwacji o czasie przekraczającym 2.5h minimalny koszt rezerwacji musi wynieść co najmniej 300 zł')
+                    AllActions.objects.create(user=request.user, action_id=12, action='Rezerwacja: rezerwacja przekraczająca 2.5h')
+
+                elif err >= 210 and err <= 270:
+                    messages.warning(request, 'Przy rezerwacji o czasie przekraczającym 3.5h minimalny koszt rezerwacji musi wynieść co najmniej 550 zł')
+                    AllActions.objects.create(user=request.user, action_id=12, action='Rezerwacja: rezerwacja przekraczająca 3.5h')
+
+                elif err > 270:
+                    messages.warning(request, 'Dla rezerwacji powyżej 4.5h prosimy skontaktować się z obsługą restauracji')
+                    AllActions.objects.create(user=request.user, action_id=12, action='Rezerwacja: rezerwacja przekraczająca 4.5h')
+                    return redirect('reservation1')
+
                 table = Stolik_item.objects.get(stolik_miejsca = seats)
                 reservations = Reservation.objects.filter(rezerwacja_dzien = day, stolik = table)
                 ad = AvailableDate([begin_h, begin_m], [end_h, end_m], day, reservations, table)
                 suggestions = ad.return_accept()
 
                 if suggestions == 'reserve':
+                    strg = 'alt' + seats
                     sug['suc'] = 'reserve'
+                    sug[strg] = 1
+                    res = Reservation.objects.create(nazwa=request.user, rezerwacja_dzien=day.strftime('%Y-%m-%d'), time_begin=f'{begin_h}' + ':' + f'{begin_m}', time_end=f'{end_h}' + ':' + f'{end_m}')
+                    res.stolik.add(table)
+                    res.save()
+
                 else:
+                    request.session['day'] = datetime.strftime(day, '%Y-%m-%d')
                     sug['suc'] = 'ayy'
                     for i in range(len(suggestions)):
                         sug[short[i]] = {'first': suggestions[i][0], 'second': suggestions[i][1]}
-                        request.session[short[i]] = suggestions[i][1]
+                        request.session[short[i]] = {'first': suggestions[i][2], 'second': suggestions[i][3]}
                     suggestions = np.array(suggestions)
                     ch = list(zip([i+1 for i in range(5)], suggestions[:, 1]))
                     form2 = PickForm(choice = ch)
-            elif 'place_submit' in request.POST:
-                form2 = PickForm(request.POST)
-                if form2.is_valid():
-                    AllActions.objects.create(user=request.user, action_id=12, action="Rezerwacja: pomyślny wybór daty i stolika")
-                    return redirect('reservation2')
+        elif 'place_submit' in request.POST:
+            form2 = PickForm(request.POST)
+            if form2.is_valid():
+                breakpoint()
+                strg = 'alt' + form2.cleaned_data['choice']
+                table = Stolik_item.objects.get(stolik_miejsca=form2.cleaned_data['choice'])
+                res = Reservation.objects.create(nazwa=request.user, rezerwacja_dzien=request.session['day'], time_begin=request.session[strg]['first'], time_end=request.session[strg]['second'])
+                res.stolik.add(table)
+                res.save()
+                AllActions.objects.create(user=request.user, action_id=12, action="Rezerwacja: pomyślny wybór daty i stolika")
+                return redirect('reservation2')
 
     else:
         form = ReservationForm()

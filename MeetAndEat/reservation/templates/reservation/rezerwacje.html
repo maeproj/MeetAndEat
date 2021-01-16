@@ -56,11 +56,31 @@
 					<div class="mapa_restauracji_kontener">
 						<div class="menu_tekst">Plan Restauracji</div>
 						<div class="mapa">
-							<a href="{% url 'reservation2' %}"> <div class="stolik1" style="-webkit-box-shadow: 0px 0px 2px 19px #C10000; box-shadow: 0px 0px 2px 19px #C10000;"> </div> </a>
-							<a href="{% url 'reservation2' %}"> <div class="stolik2" style="-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; box-shadow: 0px 0px 2px 19px #05F2B1;"> </div> </a>
-							<a href="{% url 'reservation2' %}"> <div class="stolik3" style="-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; box-shadow: 0px 0px 2px 19px #05F2B1;"> </div> </a>
-							<a href="{% url 'reservation2' %}"> <div class="stolik4" style="-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; box-shadow: 0px 0px 2px 19px #05F2B1;"> </div> </a>
-							<a href="{% url 'reservation2' %}"> <div class="stolik5" style="-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; box-shadow: 0px 0px 2px 19px #05F2B1;"> </div> </a>
+						{% if sugg.alt2 == 1 %}
+						<a href="{% url 'reservation2' %}"> <div class="stolik1" style="-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; box-shadow: 0px 0px 2px 19px #05F2B1;"> </div> </a>
+						{% else %}
+						<a href="{% url 'reservation2' %}"> <div class="stolik1" style="-webkit-box-shadow: 0px 0px 2px 19px #C10000; box-shadow: 0px 0px 2px 19px #C10000; pointer-events: none;"> </div> </a>
+						{% endif %}
+						{% if sugg.alt1 == 1 %}
+						<a href="{% url 'reservation2' %}"> <div class="stolik2" style="-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; box-shadow: 0px 0px 2px 19px #05F2B1;"> </div> </a>
+						{% else %}
+						<a href="{% url 'reservation2' %}"> <div class="stolik2" style="-webkit-box-shadow: 0px 0px 2px 19px #C10000; box-shadow: 0px 0px 2px 19px #C10000; pointer-events: none;"> </div> </a>
+						{% endif %}
+						{% if sugg.alt3 == 1 %}
+						<a href="{% url 'reservation2' %}"> <div class="stolik3" style="-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; box-shadow: 0px 0px 2px 19px #05F2B1;"> </div> </a>
+						{% else %}
+						<a href="{% url 'reservation2' %}"> <div class="stolik3" style="-webkit-box-shadow: 0px 0px 2px 19px #C10000; box-shadow: 0px 0px 2px 19px #C10000; pointer-events: none;"> </div> </a>
+						{% endif %}
+						{% if sugg.alt4 == 1 %}
+						<a href="{% url 'reservation2' %}"> <div class="stolik4" style="-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; box-shadow: 0px 0px 2px 19px #05F2B1;"> </div> </a>
+						{% else %}
+						<a href="{% url 'reservation2' %}"> <div class="stolik4" style="-webkit-box-shadow: 0px 0px 2px 19px #C10000; box-shadow: 0px 0px 2px 19px #C10000; pointer-events: none;"> </div> </a>
+						{% endif %}
+						{% if sugg.alt5 == 1 %}
+						<a href="{% url 'reservation2' %}"> <div class="stolik5" style="-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; box-shadow: 0px 0px 2px 19px #05F2B1;"> </div> </a>
+						{% else %}
+						<a href="{% url 'reservation2' %}"> <div class="stolik5" style="-webkit-box-shadow: 0px 0px 2px 19px #C10000; box-shadow: 0px 0px 2px 19px #C10000; pointer-events: none;"> </div> </a>
+						{% endif %}
 						</div>
 					</div>
 

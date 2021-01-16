@@ -105,23 +105,35 @@ def change_password(request):
             else:
                 user = form.save()
                 person = NewUser.objects.get(user=user)
-                if form.cleaned_data['old_password'] not in person.password_history:
-                    AllActions.objects.create(user=user, action_id=6, action="Błąd przy zmianie hasła: stare hasło nie pasuje")
-                    messages.error(request, 'Błędne stare hasło')
-                elif form.cleaned_data['new_password1'] in person.password_history:
-                    AllActions.objects.create(user=user, action_id=7, action="Błąd przy zmianie hasła: nowe hasło już było rejestrowane")
-                    messages.error(request, 'Hasło było już używane, proszę wpisać nowe hasło')
+                if re.search('[A-ZĄĆĘŁÓŃŻŹŚ]', form.cleaned_data['password1']) is not None:
+                    if re.search('[.@#$&^_]', form.cleaned_data['password1']) is not None:
+                        if re.search('[0-9]', form.cleaned_data['password1']) is not None:
+                            if form.cleaned_data['old_password'] not in person.password_history:
+                                AllActions.objects.create(user=user, action_id=6, action="Błąd przy zmianie hasła: stare hasło nie pasuje")
+                                messages.error(request, 'Błędne stare hasło')
+                            elif form.cleaned_data['new_password1'] in person.password_history:
+                                AllActions.objects.create(user=user, action_id=7, action="Błąd przy zmianie hasła: nowe hasło już było rejestrowane")
+                                messages.error(request, 'Hasło było już używane, proszę wpisać nowe hasło')
+                            else:
+                                user.refresh_from_db()
+                                user.save()
+                                messages.success(request, 'Twoje hasło zostało pomyślnie zmienione :)')
+                                person.password_date = date.today()
+                                person.password_history += ',' + form.cleaned_data['new_password1']
+                                person.save()
+                                update_session_auth_hash(request, user)
+                                AllActions.objects.create(user=user, action_id=8, action="pomyślna zmiana hasła")
+                                login(request, user)
+                                return redirect('home')
+                        else:
+                            messages.error(request, 'Brak cyfry w haśle')
+                            return redirect('register')
+                    else:
+                        messages.error(request, 'Brak znaku specjalnego w haśle')
+                        return redirect('register')
                 else:
-                    user.refresh_from_db()
-                    user.save()
-                    messages.success(request, 'Twoje hasło zostało pomyślnie zmienione :)')
-                    person.password_date = date.today()
-                    person.password_history += ',' + form.cleaned_data['new_password1']
-                    person.save()
-                    update_session_auth_hash(request, user)
-                    AllActions.objects.create(user=user, action_id=8, action="pomyślna zmiana hasła")
-                    login(request, user)
-                    return redirect('home')
+                    messages.error(request, 'Brak wielkiej litery w haśle')
+                    return redirect('register')
         else:
             messages.error(request, 'Nieprawidłowe dane :(')
     else:
@@ -146,20 +158,16 @@ def profile(request):
         form = ChangePassClick(request.POST)
         if form.is_valid():
             if user.check_password(form.cleaned_data['password']):
-                breakpoint()
                 subject = 'Zmiana hasła'
                 from_email = EMAIL_HOST_USER
                 plain_text = get_template('email.txt')
                 htmly = get_template('email.html')
-                breakpoint()
                 d = {'username': user, 'url': reverse('change_password')}
                 text_content = plain_text.render(d)
                 html_content = htmly.render(d)
-                breakpoint()
                 msg = EmailMultiAlternatives(subject, text_content, from_email, ['ooracuchoo@gmail.com'])
                 msg.attach_alternative(html_content, 'text/html')
                 msg.send()
-                breakpoint()
 
     else:
         form = ChangePassClick()
@@ -167,3 +175,48 @@ def profile(request):
 
 def moje_rezerwacje(request):
     pass
+
+@login_required
+def auth_change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            if form.cleaned_data['new_password1'] == form.cleaned_data['old_password']:
+                messages.error(request, 'Nieprawidłowe dane :(')
+            else:
+                user = form.save()
+                person = NewUser.objects.get(user=user)
+                if re.search('[A-ZĄĆĘŁÓŃŻŹŚ]', form.cleaned_data['password1']) is not None:
+                    if re.search('[.@#$&^_]', form.cleaned_data['password1']) is not None:
+                        if re.search('[0-9]', form.cleaned_data['password1']) is not None:
+                            if form.cleaned_data['old_password'] not in person.password_history:
+                                AllActions.objects.create(user=user, action_id=6, action="Błąd przy zmianie hasła: stare hasło nie pasuje")
+                                messages.error(request, 'Błędne stare hasło')
+                            elif form.cleaned_data['new_password1'] in person.password_history:
+                                AllActions.objects.create(user=user, action_id=7, action="Błąd przy zmianie hasła: nowe hasło już było rejestrowane")
+                                messages.error(request, 'Hasło było już używane, proszę wpisać nowe hasło')
+                            else:
+                                user.refresh_from_db()
+                                user.save()
+                                messages.success(request, 'Twoje hasło zostało pomyślnie zmienione :)')
+                                person.password_date = date.today()
+                                person.password_history += ',' + form.cleaned_data['new_password1']
+                                person.save()
+                                update_session_auth_hash(request, user)
+                                AllActions.objects.create(user=user, action_id=8, action="pomyślna zmiana hasła")
+                                login(request, user)
+                                return redirect('home')
+                        else:
+                            messages.error(request, 'Brak cyfry w haśle')
+                            return redirect('register')
+                    else:
+                        messages.error(request, 'Brak znaku specjalnego w haśle')
+                        return redirect('register')
+                else:
+                    messages.error(request, 'Brak wielkiej litery w haśle')
+                    return redirect('register')
+        else:
+            messages.error(request, 'Nieprawidłowe dane :(')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'users/change_pass.html', {'form':form})
