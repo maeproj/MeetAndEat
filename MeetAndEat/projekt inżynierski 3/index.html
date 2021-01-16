@@ -34,7 +34,6 @@
 	function otworz_czat()
 	{
 		var x=document.getElementById("czat_okno").style.display
-		console.log(x);
 		if (x === "none" || !x)
 		{
 			document.getElementById("czat_okno").style.display="block";
@@ -44,7 +43,22 @@
 			document.getElementById("czat_okno").style.display="none";
 		}
 	}
+	function zamknij_otworz_okno_srodek2()
+	{
+		var y=document.getElementById("okno_srodek2").style.display
+		if (y === "none" || !y)
+		{
+			document.getElementById("okno_srodek2").style.display="block";
+		}
+		else
+		{
+			document.getElementById("okno_srodek2").style.display="none";
+		}
+	}
+	
+
 	</script>
+	
 	
 </head>
 
@@ -69,13 +83,28 @@
 							<ul class="nav">
 								<li class="nav"><a href="profil.html">Moje konto</a></li>
 								<li class="nav"><a href="moje_rezerwacje.html">Moje rezerwacje</a></li>
-								<li class="nav"><a href="niezalogowany.html">Wyloguj</a></li>
+								<li class="nav" onclick="zamknij_otworz_okno_srodek2()">Zaloguj się</li>
 							</ul>
 						</li>
 				</ol>
 			</nav>
 	</header>
-		
+	
+	<div id="okno_srodek2">
+		<div id="rejestracja_okno">
+			<div class="menu_tekst">Logowanie</div></br>
+			<form>
+			
+			<input class="rejestracja_input" type="text" placeholder="Login" onfocus="this.placeholder=''" onblur="this.placeholder='Login'" >
+			</br>
+			<input class="rejestracja_input" type="password" placeholder="Hasło" onfocus="this.placeholder=''" onblur="this.placeholder='Hasło'" >
+			</br></br>
+			<input class="rejestracja_input" type="submit" value="Zaloguj się">
+			</br></br>
+			</form>
+		</div>
+	</div>
+	
 	<main>	
 		<a href="#" class="scrollup"></a>
 		<div id="strona_glowna">
