@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from home import views as home_views
 from users import views as user_views
 from reservation import views as reservation_views
@@ -32,7 +32,6 @@ urlpatterns = [
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
     path('home/', home_views.home, name='home'),
-    path('login/', user_views.login_user, name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('pass_change/', user_views.change_password, name='change_password'),
     path('menu/', menu_view.menu_orgs, name='menu'),
@@ -40,12 +39,12 @@ urlpatterns = [
     #path('makarony/', menu_views.menu_makarony, name='menu_makarony'),
     #path('kanapki/', menu_views.menu_kanapki, name='menu_kanapki'),
     #path('pizze/', menu_views.menu_pizze, name='menu_pizze'),
-    path('rezerwacje1', reservation_views.reservation, name='reservation1'),
-    path('rezerwacje2', reservation_views.menu_orgs, name='reservation2'),
+    path('rezerwacje1/', reservation_views.reservation, name='reservation1'),
+    path('rezerwacje2/', reservation_views.menu_orgs, name='reservation2'),
     path('kontakt/', home_views.kontakt, name='kontakt'),
     path('restauracja/', home_views.restauracja, name='restauracja'),
     path('moje_rezerwacje/', user_views.moje_rezerwacje, name='moje_rezerwacje'),
-    url(r'^activate_account/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+    path(r'activate_account/<uidb64>/<token>/',
                 user_views.auth_change_password, name='auth_pass_change'),
 ]
 

@@ -9,13 +9,13 @@
     <main>
         <section>
             <div id="tlo_rejestracje">
-                <div id="okno_srodek">
+                <div id="okno_srodek3">
                     <div id="rejestracja_okno">
-                        <div class="menu_tekst">Zmiana hasla</div></br>
+                        <div class="menu_tekst">Zmiana hasla</div>
                         <form method="post">
                             {% csrf_token %}
-                            {{ form_ch|crispy }}
-                            <input class="rejestracja_input" type="submit" value="Zmien haslo">
+                            {{ form_auth.as_p }}
+                            <input class="rejestracja_input" type="submit" value="Zmien haslo" name="change_imp">
                         </form>
                     </div>
                 </div>

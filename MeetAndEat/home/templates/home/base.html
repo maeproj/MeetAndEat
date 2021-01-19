@@ -34,7 +34,6 @@
 
 		function otworz_czat() {
 			var x = document.getElementById("czat_okno").style.display
-			console.log(x);
 			if (x === "none" || !x) {
 				document.getElementById("czat_okno").style.display = "block";
 			}
@@ -42,6 +41,16 @@
 				document.getElementById("czat_okno").style.display = "none";
 			}
 		}
+
+        function zamknij_otworz_okno_srodek2() {
+            var y = document.getElementById("okno_srodek2").style.display
+            if (y === "none" || !y) {
+                document.getElementById("okno_srodek2").style.display = "block";
+            }
+            else {
+                document.getElementById("okno_srodek2").style.display = "none";
+            }
+        }
 	</script>
 
 	{% block scripts %}{% endblock %}
@@ -51,74 +60,86 @@
 	<div id="czat_okno">
 		<div id="miejsce_dla_jedruli"></div>
 	</div>
-<body onload="zmienslajd()">
-	<header>
-		<div id="logo">
-			Meet&Eat </br>
+	<body onload="zmienslajd(); ">
+		<header>
+			<div id="logo">
+				Meet&Eat </br>
+			</div>
+			<nav>
+				<ol class="nav">
+					<li class="nav"><a href="{% url 'home' %}">Strona główna</a></li>
+					<li class="nav"><a href="{% url 'menu' %}">Menu</a>
+					<li class="nav"><a href="{% url 'restauracja' %}">Restauracja</a>
+					<li class="nav"><a href="{% url 'reservation1' %}">Zarezerwuj</a></li>
+					<li class="nav"><a href="{% url 'kontakt' %}">Kontakt</a></li>
+					<li class="nav">
+						<a href="#">Moje Konto</a>
+						<ul class="nav">
+							{% if user.is_authenticated %}
+							<li class="nav"><a href="{% url 'profile' %}">Moje konto</a></li>
+							<li class="nav"><a href="#">Moje rezerwacje</a></li>
+							<li class="nav"><a href="{% url 'logout' %}">Wyloguj</a></li>
+							{% else %}
+							<li class="nav" onclick="zamknij_otworz_okno_srodek2()">Zaloguj</li>
+							<li class="nav"><a href="{% url 'register' %}">Zarejestruj się</a></li>
+							{% endif %}
+						</ul>
+					</li>
+				</ol>
+			</nav>
+		</header>
+
+		<div id="okno_srodek2">
+			<div id="rejestracja_okno">
+				<div class="menu_tekst">Logowanie</div></br>
+				<form method="post">
+					{% csrf_token %}
+					{{form.as_p}}
+					<input class="rejestracja_input" type="submit" value="Zaloguj się" name="logowanie">
+					</br></br>
+				</form>
+			</div>
 		</div>
-		<nav>
-			<ol class="nav">
-				<li class="nav"><a href="{% url 'home' %}">Strona główna</a></li>
-				<li class="nav"><a href="{% url 'menu' %}">Menu</a>
-				<li class="nav"><a href="{% url 'restauracja' %}">Restauracja</a>
-				<li class="nav"><a href="{% url 'reservation1' %}">Zarezerwuj</a></li>
-				<li class="nav"><a href="{% url 'kontakt' %}">Kontakt</a></li>
-				<li class="nav">
-					<a href="#">Moje Konto</a>
-					<ul class="nav">
-						{% if user.is_authenticated %}
-						<li class="nav"><a href="{% url 'profile' %}">Moje konto</a></li>
-						<li class="nav"><a href="#">Moje rezerwacje</a></li>
-						<li class="nav"><a href="{% url 'logout' %}">Wyloguj</a></li>
-						{% else %}
-						<li class="nav"><a href="{% url 'login' %}">Zaloguj</a></li>
-						<li class="nav"><a href="{% url 'register' %}">Zarejestruj się</a></li>
-						{% endif %}
-					</ul>
-				</li>
-			</ol>
-		</nav>
-	</header>
-	{% if messages %}
-	<ol id="powiadomienia">
-		{% for message in messages %}
-		<li id="tekst">
-			{{message}}
-		</li>
-		{% endfor %}
-		<li id="zamknij" onclick="zamknij_okno()">Zamknij</li>
-	</ol>
-	{% endif %}
-	<a href="#" class="scrollup"></a>
-	{% block content %}{% endblock %}
+		{% if messages %}
+		<ol id="powiadomienia">
+			{% for message in messages %}
+			<li id="tekst">
+				{{message}}
+			</li>
+			{% endfor %}
+			<li id="zamknij" onclick="zamknij_okno()">Zamknij</li>
+		</ol>
+		{% endif %}
+		<a href="#" class="scrollup"></a>
+		{% block content %}{% endblock %}
 
-	<footer>
-		<div id="stopka">
-			Meet & Eat </br>
-		</div>
-	</footer>
+		<footer>
+			<div id="stopka">
+				Meet & Eat </br>
+			</div>
+		</footer>
 
-	<script src="{% static 'jquery-1.11.3.min.js' %}"></script>
-	<script>
-		$(document).ready(function () {
-			var NavY = $('nav').offset().top;
+		<script src="{% static 'jquery-1.11.3.min.js' %}"></script>
+		<script>
+			$(document).ready(function () {
+				var NavY = $('nav').offset().top;
 
-			var stickyNav = function () {
-				var ScrollY = $(window).scrollTop();
+				var stickyNav = function () {
+					var ScrollY = $(window).scrollTop();
 
-				if (ScrollY > NavY) {
-					$('nav').addClass('sticky');
-				} else {
-					$('nav').removeClass('sticky');
-				}
-			};
+					if (ScrollY > NavY) {
+						$('nav').addClass('sticky');
+					} else {
+						$('nav').removeClass('sticky');
+					}
+				};
 
-			stickyNav();
-
-			$(window).scroll(function () {
 				stickyNav();
+
+				$(window).scroll(function () {
+					stickyNav();
+				});
 			});
-		});
-	</script>
-</body>
+		</script>
+	</body>
 </html>

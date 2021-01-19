@@ -7,12 +7,48 @@
 {% block scripts %}
 <script>
     function zamknij_otworz_okno_srodek() {
-        var y = document.getElementById("okno_srodek").style.display
+		var y = document.getElementById("okno_srodek").style.display
+		if (y === "none" || !y) {
+			document.getElementById("okno_srodek").style.display = "block";
+		}
+		else {
+			document.getElementById("okno_srodek").style.display = "none";
+		}
+    }
+    function zamknij_otworz_okno_srodek3() {
+        var y = document.getElementById("okno_srodek4").style.display
         if (y === "none" || !y) {
-            document.getElementById("okno_srodek").style.display = "block";
+            document.getElementById("okno_srodek4").style.display = "block";
         }
         else {
-            document.getElementById("okno_srodek").style.display = "none";
+            document.getElementById("okno_srodek4").style.display = "none";
+        }
+    }
+    function zamknij_otworz_okno_srodek4() {
+        var y = document.getElementById("okno_srodek5").style.display
+        if (y === "none" || !y) {
+            document.getElementById("okno_srodek5").style.display = "block";
+        }
+        else {
+            document.getElementById("okno_srodek5").style.display = "none";
+        }
+    }
+    function zamknij_otworz_okno_srodek5() {
+        var y = document.getElementById("okno_srodek6").style.display
+        if (y === "none" || !y) {
+            document.getElementById("okno_srodek6").style.display = "block";
+        }
+        else {
+            document.getElementById("okno_srodek6").style.display = "none";
+        }
+    }
+    function zamknij_otworz_okno_srodek6() {
+        var y = document.getElementById("okno_srodek7").style.display
+        if (y === "none" || !y) {
+            document.getElementById("okno_srodek7").style.display = "block";
+        }
+        else {
+            document.getElementById("okno_srodek7").style.display = "none";
         }
     }
 </script>
@@ -22,9 +58,45 @@
     Podaj haslo. Jesli bedzie poprawne, wyslemy na twoj email link do jego zmiany. </br>
     <form method="post">
         {% csrf_token %}
-        {{form.password}}
+        {{form_prof.password}}
 
-        </br><input type="submit" name="pass_change_butt" value="Potwierdz"/>
+        </br><input class="rejestracja_input" type="submit" onclick="zamknij_otworz_okno_srodek()" name="pass_change_butt" value="Potwierdz" />
+    </form>
+</div>
+<div id="okno_srodek4">
+    Podaj nowy nick </br>
+    <form method="post">
+        {% csrf_token %}
+        {{nick_form}}
+
+        </br><input class="rejestracja_input" type="submit" onclick="zamknij_otworz_okno_srodek3()" name="nick_change_butt" value="Potwierdz" />
+    </form>
+</div>
+<div id="okno_srodek5">
+    Podaj nowe imie </br>
+    <form method="post">
+        {% csrf_token %}
+        {{name_form}}
+
+        </br><input class="rejestracja_input" type="submit" onclick="zamknij_otworz_okno_srodek4()" name="name_change_butt" value="Potwierdz" />
+    </form>
+</div>
+<div id="okno_srodek6">
+    Podaj nowy email </br>
+    <form method="post">
+        {% csrf_token %}
+        {{mail_form}}
+
+        </br><input class="rejestracja_input" type="submit" onclick="zamknij_otworz_okno_srodek5()" name="mail_change_butt" value="Potwierdz" />
+    </form>
+</div>
+<div id="okno_srodek7">
+    Podaj nowy telefon </br>
+    <form method="post">
+        {% csrf_token %}
+        {{phone_form}}
+
+        </br><input class="rejestracja_input" type="submit" onclick="zamknij_otworz_okno_srodek6()" name="phone_change_butt" value="Potwierdz" />
     </form>
 </div>
 <main>
@@ -35,17 +107,17 @@
                 <div class="menu_tekst_duzy">Moje konto</div>
                 </br>
                 <div class="konto_element">Nazwa uzywkownika: {{data.username}}</div>
-                <a href="#"><div class="konto_maly">Zmien</div></a>
+                <div class="konto_maly" onclick="zamknij_otworz_okno_srodek3()">Zmien</div>
                 <div style="clear:both;"></div>
                 <div class="konto_element">Imie: {{data.first_name}}</div>
-                <a href="#"><div class="konto_maly">Zmien</div></a>
+                <div class="konto_maly" onclick="zamknij_otworz_okno_srodek4()">Zmien</div>
                 <div style="clear:both;"></div>
                 <div class="konto_element">Adres e-mail: {{data.email}}</div>
-                <a href="#"><div class="konto_maly">Zmien</div></a>
+                <div class="konto_maly" onclick="zamknij_otworz_okno_srodek5()">Zmien</div>
                 <div style="clear:both;"></div>
                 <div class="konto_element">Numer telefonu: {{data.phone}}</div>
-                <a href="#"><div class="konto_maly">Zmien</div></a>
-                <div style="clear:both;"></div>
+                <div class="konto_maly" onclick="zamknij_otworz_okno_srodek6()">Zmien</div>
+                <div style="clear:both;" ></div>
                 <div class="konto_element">Haslo: *******</div>
                 <div class="konto_maly" onclick="zamknij_otworz_okno_srodek()">Zmien</div>
                 <div style="clear:both;"></div>

@@ -7,23 +7,19 @@
 {% block content %}
     <main>
         <section>
+            <a href="#" class="scrollup"></a>
             <div id="container">
-                <div id="strona_glowna">
-                    <div class="content-section">
-                        <form method="POST">
-                            {% csrf_token %}
-                            <fieldset class="form-group">
-                                <legend class="border-bottom mb-4">Dolacz do nas!</legend>
-                                {{ form|crispy }}
-                            </fieldset>
-                            <div class="form-group">
-                                <button class="btn btn-outline-info" type="submit">Zarejestruj sie</button>
-                            </div>
-                        </form>
-                        <div class="border-top pt-3">
-                            <small class="text-muted">
-                                Posiadasz juz konto? <a class="ml-2" href="{% url 'login' %}">Zaloguj sie</a>
-                            </small>
+                <div id="tlo_rejestracje">
+                    <div id="okno_srodek3">
+                        <div id="rejestracja_okno">
+                            <div class="menu_tekst">Rejestracja</div></br>
+                            <form method="POST">
+                                {% csrf_token %}
+                                {{form_reg.as_p}} </br>
+
+                                <input class="rejestracja_input" type="submit" name ="regis" value="Zarejestruj sie">
+                                </br></br>
+                            </form>
                         </div>
                     </div>
                 </div>

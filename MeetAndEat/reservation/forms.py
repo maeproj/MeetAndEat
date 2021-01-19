@@ -18,26 +18,7 @@ class ReservationForm(forms.Form):
                (3, 'Trzy'),
                (4, 'Cztery'),
                (5, 'Piec')]
-    BEGIN_CHOICES_H = [(16, '16'),
-                       (17, '17'),
-                       (18, '18'),
-                       (19, '19'),
-                       (20, '20'),
-                       (21, '21')]
-    BEGIN_CHOICES_M = [(0, '00'),
-                       (15, '15'),
-                       (30, '30'),
-                       (45, '45')]
-    END_CHOICES_H = [(16, '16'),
-                     (17, '17'),
-                     (18, '18'),
-                     (19, '19'),
-                     (20, '20'),
-                     (21, '21')]
-    END_CHOICES_M = [(0, '00'),
-                     (15, '15'),
-                     (30, '30'),
-                     (45, '45')]
+
     places_by_table = forms.ChoiceField(choices=PLACE_CHOICES, widget=forms.RadioSelect)
 
     class Meta:

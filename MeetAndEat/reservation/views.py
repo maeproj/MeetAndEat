@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import ReservationForm, PickForm
+from users.forms import UserLoginForm
 from django.contrib.auth.decorators import login_required
 from datetime import date, time, datetime, timedelta
 from django.contrib import messages
@@ -9,6 +10,7 @@ from copy import deepcopy
 import numpy as np
 import pdb
 from global_modules.models import AllActions
+from home.views import login_template
 
 class AvailableDate: 
     def __init__(self, begin_time, end_time, day, reservations, stolik):
@@ -48,10 +50,23 @@ class AvailableDate:
         self.save_end = None
         for d in self.res:
             self.save_begin, self.save_end = None, None
+            s1, s2, s3, s4 = 2, 2, 2, 2
+            l1 = d.time_begin.find(':')
+            l2 = d.time_end.find(':')
+            le1 = len(d.time_begin)
+            le2 = len(d.time_end)
+            if l1 < 2:
+                s1 = 1
+            if le1 + (2 - s1) < 5:
+                s2 = 1
+            if l2 < 2:
+                s3 = 1
+            if le2 + (2 - s3) < 5:
+                s4 = 1
             for i, time in enumerate(self.times):
-                if time[0] == int(d.time_begin[0:2]) and time[1] == int(d.time_begin[-2:]):
+                if time[0] == int(d.time_begin[0:s1]) and time[1] == int(d.time_begin[-s2:]):
                     self.save_begin = i
-                elif time[0] == int(d.time_end[0:2]) and time[1] == int(d.time_end[-2:]):
+                elif time[0] == int(d.time_end[0:s3]) and time[1] == int(d.time_end[-s4:]):
                     self.save_end = i + 1
 
             if self.save_begin is not None and self.save_end is not None:
@@ -147,13 +162,25 @@ class AvailableDate:
                 continue
             
             r = Reservation.objects.filter(rezerwacja_dzien = self.day, stolik = stolik)
-
             for j, d in enumerate(r):
                 self.save_begin, self.save_end = None, None
+                s1, s2, s3, s4 = 2, 2, 2, 2
+                l1 = d.time_begin.find(':')
+                l2 = d.time_end.find(':')
+                le1 = len(d.time_begin)
+                le2 = len(d.time_end)
+                if l1 < 2:
+                    s1 = 1
+                if le1 + (2 - s1) < 5:
+                    s2 = 1
+                if l2 < 2:
+                    s3 = 1
+                if le2 + (2 - s3) < 5:
+                    s4 = 1
                 for k, time in enumerate(self.times_table[i]):
-                    if time[0] == int(d.time_begin[0:2]) and time[1] == int(d.time_begin[-2:]):
+                    if time[0] == int(d.time_begin[0:s1]) and time[1] == int(d.time_begin[-s2:]):
                         self.save_begin = k
-                    elif time[0] == int(d.time_end[0:2]) and time[1] == int(d.time_end[-2:]):
+                    elif time[0] == int(d.time_end[0:s3]) and time[1] == int(d.time_end[-s4:]):
                         self.save_end = k + 1
 
                 if self.save_begin is not None and self.save_end is not None:
@@ -242,6 +269,7 @@ class AvailableDate:
 
 @login_required            
 def reservation(request):
+    login_form = login_template(request)
     dates = {'min': date.today().strftime('%Y-%m-%d'), 'max': (date.today() + timedelta(days=10)).strftime('%Y-%m-%d')}
     sug = {'suc': '', 'alt1': {}, 'alt2': {}, 'alt3': {}, 'alt4': {}, 'alt5': {}}
     short = ['alt' + str(i+1) for i in range(5)]
@@ -250,10 +278,15 @@ def reservation(request):
         if 'date_submit' in request.POST:
             form = ReservationForm(request.POST)
             if form.is_valid():
-                seats =form.cleaned_data['places_by_table']
-                time_begin = datetime.strptime(request.POST.get('czas-start'), '%H:%M').time()
-                time_end = datetime.strptime(request.POST.get('czas-koniec'), '%H:%M').time()
-                day = datetime.strptime(request.POST.get('dzien'), '%Y-%m-%d').date()
+                seats = form.cleaned_data['places_by_table']
+                try:
+                    time_begin = datetime.strptime(request.POST.get('czas-start'), '%H:%M').time()
+                    time_end = datetime.strptime(request.POST.get('czas-koniec'), '%H:%M').time()
+                    day = datetime.strptime(request.POST.get('dzien'), '%Y-%m-%d').date()
+                except:
+                    messages.error(request, 'Błąd w terminie')
+                    AllActions.objects.create(user=request.user, action_id=23, action="Rezerwacja: źle podany termin")
+                    return redirect('reservation1')
                 begin_h = time_begin.hour
                 begin_m = time_begin.minute
                 end_h = time_end.hour
@@ -273,20 +306,23 @@ def reservation(request):
                     return redirect('reservation1')
 
                 if err > 90 and err < 150:
-                    messages.warning(request, 'Przy rezerwacji o czasie przekraczającym 1.5h minimalny koszt rezerwacji musi wynieść co najmniej 180 zł')
+                    overpay = 90 * int(seats)
+                    messages.warning(request, f'Przy rezerwacji o czasie przekraczającym 1.5h minimalny koszt rezerwacji musi wynieść co najmniej {overpay} zł')
                     AllActions.objects.create(user=request.user, action_id=12, action='Rezerwacja: rezerwacja przekraczająca 1.5h')
 
                 elif err >= 150 and err < 210:
-                    messages.warning(request, 'Przy rezerwacji o czasie przekraczającym 2.5h minimalny koszt rezerwacji musi wynieść co najmniej 300 zł')
-                    AllActions.objects.create(user=request.user, action_id=12, action='Rezerwacja: rezerwacja przekraczająca 2.5h')
+                    overpay = 150 * int(seats)
+                    messages.warning(request, f'Przy rezerwacji o czasie przekraczającym 2.5h minimalny koszt rezerwacji musi wynieść co najmniej {overpay} zł')
+                    AllActions.objects.create(user=request.user, action_id=13, action='Rezerwacja: rezerwacja przekraczająca 2.5h')
 
                 elif err >= 210 and err <= 270:
-                    messages.warning(request, 'Przy rezerwacji o czasie przekraczającym 3.5h minimalny koszt rezerwacji musi wynieść co najmniej 550 zł')
-                    AllActions.objects.create(user=request.user, action_id=12, action='Rezerwacja: rezerwacja przekraczająca 3.5h')
+                    overpay = 275 * int(seats)
+                    messages.warning(request, f'Przy rezerwacji o czasie przekraczającym 3.5h minimalny koszt rezerwacji musi wynieść co najmniej {overpay} zł')
+                    AllActions.objects.create(user=request.user, action_id=14, action='Rezerwacja: rezerwacja przekraczająca 3.5h')
 
                 elif err > 270:
                     messages.warning(request, 'Dla rezerwacji powyżej 4.5h prosimy skontaktować się z obsługą restauracji')
-                    AllActions.objects.create(user=request.user, action_id=12, action='Rezerwacja: rezerwacja przekraczająca 4.5h')
+                    AllActions.objects.create(user=request.user, action_id=15, action='Rezerwacja: rezerwacja przekraczająca 4.5h')
                     return redirect('reservation1')
 
                 table = Stolik_item.objects.get(stolik_miejsca = seats)
@@ -314,18 +350,20 @@ def reservation(request):
         elif 'place_submit' in request.POST:
             form2 = PickForm(request.POST)
             if form2.is_valid():
-                breakpoint()
                 strg = 'alt' + form2.cleaned_data['choice']
                 table = Stolik_item.objects.get(stolik_miejsca=form2.cleaned_data['choice'])
                 res = Reservation.objects.create(nazwa=request.user, rezerwacja_dzien=request.session['day'], time_begin=request.session[strg]['first'], time_end=request.session[strg]['second'])
                 res.stolik.add(table)
                 res.save()
-                AllActions.objects.create(user=request.user, action_id=12, action="Rezerwacja: pomyślny wybór daty i stolika")
+                AllActions.objects.create(user=request.user, action_id=16, action="Rezerwacja: pomyślny wybór daty i stolika")
                 return redirect('reservation2')
 
     else:
         form = ReservationForm()
-    return render(request, 'reservation/rezerwacje.html', {'form':form, 'form2': form2, 'sugg':sug, 'dates': dates})
+    if type(login_form) == type(UserLoginForm()):
+        return render(request, 'reservation/rezerwacje.html', {'form_res':form, 'form2': form2, 'form': login_form, 'sugg':sug, 'dates': dates})
+    else:
+        return render(request, 'reservation/rezerwacje.html', {'form_res':form, 'form2': form2, 'form': UserLoginForm(), 'sugg':sug, 'dates': dates})
 
 @login_required
 def reservation_items(request):

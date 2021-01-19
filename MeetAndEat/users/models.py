@@ -13,6 +13,15 @@ class NewUser(models.Model):
     entries = models.IntegerField(default=0) #próby logowania
     timeout = models.DateTimeField(null=True) #czasowa blokada w razie przekroczenia maksymalnej liczby prób logowania
     password_history = models.TextField() #historia haseł
+    pass_change_entries = models.IntegerField(default=0)
+    pass_timeout = models.DateTimeField(null=True, default=None)
+    is_worker = models.BooleanField(default=False)
 
     def __str__(self):
         return "{}:{}".format(self.user, self.password_date)
+
+class SMSModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    code = models.CharField(max_length=6, default=False)
+    failed_attempts = models.IntegerField(default=0)
+    to_delete = models.BooleanField(default=False)

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from twilio.rest import Client
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,6 +35,17 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'mitendit@gmail.com'
 EMAIL_HOST_PASSWORD = 'mocnehaslo'
 EMAIL_USE_SSL = False
+
+SENDSMS_BACKEND = 'sendsms.backends.console.SmsBackend'
+
+TWILIO_ACCOUNT_SID = 'AC76218dcf1df1a0331421dd116d8ebcfa'
+TWILIO_AUTH_TOKEN = 'f7540ab50eb7f9a87ea4a7e2ae05fc20'
+TWILIO_NUMBER = '+16789091429'
+SMS_BROADCAST_TO_NUMBERS = [
+    "",
+    "",
+    ""
+    ]
 
 BOOTSTRAP4 = {
     'include_jquery': True
@@ -146,6 +158,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'login_user'
 LOGIN_URL = 'login'
+
+LOGOUT_REDIRECT_URL = 'home'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
