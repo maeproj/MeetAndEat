@@ -296,6 +296,7 @@ def reservation(request):
                 #    messages.error(request, f'Nie można wykonać rezerwacji na datę przeszłą :)')        #włączyć na produkcję
                 #    AllActions.objects.create(user=request.user, action_id=10, action="Rezerwacja: podano przeeszłą datę")
                 #    return redirect('reservation1')
+                overpay = None
                 if err < 0: 
                     messages.error(request, f'Zakończenie rezerwacji nie może wypaść przed jej rozpoczęciem :)')
                     AllActions.objects.create(user=request.user, action_id=9, action="Rezerwacja: godzina zakończenia wcześniej od daty rozpoczęcia")
@@ -325,6 +326,7 @@ def reservation(request):
                     AllActions.objects.create(user=request.user, action_id=15, action='Rezerwacja: rezerwacja przekraczająca 4.5h')
                     return redirect('reservation1')
 
+                request.session['cena'] = overpay
                 table = Stolik_item.objects.get(stolik_miejsca = seats)
                 reservations = Reservation.objects.filter(rezerwacja_dzien = day, stolik = table)
                 ad = AvailableDate([begin_h, begin_m], [end_h, end_m], day, reservations, table)

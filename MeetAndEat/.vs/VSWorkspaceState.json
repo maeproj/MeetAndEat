@@ -1,15 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\addons",
     "\\home",
+    "\\MeetAndEat",
     "\\projekt inżynierski 3",
     "\\reservation",
     "\\reservation\\templates",
-    "\\reservation\\templates\\reservation",
-    "\\users",
-    "\\users\\migrations"
+    "\\reservation\\templates\\reservation"
   ],
-  "SelectedNode": "\\reservation\\views.py",
+  "SelectedNode": "\\reservation\\forms.py",
   "PreviewInSolutionExplorer": false
 }
