@@ -42,15 +42,15 @@
 			}
 		}
 
-        function zamknij_otworz_okno_srodek2() {
-            var y = document.getElementById("okno_srodek2").style.display
-            if (y === "none" || !y) {
-                document.getElementById("okno_srodek2").style.display = "block";
-            }
-            else {
-                document.getElementById("okno_srodek2").style.display = "none";
-            }
-        }
+		function zamknij_otworz_okno_srodek2() {
+			var y = document.getElementById("okno_srodek2").style.display
+			if (y === "none" || !y) {
+				document.getElementById("okno_srodek2").style.display = "block";
+			}
+			else {
+				document.getElementById("okno_srodek2").style.display = "none";
+			}
+		}
 	</script>
 
 	{% block scripts %}{% endblock %}
@@ -103,6 +103,15 @@
 		{% if messages %}
 		<ol id="powiadomienia">
 			{% for message in messages %}
+			{% if message.tags == "error" %}
+			<img src="{% static 'images/error.png' %}" style="width: 50px; padding-bottom: 0px;"/>
+			{% endif %}
+			{% if message.tags == "warning" %}
+			<img src="{% static 'images/warning.png' %}" style="width: 50px; padding-bottom: 0px;" />
+			{% endif %}
+			{% if message.tags == "success" %}
+			<img src="{% static 'images/correct.png' %}" style="width: 50px; padding-bottom: 0px;" />
+			{% endif %}
 			<li id="tekst">
 				{{message}}
 			</li>

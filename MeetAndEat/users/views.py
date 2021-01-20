@@ -28,16 +28,20 @@ def register(request):
     if request.method == 'POST' and 'regis' in request.POST:
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            users = form.save()
-            users.save()
+            users = form.save(commit=False)
             if re.search('[A-ZĄĆĘŁÓŃŻŹŚ]', form.cleaned_data['password1']) is not None:
                 if re.search('[.@#$&^_]', form.cleaned_data['password1']) is not None:
                     if re.search('[0-9]', form.cleaned_data['password1']) is not None:
-                        newuser = NewUser.objects.create(user=users, phone=form.cleaned_data['telefon'], password_history = form.cleaned_data['password1'])
-                        newuser.save()
-                        messages.success(request, 'Twoje konto zostało założone, możesz sie teraz zalogować!')
-                        AllActions.objects.create(user=users, action_id=1, action=f"założenie konta")
-                        return redirect('home')
+                        if re.match('^[a-zA-ZĄĆĘŁÓŃŻŹŚ.@#&^_0-9]+$', form.cleaned_data['password1']):
+                            breakpoint()
+                            users.save()
+                            newuser = NewUser.objects.create(user=users, phone=form.cleaned_data['telefon'], password_history = form.cleaned_data['password1'])
+                            newuser.save()
+                            messages.success(request, 'Twoje konto zostało założone, możesz sie teraz zalogować!')
+                            AllActions.objects.create(user=users, action_id=1, action=f"założenie konta")
+                            return redirect('home')
+                        else:
+                            messages.error(request, 'Wpisano nielegalne znaki')
                     else:
                         messages.error(request, 'Brak cyfry w haśle')
                         return redirect('register')
@@ -126,7 +130,7 @@ def profile(request):
         if form.is_valid():
             if user.check_password(form.cleaned_data['password']):
                 if user_ex.pass_change_entries > 2:
-                    if datetime.now() - user_ex.pass_timeout < timedelta(hours=24):
+                    if datetime.now(timezone.utc) - user_ex.pass_timeout < timedelta(hours=24):
                         messages.error(request, 'Możliwość wygenerowania kodu zablokowana. Blokada zniknie po 24h.')
                     else:
                         user_ex.pass_change_entries = 0
@@ -147,6 +151,7 @@ def profile(request):
                     AllActions.objects.create(user=user, action_id=23, action="PROFIL: Wniesienie o zmianę hasła")
                     try:
                         sms_model_delete = SMSModel.objects.get(user=request.user, to_delete=True)
+                        sms_model_delete.delete()
                     except:
                         pass
             else:
@@ -173,8 +178,8 @@ def profile(request):
     elif request.method == 'POST' and 'phone_change_butt' in request.POST:
         phone_form = PhoneChangeForm(request.POST)
         if phone_form.is_valid():
-            person = NewUser.objects.create(user=request.user)
-            person.phone = phone_form.cleaned_data['phone']
+            person = NewUser.objects.get(user=request.user)
+            person.phone = phone_form.cleaned_data['telefon']
             person.save()
 
     if type(login_form) == type(UserLoginForm):
@@ -200,7 +205,7 @@ def auth_change_password(request, uidb64, token):
         return redirect('home')
 
     login_form = login_template(request)
-    person = User.objects.get(user=request.user)
+    person = NewUser.objects.get(user=request.user)
     sms_model = None
     try:
         sms_model = SMSModel.objects.get(user=request.user, to_delete=False)
@@ -239,13 +244,16 @@ def auth_change_password(request, uidb64, token):
                             person.pass_timeout = datetime.now()
                             person.save()
                             messages.error(request, 'Zablokowano możliwość generowania kodów. Blokada zniknie po 24h.')
+                            return redirect('home')
                         messages.error(request, f'Kod weryfikacyjny stracił ważność: zbyt duża ilość prób')
                         person.save()
                         AllActions.objects.create(user=user, action_id=22, action="AUTH: Utrata ważności kodu - zbyt duża ilość prób")
+                        sms_model.to_delete = True
+                        sms_model.save()
                         return redirect('home')
                     messages.error(request, 'Błędny kod weryfikacyjny')
                     AllActions.objects.create(user=user, action_id=21, action="AUTH: Błędny kod weryfikacyjny")
-                    return redirect('auth_pass_change', [uidb64, token])
+                    return redirect('auth_pass_change', uidb64 = uidb64, token=token)
 
                 if form.cleaned_data['new_password1'] == form.cleaned_data['old_password']:
                     messages.error(request, 'Nieprawidłowe dane :(')
@@ -275,13 +283,13 @@ def auth_change_password(request, uidb64, token):
                                     return redirect('home')
                             else:
                                 messages.error(request, 'Brak cyfry w haśle')
-                                return redirect('auth_pass_change', [uidb64, token])
+                                return redirect('auth_pass_change', uidb64 = uidb64, token=token)
                         else:
                             messages.error(request, 'Brak znaku specjalnego w haśle')
-                            return redirect('auth_pass_change', [uidb64, token])
+                            return redirect('auth_pass_change', uidb64 = uidb64, token=token)
                     else:
                         messages.error(request, 'Brak wielkiej litery w haśle')
-                        return redirect('auth_pass_change', [uidb64, token])
+                        return redirect('auth_pass_change', uidb64 = uidb64, token=token)
             else:
                 messages.error(request, 'Nie udało się zmienić hasła')
                 return render(request, 'users/auth_change_pass.html', {'form_auth': form, 'form': login_form, 'uidb64': uidb64, 'token': token})

@@ -334,25 +334,29 @@ def reservation(request):
                     strg = 'alt' + seats
                     sug['suc'] = 'reserve'
                     sug[strg] = 1
-                    res = Reservation.objects.create(nazwa=request.user, rezerwacja_dzien=day.strftime('%Y-%m-%d'), time_begin=f'{begin_h}' + ':' + f'{begin_m}', time_end=f'{end_h}' + ':' + f'{end_m}')
+                    res = Temp_Reservation.objects.create(nazwa=request.user, rezerwacja_dzien=day.strftime('%Y-%m-%d'), time_begin=f'{begin_h}' + ':' + f'{begin_m}', time_end=f'{end_h}' + ':' + f'{end_m}')
                     res.stolik.add(table)
                     res.save()
 
                 else:
                     request.session['day'] = datetime.strftime(day, '%Y-%m-%d')
                     sug['suc'] = 'ayy'
+                    temp_text = []
                     for i in range(len(suggestions)):
+                        if suggestions[i][1] == 'Brak możliwości na dany dzień':
+                            continue
+                        temp_text.append(suggestions[i][1])
                         sug[short[i]] = {'first': suggestions[i][0], 'second': suggestions[i][1]}
                         request.session[short[i]] = {'first': suggestions[i][2], 'second': suggestions[i][3]}
                     suggestions = np.array(suggestions)
-                    ch = list(zip([i+1 for i in range(5)], suggestions[:, 1]))
+                    ch = list(zip([i+1 for i in range(len(sug.keys()))], temp_text))
                     form2 = PickForm(choice = ch)
         elif 'place_submit' in request.POST:
             form2 = PickForm(request.POST)
             if form2.is_valid():
                 strg = 'alt' + form2.cleaned_data['choice']
                 table = Stolik_item.objects.get(stolik_miejsca=form2.cleaned_data['choice'])
-                res = Reservation.objects.create(nazwa=request.user, rezerwacja_dzien=request.session['day'], time_begin=request.session[strg]['first'], time_end=request.session[strg]['second'])
+                res = Temp_Reservation.objects.create(nazwa=request.user, rezerwacja_dzien=request.session['day'], time_begin=request.session[strg]['first'], time_end=request.session[strg]['second'])
                 res.stolik.add(table)
                 res.save()
                 AllActions.objects.create(user=request.user, action_id=16, action="Rezerwacja: pomyślny wybór daty i stolika")

@@ -21,7 +21,7 @@ class UserRegisterForm(UserCreationForm):
         self.fields['first_name'].widget.attrs = {'class': 'rejestracja_input', 'placeholder': 'Imię', 'onfocus': "this.placeholder=''", 'onblur': "this.placeholder='Imię'"}
         self.fields['password2'].widget.attrs = {'class': 'rejestracja_input', 'placeholder': 'Powtórz hasło', 'onfocus': "this.placeholder=''", 'onblur': "this.placeholder='Powtórz hasło'"}
         self.fields['password1'].help_text = '<div></br></div>Hasło powinno zawierać: <ul style="list-style:none; padding:0; margin:0;"><li>Co najmniej 8 znaków</li><li>Co najmniej jedną wielką literę</li>\
-        <li>Co najmniej jeden znak specjalny ./@/#/$/^/&</li><li>Co najmniej jedną cyfrę</li></ul></br>'
+        <li>Co najmniej jeden znak specjalny ./_/@/#/^/&</li><li>Co najmniej jedną cyfrę</li></ul></br>'
         self.fields['username'].label = ''
         self.fields['password1'].label = ''
         self.fields['password2'].label = ''

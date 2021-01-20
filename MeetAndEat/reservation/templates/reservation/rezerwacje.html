@@ -28,24 +28,30 @@
 							<div class="jaki_dzien">
 								<fieldset>
 									<legend> Którego dnia? </legend>
-									<input type="date" name="dzien" min="{{dates.min}}" max="{{dates.max}}"?>
+									<div class="input_field">
+										<input type="date" name="dzien" min="{{dates.min}}" max="{{dates.max}}" ?>
+									</div>
 								</fieldset>
 							</div>
 							<div class="ktora_godzina">
 								<fieldset>
 									<legend> Od której godziny? </legend>
-									<input type="time" name="czas-start" step="900" min="16:00:00" max="21:45:00">
+									<div class="input_field">
+										<input type="time" name="czas-start" step="900" min="16:00:00" max="21:45:00">
+									</div>
 								</fieldset>
 							</div>
 
 							<div class="ktora_godzina">
 								<fieldset>
 									<legend> Do której godziny? </legend>
-									<input type="time" name="czas-koniec" step="900" min="16:00:00" max="21:45:00">
+									<div class="input_field">
+										<input type="time" name="czas-koniec" step="900" min="16:00:00" max="21:45:00">
+									</div>
 								</fieldset>
 							</div>
 							<div class="input_field">
-								<input type="submit" name="date_submit" value="OK" />
+								<input class="rejestracja_input2" type="submit" name="date_submit" value="Sprawdź dostępne" />
 							</div>
 						</form>
 						{% if sugg.suc == "reserve" %}
@@ -93,7 +99,7 @@
 						{% csrf_token %}
 						{{form2.as_p}}
 						<div class="input_field">
-							<input type="submit" name="place_submit" value="OK" />
+							<input class="rejestracja_input" type="submit" name="place_submit" value="OK" />
 						</div>
 					</form>
 				</div>

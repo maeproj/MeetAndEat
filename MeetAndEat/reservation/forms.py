@@ -19,7 +19,7 @@ class ReservationForm(forms.Form):
                (4, 'Cztery'),
                (5, 'Piec')]
 
-    places_by_table = forms.ChoiceField(choices=PLACE_CHOICES, widget=forms.RadioSelect)
+    places_by_table = forms.ChoiceField(choices=PLACE_CHOICES, widget=forms.RadioSelect(attrs={'style': 'list-style:none; padding:0; margin:0;'}))
 
     class Meta:
         model = User
@@ -33,7 +33,7 @@ class PickForm(forms.Form):
         except:
             CHOICES = [(1,1), (2,2), (3,3), (4,4), (5,5)]
         super(PickForm, self).__init__(*args, **kwargs)
-        self.fields['choice'] = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
+        self.fields['choice'] = forms.ChoiceField(label='Możliwości', choices=CHOICES, widget=forms.RadioSelect)
 
     class Meta:
         model = User

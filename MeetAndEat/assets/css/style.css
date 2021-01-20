@@ -110,7 +110,7 @@ nav
  {
 	font-size: 17px;
 	width: 230px;
-	min-height: 1000px;
+	min-height: 900px;
 	background-color: #00A579;
 	padding: 5px;
 	float: left;
@@ -670,6 +670,20 @@ input.rejestracja_input[type=submit]
 	outline: none;
 }
 
+input.rejestracja_input2[type=submit] {
+	width: auto;
+	background-color: #36b03c;
+	font-size: 20px;
+	color: white;
+	padding: 15px 10px;
+	margin-top: 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	letter-spacing: 2px;
+	outline: none;
+}
+
 input.rejestracja_input[type=submit]:focus
 {
 	-webkit-box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.9);
@@ -850,7 +864,7 @@ ol#powiadomienia
 
 ol#powiadomienia>li#tekst
 {
-	padding-top:10px;
+	padding-top:0px;
 	font-size:18px;
 	width: 330px;
 	height: 105px;

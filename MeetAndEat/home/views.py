@@ -40,6 +40,7 @@ def login_template(request):
                     else:
                         login(request, user)
                         AllActions.objects.create(user=user, action_id=2, action="logowanie")
+                        messages.success(request, 'Zalogowano pomyślnie')
                         return redirect(resolve(request.path_info).url_name)
             else:
                 if User.objects.filter(username=username).exists():
