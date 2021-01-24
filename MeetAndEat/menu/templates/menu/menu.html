@@ -2,56 +2,111 @@
 {% load static %}
 {% block head %}
 <title>MeetAndEat - Rezerwacja</title>
-<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'css/main.css' %}"/>
 {% endblock head %}
 {% block content %}
 <main>
-	<section>
-		<div id="container">
-			<div id="rezerwacje">
-
-				<section>
-					<div class="lewo_obraz">
-
+	<section class="main_field">
+		<div class="container">
+			<div class="row">
+				<div class="col-3 d-none d-lg-inline-block">
+					<div class="tlo_rejestracje">
+						<img class="img-fluid" src="{% static 'images/lewo.png' %}" alt="lewo obraz"></a>
 					</div>
+				</div>
 
-					<div class="parametry_zamowienia_menu">
-						<div class="menu_tekst">Menu</div>
-						<div class="menu_zamawianie">
-							{% for menu in  menu_orgs %}
-							{{menu.typ}}</br>
-							<ol class="lista_jedzenie">
-								<li class="element_jedzenie">
-									{% for item in  menu.zawartosc.all %}
-									{{item}} ({{item.cena}} zl)
-									<ul class="dymek">
-										<img src="{{item.zdjecie.url}}" alt="{{item.zdjecie}}" style="width:220px; margin-left:-63px; margin-top:2px;">
-									</ul>
-									<ul class="skladniki">
-										{% for skladniki in  item.skladniki.all %}
-										<li class="skladniki"> {{skladniki}}</li>
-										{% endfor %}
-									</ul>
-								</li>
-								<div style="clear:both;"></div>
-								{% endfor %}
-								{% endfor %}
-							</ol>
+				<div class="col-12 col-lg-6 px-0 py-0">
+					<div class="tlo_menu col-12 mx-auto">
+						<div class="menu_tekst pt-3">Menu</div>
+						<div class="row">
+							<div class="col-4 col-lg-4" style="z-index: 0;">
+								<ol class="lista_jedzenie">
+									<li class="element_jedzenie">
+										Pizza Wiejska
+										<ul class="dymek">
+											<img src="{% static 'images/pizza3.png' %}" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Kiełasa</li>
+											<li class="skladniki">Ogórek kiszony</li>
+											<li class="skladniki">Ser</li>
+											<li class="skladniki">Ziemniaki</li>
+										</ul>
+										<ul class="cena">
+											<div class="cena-div" style="margin-left:-41px; margin-top:-8px;">25zł</div>
+										</ul>
+									</li>
+								</ol>
+							</div>
+							<div class="col-4 col-lg-4" style="z-index: 0;">
+								<ol class="lista_jedzenie">
+									<li class="element_jedzenie">
+										Pizza Wiejska
+										<ul class="dymek">
+											<img src="{% static 'images/pizza3.png' %}" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Kiełasa</li>
+											<li class="skladniki">Ogórek kiszony</li>
+											<li class="skladniki">Ser</li>
+											<li class="skladniki">Ziemniaki</li>
+										</ul>
+										<ul class="cena">
+											<div class="cena-div" style="margin-left:-41px; margin-top:-8px;">25zł</div>
+										</ul>
+									</li>
+								</ol>
+							</div>
+							<div class="col-4 col-lg-4" style="z-index: 0;">
+								<ol class="lista_jedzenie">
+									<li class="element_jedzenie">
+										Pizza Wiejska
+										<ul class="dymek">
+											<img src="{% static 'images/pizza3.png' %}" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Kiełasa</li>
+											<li class="skladniki">Ogórek kiszony</li>
+											<li class="skladniki">Ser</li>
+											<li class="skladniki">Ziemniaki</li>
+										</ul>
+										<ul class="cena">
+											<div class="cena-div" style="margin-left:-41px; margin-top:-8px;">25zł</div>
+										</ul>
+									</li>
+								</ol>
+							</div>
+							<div class="col-4 col-lg-4" style="z-index: 0;">
+								<ol class="lista_jedzenie">
+									<li class="element_jedzenie">
+										Pizza Wiejska
+										<ul class="dymek">
+											<img src="{% static 'images/pizza3.png' %}" alt="Italian Trulli" style="width:220px; margin-left:-63px; margin-top:2px;">
+										</ul>
+										<ul class="skladniki">
+											<li class="skladniki">Kiełasa</li>
+											<li class="skladniki">Ogórek kiszony</li>
+											<li class="skladniki">Ser</li>
+											<li class="skladniki">Ziemniaki</li>
+										</ul>
+										<ul class="cena">
+											<div class="cena-div" style="margin-left:-41px; margin-top:-8px;">25zł</div>
+										</ul>
+									</li>
+								</ol>
+							</div>
 						</div>
-
-
 					</div>
-					<div class="prawo_obraz">
+				</div>
 
+				<div class="col-3 d-none d-lg-inline-block">
+					<div class="tlo_rejestracje">
+						<img class="img-fluid" src="{% static 'images/prawo.png' %}" alt="lewo obraz"></a>
 					</div>
-
-					<div style="clear:both;"></div>
-
-				</section>
-
-				</form>
+				</div>
 			</div>
 		</div>
 	</section>
+
 </main>
-					{% endblock content %}
+{% endblock content %}

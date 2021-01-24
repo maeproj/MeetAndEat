@@ -2,82 +2,83 @@
 {% load static %}
 {% block head %}
 <title>MeetAndEat - Restauracja</title>
-<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css" />
 {% endblock head %}
 {% block scripts %}
 <script type="text/javascript">
 
-		var numer = 1
+	var numer = 1
 
-		function schowaj()
-		{
-			$("#slider1").fadeOut(300);
-			$("#slider2").fadeOut(300);
-			$("#slider3").fadeOut(300);
-			$("#slider4").fadeOut(300);
-			$("#slider5").fadeOut(300);
-		}
+	function schowaj() {
+		$("#slider1").fadeOut(300);
+		$("#slider2").fadeOut(300);
+		$("#slider3").fadeOut(300);
+		$("#slider4").fadeOut(300);
+		$("#slider5").fadeOut(300);
+	}
 
-		function zmienslajd()
-		{
-			numer++; if (numer>2) numer=1;
-			var plik1 = "<img src=\"/static/images/stolik przy drzwiach " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
-			var plik2 = "<img src=\"/static/images/stolik w rogu " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
-			var plik3 = "<img src=\"/static/images/stolik na środku " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
-			var plik4 = "<img src=\"/static/images/stolik przy kuchni " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
-			var plik5 = "<img src=\"/static/images/stolik w wnęce " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
+	function zmienslajd() {
+		numer++; if (numer > 2) numer = 1;
+		var plik1 = "<img src=\"/static/images/stolik przy drzwiach " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
+		var plik2 = "<img src=\"/static/images/stolik w rogu " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
+		var plik3 = "<img src=\"/static/images/stolik na środku " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
+		var plik4 = "<img src=\"/static/images/stolik przy kuchni " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
+		var plik5 = "<img src=\"/static/images/stolik w wnęce " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
 
-			document.getElementById("slider1").innerHTML = plik1;
-			document.getElementById("slider2").innerHTML = plik2;
-			document.getElementById("slider3").innerHTML = plik3;
-			document.getElementById("slider4").innerHTML = plik4;
-			document.getElementById("slider5").innerHTML = plik5;
+		document.getElementById("slider1").innerHTML = plik1;
+		document.getElementById("slider2").innerHTML = plik2;
+		document.getElementById("slider3").innerHTML = plik3;
+		document.getElementById("slider4").innerHTML = plik4;
+		document.getElementById("slider5").innerHTML = plik5;
 
-			$("#slider1").fadeIn(300);
-			$("#slider2").fadeIn(300);
-			$("#slider3").fadeIn(300);
-			$("#slider4").fadeIn(300);
-			$("#slider5").fadeIn(300);
+		$("#slider1").fadeIn(300);
+		$("#slider2").fadeIn(300);
+		$("#slider3").fadeIn(300);
+		$("#slider4").fadeIn(300);
+		$("#slider5").fadeIn(300);
 
-			setTimeout("zmienslajd()", 4000);
-			setTimeout("schowaj()", 3700);
+		setTimeout("zmienslajd()", 4000);
+		setTimeout("schowaj()", 3700);
 
-		}
+	}
 
 </script>
 {% endblock scripts %}
 {% block content %}
 <main>
-	<section>
-		<div id="container">
-			<div id="strona_glowna">
-				<div class="srodek">
-					<div class="menu_tekst"> Plan restauracji </div> </br>
-					<img src="{% static 'images/restauracja z góry 3.png' %}" alt="Italian Trulli" style="width:800px; border: 1px solid black;">
-					<div class="menu_tekst"> Od strony obsługi </div> </br>
-					<img src="{% static 'images/widok zza lady.png' %}" alt="Italian Trulli" style="width:800px; border: 1px solid black;">
-					<div class="menu_tekst"> Z rogu </div> </br>
-					<img src="{% static 'images/widok z rogu.png' %}" alt="Italian Trulli" style="width:800px; border: 1px solid black;">
-					<div class="menu_tekst"> Stolik 1 </div> </br>
-					<div id="slider1"> </div>
+	<section class="main_field">
+		<div class="container px-0 py-0">
+			<div class="tlo_rejestracje col-12 px-5 pb-4">
+				<div class="menu_tekst pt-3"> Plan restauracji </div> </br>
+				<img class="img_fluid" src="{% static 'images/restauracja z góry 3.png' %}" alt="Italian Trulli" style="width:800px; border: 1px solid black;">
+				<div class="menu_tekst pt-3"> Od strony obsługi </div> </br>
+				<img class="img_fluid" src="{% static 'images/widok zza lady.png' %}" alt="Italian Trulli" style="width:800px; border: 1px solid black;">
+				<div class="menu_tekst pt-3"> Z rogu </div> </br>
+				<img class="img_fluid" src="{% static 'images/widok z rogu.png' %}" alt="Italian Trulli" style="width:800px; border: 1px solid black;">
 
-					<div class="menu_tekst"> Stolik 2 </div> </br>
-					<div id="slider2"> </div>
+				<div class="menu_tekst pt-3"> Stolik 1 </div> </br>
 
-					<div class="menu_tekst"> Stolik 3 </div> </br>
-					<div id="slider3"> </div>
+				<img class="img-fluid" src="{% static 'images/stolik przy drzwiach 1.png' %}" alt="Italian Trulli" style="width:800px; border: 1px solid black;">
 
-					<div class="menu_tekst"> Stolik 4 </div> </br>
-					<div id="slider4"> </div>
+				<div class="menu_tekst pt-3"> Stolik 2 </div> </br>
 
-					<div class="menu_tekst"> Stolik 5 </div> </br>
-					<div id="slider5"> </div>
-					</br></br>
+				<img class="img-fluid" src="{% static 'images/stolik w rogu 1.png' %}" alt="Italian Trulli" style="width:800px; border: 1px solid black;">
 
-				</div>
+				<div class="menu_tekst pt-3"> Stolik 3 </div> </br>
+
+				<img class="img-fluid" src="{% static 'images/stolik na środku 1.png' %}" alt="Italian Trulli" style="width:800px; border: 1px solid black;">
+
+				<div class="menu_tekst pt-3"> Stolik 4 </div> </br>
+
+				<img class="img-fluid" src="{% static 'images/stolik przy kuchni 1.png' %}" alt="Italian Trulli" style="width:800px; border: 1px solid black;">
+
+				<div class="menu_tekst pt-3"> Stolik 5 </div> </br>
+
+				<img class="img-fluid" src="{% static 'images/stolik w wnęce 1.png' %}" alt="Italian Trulli" style="width:800px; border: 1px solid black;">
+				</br></br>
 			</div>
 		</div>
 	</section>
 </main>
 {% endblock content %}
-	
+

@@ -3,16 +3,24 @@
 <head>
 	{% load static %}
 	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="Tutaj wpisujemy opis" />
 	<meta name="keywords" content="słowa kluczowe, tagi, o czym strona" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	{% block head %}{% endblock %}
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/fontello.css' %}" type="text/css" />
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="{% static 'js/jquery.scrollTo.min.js' %}"></script>
-	<link rel="stylesheet" href="{% static 'font2/css/fontello.css' %}" type="text/css" />
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato&display=swap" rel="stylesheet">
+
+
+	<!--[if lt IE 9]>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<![endif]-->
 
 	<script>
 		jQuery(function ($) {
@@ -66,51 +74,68 @@
 				Meet&Eat </br>
 			</div>
 			<nav>
-				<ol class="nav">
-					<li class="nav"><a href="{% url 'home' %}">Strona główna</a></li>
-					<li class="nav"><a href="{% url 'menu' %}">Menu</a>
-					<li class="nav"><a href="{% url 'restauracja' %}">Restauracja</a>
-					<li class="nav"><a href="{% url 'reservation1' %}">Zarezerwuj</a></li>
-					<li class="nav"><a href="{% url 'kontakt' %}">Kontakt</a></li>
-					<li class="nav">
-						<a href="#">Moje Konto</a>
-						<ul class="nav">
-							{% if user.is_authenticated %}
-							<li class="nav"><a href="{% url 'profile' %}">Moje konto</a></li>
-							<li class="nav"><a href="#">Moje rezerwacje</a></li>
-							<li class="nav"><a href="{% url 'logout' %}">Wyloguj</a></li>
-							{% else %}
-							<li class="nav" onclick="zamknij_otworz_okno_srodek2()">Zaloguj</li>
-							<li class="nav"><a href="{% url 'register' %}">Zarejestruj się</a></li>
-							{% endif %}
+				<nav class="navbar navbar-light bg-navcolor navbar-expand-lg">
+					<a class="navbar-brand d-lg-none ml-3" href="index.html"><div id="logo_mini">Meat&Eat</div></a>
+					<button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false" aria-label="Przełącznik nawigacji">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="mainmenu">
+						<ul class="navbar-nav mx-auto">
+							<li class="nav-item mx-2">
+								<a class="nav-link" href="{% url 'home' %}"> Strona główna </a>
+							</li>
+							<li class="nav-item mx-2">
+								<a class="nav-link" href="{% url 'menu' %}"> Menu </a>
+							</li>
+							<li class="nav-item mx-2">
+								<a class="nav-link" href="{% url 'restauracja' %}"> Restauracja </a>
+							</li>
+							<li class="nav-item mx-2">
+								<a class="nav-link" href="{% url 'reservation1' %}"> Zarezerwuj </a>
+							</li>
+							<li class="nav-item mx-2">
+								<a class="nav-link" href="{% url 'kontakt' %}"> Kontakt </a>
+							</li>
+							<li class="nav-item dropdown mx-2">
+								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false" id="submenu" aria-haspopup="true">Moje Konto</a>
+								{% if user.is_authenticated %}
+								<div class="dropdown-menu" aria-labelledby="submenu" style="text-align:center; background-color:#D5D5D3; border: none; font-size:18px">
+
+									<a class="dropdown-item" href="{% url 'profile' %}"> Moje konto </a>
+									<a class="dropdown-item" href="{% url 'moje_rezerwacje' %}"> Moje rezerwacje </a>
+									<a class="dropdown-item" href="{% url 'logout' %}"> Wyloguj </a>
+
+								</div>
+								{% else %}
+								<div class="dropdown-menu" aria-labelledby="submenu" style="text-align:center; background-color:#D5D5D3; border: none; font-size:18px">
+
+									<a class="dropdown-item" href="{% url 'login' %}"> Zaloguj się </a>
+									<a class="dropdown-item" href="{% url 'register' %}"> Zarejestruj się </a>
+
+								</div>
+								{% endif %}
+
+							</li>
+							<li class="nav-item d-lg-none mx-2">
+								<a class="nav-link" href="#"> Czat </a>
+							</li>
 						</ul>
-					</li>
-				</ol>
+					</div>
+				</nav>
 			</nav>
 		</header>
 
-		<div id="okno_srodek2">
-			<div id="rejestracja_okno">
-				<div class="menu_tekst">Logowanie</div></br>
-				<form method="post">
-					{% csrf_token %}
-					{{form.as_p}}
-					<input class="rejestracja_input" type="submit" value="Zaloguj się" name="logowanie">
-					</br></br>
-				</form>
-			</div>
-		</div>
 		{% if messages %}
 		<ol id="powiadomienia">
 			{% for message in messages %}
 			{% if message.tags == "error" %}
-			<img src="{% static 'images/error.png' %}" style="width: 50px; padding-bottom: 0px;"/>
+			<img src="{% static 'images/error.png' %}" style="width: 40px; padding:0;" />
 			{% endif %}
 			{% if message.tags == "warning" %}
-			<img src="{% static 'images/warning.png' %}" style="width: 50px; padding-bottom: 0px;" />
+			<img src="{% static 'images/warning.png' %}" style="width: 40px; padding:0px;" />
 			{% endif %}
 			{% if message.tags == "success" %}
-			<img src="{% static 'images/correct.png' %}" style="width: 50px; padding-bottom: 0px;" />
+			<img src="{% static 'images/correct.png' %}" style="width: 40px; padding:0px;" />
 			{% endif %}
 			<li id="tekst">
 				{{message}}
@@ -127,6 +152,10 @@
 				Meet & Eat </br>
 			</div>
 		</footer>
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
 		<script src="{% static 'jquery-1.11.3.min.js' %}"></script>
 		<script>
@@ -150,5 +179,7 @@
 				});
 			});
 		</script>
+
+		<script src="{%static 'js/bootstrap.min.js' %}"></script>
 	</body>
 </html>

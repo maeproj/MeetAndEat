@@ -30,18 +30,30 @@ class Menu_org(models.Model):
     def __str__(self):
         return self.typ
 
+class Produkt_rezerwacji(models.Model):
+    nazwa_produktu = models.ForeignKey(Menu_item,default=None,on_delete=models.CASCADE,blank=True)
+    dodaj_skladnik=models.ManyToManyField(Skladnik,default=None,blank=True,related_name='odejmij_skladnik')
+    odejmij_skladnik=models.ManyToManyField(Skladnik,default=None,blank=True,related_name='dodaj_skladnik')
+    podanie_godzina = models.IntegerField(default=0,blank=True)
+    podanie_minuta = models.IntegerField(default=0,blank=True)
+    #def __str__(self):
+    #    return self.nazwa_produktu.nazwa
 class Reservation(models.Model):
     stolik=models.ManyToManyField(Stolik_item,default=None)
     nazwa = models.ForeignKey(User,default=None,on_delete=models.CASCADE)
-    zamowienie_item=models.ManyToManyField(Menu_item,default=None)
+    zamowienie_item=models.ManyToManyField(Produkt_rezerwacji,default=None,blank=True)#
     cena_rachunek=models.DecimalField(max_digits=10, decimal_places=2, default=0)
     rezerwacja_dzien = models.CharField(max_length=20)
     time_begin = models.CharField(max_length=10)
     time_end = models.CharField(max_length=10)
-    czas_rezerwacji = models.DateTimeField(auto_now_add=True) #ważna zmiana -> usunąłem auto_now_add, trzeba w view dodawać datę
-    modyfikacje=models.TextField(blank=True)
+    czas_rezerwacji = models.DateTimeField(auto_now_add=True)
     komentarz=models.TextField(blank=True)
     aktywnosc=models.BooleanField(default=True)
+
+class Tymczasowe_zamowienie(models.Model):
+    nazwa_uzytkownika = models.ForeignKey(User,default=None,on_delete=models.CASCADE)
+    zamowienie_item=models.ManyToManyField(Produkt_rezerwacji,default=None)#
+    tymczasowe_edytowane = models.ManyToManyField(Produkt_rezerwacji,default=None,related_name='nazwa_uzytkownika',blank=True)
 
 class Temp_Reservation(models.Model):
     stolik=models.ManyToManyField(Stolik_item,default=None)
@@ -49,7 +61,7 @@ class Temp_Reservation(models.Model):
     rezerwacja_dzien = models.CharField(max_length=20)
     time_begin = models.CharField(max_length=10)
     time_end = models.CharField(max_length=10)
-    czas_rezerwacji = models.DateTimeField(auto_now_add=True) #ważna zmiana -> usunąłem auto_now_add, trzeba w view dodawać datę
+    czas_rezerwacji = models.DateTimeField(auto_now_add=True)
 
 
 

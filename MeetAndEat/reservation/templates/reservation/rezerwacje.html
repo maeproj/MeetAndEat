@@ -1,109 +1,82 @@
 ﻿{% extends 'home/base.html' %}
 {% load static %}
 {% block head %}
-<!--{% load bootstrap4 %}
-{% bootstrap_css %}
-{% bootstrap_javascript jquery='full' %}-->
 <title>MeetAndEat - Rezerwacja</title>
-<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css" />
 {% endblock head %}
 {% block content %}
 <main>
-	<section>
-		<div id="container">
-			<div id="rezerwacje">
+	<section class="main_field">
+		<div class="container px-0 mx-auto">
+			<div class="row">
+				<div class="col-12 col-lg-3 d-lg-inline-block">
+					<div class="tlo_rejestracje">
+						<div class="parametry_zamowienia4 mt-3" style="height:904px">
+							<div class="menu_tekst pt-3">Uzupełnij dane</div>
+							<form action="" method="post">
+								{% csrf_token %}
+								<div id="do_checkboxa col-12 text-justify ml-2">
+									<fieldset>
+										<legend> Ile miejsc przy stoliku? </legend>
+										<div style="text-align:left;">
+										{{ form_res.places_by_table }}
+										</div>
+									</fieldset>
+								</div>
 
-				<section>
-					<div class="parametry_zamowienia">
-						<div class="menu_tekst">Co Cię interesuje?</div>
-						<form action="" method="post">
-							{% csrf_token %}
-							<div id="ile_osob">
-								<fieldset>
-									<legend> Ile miejsc przy stoliku? </legend>
-									{{ form_res.places_by_table }}
-								</fieldset>
-							</div>
+								<div class="input_field col-12 mt-3  text-justify ml-2">
+									<fieldset>
+										<legend> Którego dnia? </legend>
+										{{form_res.day}}
+									</fieldset>
+								</div>
+								<div class="input_field col-12 mt-3  text-justify ml-2">
+									<fieldset>
+										<legend> Od której godziny? </legend>
+										{{form_res.time_begin}}
+									</fieldset>
+								</div>
 
-							<div class="jaki_dzien">
-								<fieldset>
-									<legend> Którego dnia? </legend>
-									<div class="input_field">
-										<input type="date" name="dzien" min="{{dates.min}}" max="{{dates.max}}" ?>
-									</div>
-								</fieldset>
-							</div>
-							<div class="ktora_godzina">
-								<fieldset>
-									<legend> Od której godziny? </legend>
-									<div class="input_field">
-										<input type="time" name="czas-start" step="900" min="16:00:00" max="21:45:00">
-									</div>
-								</fieldset>
-							</div>
+								<div class="input_field col-12 mt-3  text-justify ml-2">
+									<fieldset>
+										<legend> Do której godziny? </legend>
+										{{form_res.time_end}}
+									</fieldset>
+								</div>
 
-							<div class="ktora_godzina">
-								<fieldset>
-									<legend> Do której godziny? </legend>
-									<div class="input_field">
-										<input type="time" name="czas-koniec" step="900" min="16:00:00" max="21:45:00">
-									</div>
-								</fieldset>
-							</div>
-							<div class="input_field">
-								<input class="rejestracja_input2" type="submit" name="date_submit" value="Sprawdź dostępne" />
-							</div>
-						</form>
-						{% if sugg.suc == "reserve" %}
-						<div class="menu_tekst">Zaznacz stolik na planie restauracji</div>
-						{% endif %}
-					</div>
-
-					<div class="mapa_restauracji_kontener">
-						<div class="menu_tekst">Plan Restauracji</div>
-						<div class="mapa">
-						{% if sugg.alt2 == 1 %}
-						<a href="{% url 'reservation2' %}"> <div class="stolik1" style="-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; box-shadow: 0px 0px 2px 19px #05F2B1;"> </div> </a>
-						{% else %}
-						<a href="{% url 'reservation2' %}"> <div class="stolik1" style="-webkit-box-shadow: 0px 0px 2px 19px #C10000; box-shadow: 0px 0px 2px 19px #C10000; pointer-events: none;"> </div> </a>
-						{% endif %}
-						{% if sugg.alt1 == 1 %}
-						<a href="{% url 'reservation2' %}"> <div class="stolik2" style="-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; box-shadow: 0px 0px 2px 19px #05F2B1;"> </div> </a>
-						{% else %}
-						<a href="{% url 'reservation2' %}"> <div class="stolik2" style="-webkit-box-shadow: 0px 0px 2px 19px #C10000; box-shadow: 0px 0px 2px 19px #C10000; pointer-events: none;"> </div> </a>
-						{% endif %}
-						{% if sugg.alt3 == 1 %}
-						<a href="{% url 'reservation2' %}"> <div class="stolik3" style="-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; box-shadow: 0px 0px 2px 19px #05F2B1;"> </div> </a>
-						{% else %}
-						<a href="{% url 'reservation2' %}"> <div class="stolik3" style="-webkit-box-shadow: 0px 0px 2px 19px #C10000; box-shadow: 0px 0px 2px 19px #C10000; pointer-events: none;"> </div> </a>
-						{% endif %}
-						{% if sugg.alt4 == 1 %}
-						<a href="{% url 'reservation2' %}"> <div class="stolik4" style="-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; box-shadow: 0px 0px 2px 19px #05F2B1;"> </div> </a>
-						{% else %}
-						<a href="{% url 'reservation2' %}"> <div class="stolik4" style="-webkit-box-shadow: 0px 0px 2px 19px #C10000; box-shadow: 0px 0px 2px 19px #C10000; pointer-events: none;"> </div> </a>
-						{% endif %}
-						{% if sugg.alt5 == 1 %}
-						<a href="{% url 'reservation2' %}"> <div class="stolik5" style="-webkit-box-shadow: 0px 0px 2px 19px #05F2B1; box-shadow: 0px 0px 2px 19px #05F2B1;"> </div> </a>
-						{% else %}
-						<a href="{% url 'reservation2' %}"> <div class="stolik5" style="-webkit-box-shadow: 0px 0px 2px 19px #C10000; box-shadow: 0px 0px 2px 19px #C10000; pointer-events: none;"> </div> </a>
-						{% endif %}
+								<div class="input_field col-12 mt-3 ">
+									<input class="rejestracja_input2" type="submit" name="date_submit" value="Sprawdź dostępne" />
+								</div>
+							</form>
+							{% if sugg.suc == "reserve" %}
+							<div class="menu_tekst">Zaznacz stolik na planie restauracji</div>
+							{% endif %}
 						</div>
-					</div>
 
 
-					<div style="clear:both;"></div>
-				</section>
-				{% if sugg.suc == "ayy" %}
-				<div class="pustydiv">
-					<form method="post">
-						{% csrf_token %}
-						{{form2.as_p}}
-						<div class="input_field">
-							<input class="rejestracja_input" type="submit" name="place_submit" value="OK" />
+						{% if sugg.suc == "ayy" %}
+						<div class="pustydiv">
+							<form method="post">
+								{% csrf_token %}
+								{{form2.as_p}}
+								<div class="input_field">
+									<input class="rezerwuje col-6 col-lg-3 m-auto" type="submit" name="place_submit" value="Rezerwuję" />
+								</div>
+							</form>
 						</div>
-					</form>
+						{% endif %}
+
+						<div style="clear:both;"></div>
+					</div>
 				</div>
-				{% endif %}
+				<div class="col-12 col-lg-9 d-lg-inline-block mt-3">
+					<div class="tlo_rejestracje">
+						<div class="menu_tekst py-3">Mapa Restauracji</div>
+					</div>
+					<div class="tlo_rejestracje">
+						<img class="img-fluid" src="{% static 'images/restauracja z góry 3_2.png' %}" alt="mapa">
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>

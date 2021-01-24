@@ -1,16 +1,24 @@
+from decimal import Decimal
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import ReservationForm, PickForm
+from .forms import ReservationForm, PickForm,dodaj_dania_do_rezerwacji,zamowienie_tymczasowe,dodaj_edytowane_danie
 from users.forms import UserLoginForm
 from django.contrib.auth.decorators import login_required
 from datetime import date, time, datetime, timedelta
 from django.contrib import messages
-from .models import Temp_Reservation, Stolik_item, Reservation
+from .models import Temp_Reservation, Stolik_item, Reservation,Stolik_item, Tymczasowe_zamowienie,Produkt_rezerwacji,Menu_item, Skladnik
 from copy import deepcopy
 import numpy as np
 import pdb
 from global_modules.models import AllActions
-from home.views import login_template
+
+class Helper_class:
+    def __init__(self, stolik, nazwa, rezerwacja_dzien, time_begin, time_end):
+        self.stolik = stolik
+        self.nazwa = nazwa
+        self.rezerwacja_dzen = rezerwacja_dzien
+        self.time_begin = time_begin
+        self.time_end = time_end
 
 class AvailableDate: 
     def __init__(self, begin_time, end_time, day, reservations, stolik):
@@ -266,10 +274,9 @@ class AvailableDate:
                         new_time[1] = 0
 
         return self.alternatives
-
-@login_required            
+            
+@login_required
 def reservation(request):
-    login_form = login_template(request)
     dates = {'min': date.today().strftime('%Y-%m-%d'), 'max': (date.today() + timedelta(days=10)).strftime('%Y-%m-%d')}
     sug = {'suc': '', 'alt1': {}, 'alt2': {}, 'alt3': {}, 'alt4': {}, 'alt5': {}}
     short = ['alt' + str(i+1) for i in range(5)]
@@ -328,8 +335,12 @@ def reservation(request):
 
                 request.session['cena'] = overpay
                 table = Stolik_item.objects.get(stolik_miejsca = seats)
+                temp_reservations = list(Temp_Reservation.objects.filter(rezerwacja_dzien = day, stolik = table))
                 reservations = Reservation.objects.filter(rezerwacja_dzien = day, stolik = table)
-                ad = AvailableDate([begin_h, begin_m], [end_h, end_m], day, reservations, table)
+                for reservation in reservations:
+                    obj = Helper_class(table, request.user, day, reservation.time_begin, reservation.time_end)
+                    temp_reservations.append(obj)
+                ad = AvailableDate([begin_h, begin_m], [end_h, end_m], day, temp_reservations, table)
                 suggestions = ad.return_accept()
 
                 if suggestions == 'reserve':
@@ -339,6 +350,8 @@ def reservation(request):
                     res = Temp_Reservation.objects.create(nazwa=request.user, rezerwacja_dzien=day.strftime('%Y-%m-%d'), time_begin=f'{begin_h}' + ':' + f'{begin_m}', time_end=f'{end_h}' + ':' + f'{end_m}')
                     res.stolik.add(table)
                     res.save()
+                    request.session['res_made'] = True
+                    return redirect('reservation2')
 
                 else:
                     request.session['day'] = datetime.strftime(day, '%Y-%m-%d')
@@ -366,10 +379,8 @@ def reservation(request):
 
     else:
         form = ReservationForm()
-    if type(login_form) == type(UserLoginForm()):
-        return render(request, 'reservation/rezerwacje.html', {'form_res':form, 'form2': form2, 'form': login_form, 'sugg':sug, 'dates': dates})
-    else:
-        return render(request, 'reservation/rezerwacje.html', {'form_res':form, 'form2': form2, 'form': UserLoginForm(), 'sugg':sug, 'dates': dates})
+
+    return render(request, 'reservation/rezerwacje.html', {'form_res':form, 'form2': form2, 'sugg':sug, 'dates': dates})
 
 @login_required
 def reservation_items(request):
@@ -388,7 +399,147 @@ def menu_items(request):
     menu_items=Menu_item.objects.all()
     return render(request,"reservation/rezerwacje_jedzenie.html",{'menu_items':menu_items})
 
-
-def menu_orgs(request):
+@login_required
+def rezerwacje_dodaj_zamowienie(request):
+    breakpoint()
+    try:
+        rezerwacja_stolika_temp=Temp_Reservation.objects.get(nazwa=request.user)
+    except:
+        return redirect('reservation1')
+    cena=0.0
+    cena=Decimal(cena)
+    dane_rezerwacji=rezerwacja_stolika_temp
     menu_orgs=Menu_org.objects.all()
-    return render(request,"reservation/rezerwacje_jedzenie.html",{'menu_orgs':menu_orgs})
+    try:
+        obecna_sesja=Tymczasowe_zamowienie.objects.get(nazwa_uzytkownika=request.user)
+    except:
+        obecna_sesja=Tymczasowe_zamowienie.objects.create(nazwa_uzytkownika=request.user)
+    if request.method=="POST":
+        if 'przycisk_rezygnacja' in request.POST:
+            obecna_sesja.delete()
+            return redirect('reservation2')
+        form=zamowienie_tymczasowe(request.POST)
+        form2=dodaj_edytowane_danie(request.POST)
+        if form2.is_valid():
+            for pojedyncze_menu in menu_orgs:
+                for elementu_pojedynczego_menu in pojedyncze_menu.zawartosc.all():
+                    try:
+                        if(request.POST[elementu_pojedynczego_menu.nazwa]=='dodaj'):
+                            item_orginalny_z_menu=Menu_item.objects.get(nazwa=elementu_pojedynczego_menu.nazwa)
+                            nowy_element_zamowienia=Produkt_rezerwacji.objects.create(nazwa_produktu=item_orginalny_z_menu)
+                            obecna_sesja.zamowienie_item.add(nowy_element_zamowienia)
+                    except:
+                        pass
+            for itemy_zamowienia in obecna_sesja.zamowienie_item.all():
+                try:
+                    if(request.POST[str(itemy_zamowienia)]=='edytuj'):
+                        do_edycji=Produkt_rezerwacji.objects.get(pk=itemy_zamowienia.pk)
+                        obecna_sesja.tymczasowe_edytowane.clear()
+                        obecna_sesja.tymczasowe_edytowane.add(do_edycji)
+                        return redirect('reservation2_edit')
+                    elif(request.POST[str(itemy_zamowienia)]=='usun'):
+                         do_usuniecia=Produkt_rezerwacji.objects.get(pk=itemy_zamowienia.pk)
+                         do_usuniecia.delete()
+
+                except:
+                    pass
+        print(request.body)
+        komentarz_do_zamowienia=request.POST.get('komentarz_do_zamowienia')
+        if('akceptuj_przycisk'in request.POST):
+            for dania in obecna_sesja.zamowienie_item.all():
+                cena=cena+dania.nazwa_produktu.cena
+                for skladnik_w_daniu in dania.dodaj_skladnik.all():
+                    cena=cena+skladnik_w_daniu.cena
+            Rezerwacja=Reservation.objects.create(nazwa = request.user,cena_rachunek=cena,rezerwacja_dzien = rezerwacja_stolika_temp.rezerwacja_dzien,time_begin = rezerwacja_stolika_temp.time_begin,time_end = rezerwacja_stolika_temp.time_end,czas_rezerwacji = rezerwacja_stolika_temp.czas_rezerwacji,aktywnosc=True)
+            print(rezerwacja_stolika_temp.stolik.all().first())
+            Rezerwacja.stolik.add(rezerwacja_stolika_temp.stolik.all().first())
+            for itemki_zamowienia in obecna_sesja.zamowienie_item.all():
+                Rezerwacja.zamowienie_item.add(itemki_zamowienia)
+            Rezerwacja.save()
+            obecna_sesja.delete()
+            rezerwacja_stolika_temp.delete()
+            return redirect('home')
+            #return redirect('moje_rezerwacje')
+    else:
+        form=Tymczasowe_zamowienie()
+        form2=dodaj_edytowane_danie()
+    cena=0.0
+    cena=Decimal(cena)
+    for dania in obecna_sesja.zamowienie_item.all():
+        cena=cena+dania.nazwa_produktu.cena
+        for skladnik_w_daniu in dania.dodaj_skladnik.all():
+            cena=cena+skladnik_w_daniu.cena
+    return render(request,'reservation/rezerwacje_jedzenie.html',{'form':form,'menu_orgs':menu_orgs,'obecna_sesja':obecna_sesja.zamowienie_item,'form2':form2,'cena_zamowienia':cena,'dane_rezerwacji':dane_rezerwacji})
+
+
+@login_required
+def edycja_dania(request):
+    try:
+        rezerwacja_stolika_temp=Temp_Reservation.objects.get(nazwa=request.user)
+    except:
+        return redirect('reservation1')
+    wszystkie_skladniki=Skladnik.objects.all()
+    try:
+        obecna_sesja=Tymczasowe_zamowienie.objects.get(nazwa_uzytkownika=request.user)
+        obecna_sesja.tymczasowe_edytowane.last().nazwa_produktu
+        edytowany_item=obecna_sesja.tymczasowe_edytowane.last()
+    except:
+        return redirect('reservation2')
+    dane_rezerwacji=rezerwacja_stolika_temp
+    produkt_z_menu=obecna_sesja.tymczasowe_edytowane.last()
+    print(produkt_z_menu.nazwa_produktu)
+    print(wszystkie_skladniki.all())
+    jakie_mozna_dodac=wszystkie_skladniki.all()
+    edytowany_item=obecna_sesja.tymczasowe_edytowane.last()
+    if request.method=="POST":
+        for skladnik in wszystkie_skladniki.all():
+                try:
+                    if(request.POST[str(skladnik)]=='dodaj'):
+                        dodaj=True
+                        for zabrane in edytowany_item.odejmij_skladnik.all():
+                            if (zabrane==skladnik):
+                                edytowany_item.odejmij_skladnik.remove(skladnik)
+                        for dodane in edytowany_item.dodaj_skladnik.all():
+                            if(skladnik==dodane):
+                                dodaj=False
+                        for skladniki_dania in edytowany_item.nazwa_produktu.skladniki.all():
+                            if(str(skladniki_dania)==str(skladnik)):
+                                dodaj=False
+                        if(dodaj==True):
+                            dodawany=Skladnik.objects.get(nazwa=skladnik.nazwa)
+                            edytowany_item.dodaj_skladnik.add(dodawany)
+                    if(request.POST[str(skladnik)]=='odejmij'):
+                        for dodane in edytowany_item.dodaj_skladnik.all():
+                            if (dodane==skladnik):
+                                edytowany_item.dodaj_skladnik.remove(skladnik)
+                        for skladniki_dania in produkt_z_menu.skladniki.all():
+                            if(skladnik==skladniki_dania):
+                                odejmowany=Skladnik.objects.get(nazwa=skladnik.nazwa)
+                                edytowany_item.odejmij_skladnik.add(odejmowany)
+                except:
+                    pass
+                for itemy_zamowienia in obecna_sesja.zamowienie_item.all():
+                    try:
+                        if(request.POST[str(itemy_zamowienia)]=='edytuj'):
+                            do_edycji=Produkt_rezerwacji.objects.get(pk=itemy_zamowienia.pk)
+                            obecna_sesja.tymczasowe_edytowane.clear()
+                            obecna_sesja.tymczasowe_edytowane.add(do_edycji)
+                            return redirect('reservation2_edit')
+                        elif(request.POST[str(itemy_zamowienia)]=='usun'):
+                             do_usuniecia=Produkt_rezerwacji.objects.get(pk=itemy_zamowienia.pk)
+                             do_usuniecia.delete()
+                             return redirect('reservation2')
+
+                    except:
+                        pass
+        if('zakoncz_edycje_dania'in request.POST):
+            return redirect('reservation2')
+    else:
+        pass
+    cena=0.0
+    cena=Decimal(cena)
+    for dania in obecna_sesja.zamowienie_item.all():
+        cena=cena+dania.nazwa_produktu.cena
+        for skladnik_w_daniu in dania.dodaj_skladnik.all():
+            cena=cena+skladnik_w_daniu.cena
+    return render(request,'reservation/edytowane.html',{'obecna_sesja':obecna_sesja.zamowienie_item,'cena_zamowienia':cena,'skladniki_edytowanego':obecna_sesja.tymczasowe_edytowane.first().nazwa_produktu.skladniki,'wszystkie_skladniki':wszystkie_skladniki,'dane_rezerwacji':dane_rezerwacji,'skladniki_dodane':obecna_sesja.tymczasowe_edytowane.first().dodaj_skladnik})

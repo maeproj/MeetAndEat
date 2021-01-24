@@ -9,11 +9,11 @@ from .models import NewUser
 from phonenumber_field.formfields import PhoneNumberField
 from phonenumbers import PhoneNumber
 from django.contrib.auth.forms import PasswordChangeForm
+from phonenumber_field.widgets import PhoneNumberPrefixWidget, PhoneNumberInternationalFallbackWidget
 
 class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField(label='', required=True, widget=forms.EmailInput(attrs = {'type': 'text', 'class': 'rejestracja_input', 'placeholder': 'Email', 'onfocus': "this.placeholder=''", 'onblur': "this.placeholder='Email'"}))
-    telefon = PhoneNumberField(label='')
-    telefon.widget.build_attrs({'type': PhoneNumber}, extra_attrs={'class': 'rejestracja_input', 'placeholder': 'Telefon', 'onfocus': "this.placeholder=''", 'onblur': "this.placeholder='Telefon'"})
+    email = forms.EmailField(label='', required=True, widget=forms.EmailInput(attrs = {'class': 'rejestracja_input', 'placeholder': 'Email', 'onfocus': "this.placeholder=''", 'onblur': "this.placeholder='Email'"}))
+    telefon = PhoneNumberField(label='', widget=PhoneNumberPrefixWidget(attrs = {'class': 'rejestracja_input', 'placeholder': 'Telefon', 'onfocus': "this.placeholder=''", 'onblur': "this.placeholder='Telefon'"}, initial='PL'))
     def __init__(self, *args, **kwargs):
         super(UserRegisterForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs = {'class': 'rejestracja_input', 'placeholder': 'Nickname', 'onfocus': "this.placeholder=''", 'onblur': "this.placeholder='Nickname'"}
@@ -42,7 +42,7 @@ class UserLoginForm(forms.Form):
         fields = ['username', 'password']
 
 class ChangePassClick(forms.Form):
-    password = forms.CharField()
+    password = forms.CharField(widget=forms.TextInput(attrs={'class': 'rejestracja_input', 'type': 'text', 'placeholder': 'Hasło', 'onfocus': "this.placeholder=''", 'onblur': "this.placeholder='Hasło'"}))
 
 class PasswordChange(PasswordChangeForm):
     def __init__(self, *args, **kwargs):
@@ -106,8 +106,7 @@ class EmailChangeForm(UserCreationForm):
         fields = ['email']
 
 class PhoneChangeForm(UserCreationForm):
-    telefon = PhoneNumberField(label='')
-    telefon.widget.build_attrs({'class': 'rejestracja_input', 'placeholder': 'Telefon', 'onfocus': "this.placeholder=''", 'onblur': "this.placeholder='Telefon'"})
+    telefon = PhoneNumberField(label='', widget=PhoneNumberPrefixWidget(attrs = {'class': 'rejestracja_input', 'placeholder': 'Telefon', 'onfocus': "this.placeholder=''", 'onblur': "this.placeholder='Telefon'"}, initial='PL'))
 
     def __init__(self, *args, **kwargs):
         super(PhoneChangeForm, self).__init__(*args, **kwargs)

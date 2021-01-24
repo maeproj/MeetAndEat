@@ -1,0 +1,131 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block head %}
+<title>MeetAndEat - Rezerwacja Jedzenia</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
+{% endblock head %}
+{% block content %}
+<main>
+    <section>
+        <div id="container">
+            <div id="rezerwacje">
+
+                <form method="post" class="site-form" action="{%url 'reservation2_edit'%}">
+                    <section>
+                        <div class="parametry_zamowienia">
+                            <div class="menu_tekst">
+                                Koszyk:
+                            </div>
+                            {% csrf_token %}
+                            {% for lista_zamowienia in  obecna_sesja.all %}
+                            {% csrf_token %}
+                            {{lista_zamowienia.nazwa_produktu}}
+                            <form method="post" class="edycja" action="{%url 'reservation2_edit'%}" id="edycja">
+                                {% csrf_token %}
+                            <input type="submit" value="edytuj" name="{{lista_zamowienia}}" cursor: default;" />
+                            <input type="submit" value="usun" name="{{lista_zamowienia}}" cursor: default;" />
+                            </form>
+                            <div style="clear:both;"></div>
+                            <form method="post" class="przycisk_rezygnacja" action="{%url 'reservation2_edit'%}" id="przycisk_rezygnacja">
+								{% csrf_token %}
+								<div class="input_field" id="zakoncz_edycje_dania">
+									<input type="submit" value="zakoncz edycje pozycji" name="zakoncz_edycje_dania" />
+								</div>
+							</form>
+
+                            <!--( [dodawane]:
+                            {% for dodawane in  lista_zamowienia.dodaj_skladnik.all %}
+                            {{dodawane}},
+                            {% endfor %}
+                            <!--[odejmowane]:
+                            {% for odejmowane in  lista_zamowienia.odejmij_skladnik.all %}
+                            {{odejmowane}}
+                            {% endfor %}
+                            )-->
+                            {% endfor %}
+                            Cena zamowienia: {{cena_zamowienia}} PLN
+                            <div style="clear:both;"></div>
+                            <!--<input type="text" name="cena">
+                            </input>-->
+                            <!--<textarea id="komentarz" name="komentarz" rows="10"cols="10">
+                            {{form.komentarz}}
+                            </textarea>-->
+                            <!--<div class="input_field">
+                                <input type="submit" value="dodaj" />
+                            </div>-->
+                            <!--</form>-->
+                        </div>
+                        <div class="parametry_zamowienia_menu">
+                            <div class="menu_tekst">{{edytowany_item}}</div>
+                            <div class="menu_zamawianie">
+                                <!--+godzina podania{{form2.podanie_godzina}}
+                                <div style="clear:both;"></div>
+                                +minuta podania{{form2.podanie_minuta}}-->
+                                <div style="clear:both;"></div>
+                                Dodaj: </br>
+                                {% for skladnik_dodawany in wszystkie_skladniki.all %}
+                                {{skladnik_dodawany}} +{{skladnik_dodawany.cena}} PLN
+                                <input type="submit" value="dodaj" name="{{skladnik_dodawany}}" style=" background-color: transparent; border-color: transparent; cursor: default;" />
+                                <div style="clear:both;"></div>
+                                {% endfor %}
+                                Odejmij: </br>
+                                {% for skladnik in skladniki_edytowanego.all %}
+                                {{skladnik}}
+                                <input type="submit" value="odejmij" name="{{skladnik}}" style=" background-color: transparent; border-color: transparent; cursor: default;" />
+                                <div style="clear:both;"></div>
+                                {% endfor %}
+                                {% for skladnik in skladniki_dodane.all %}
+                                {{skladnik}}
+                                <input type="submit" value="odejmij" name="{{skladnik}}" style=" background-color: transparent; border-color: transparent; cursor: default;" />
+                                <div style="clear:both;"></div>
+                                {% endfor %}
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="parametry_zamowienia2">
+                            {% csrf_token %}
+                            <!--<form method="post" class="przycisk_dodaj_danie" action="{%url 'reservation2'%}" id="przycisk_dodaj_danie">
+                                {{form2}}
+                                <div class="input_field" id="przycisk_dodaj_danie">
+                                    <input type="submit" value="dodaj" name="przycisk_dodaj_danie" />
+                                </div>
+                            </form>-->
+                            <div class="menu_tekst">
+                                Dane Zamowienia:
+                            </div>
+                            <div style="clear:both;"></div>
+                            <div style="clear:both;"></div>
+                            Ilosc miejsc przy soliku: {{dane_rezerwacji.stolik.first.stolik_miejsca}}
+                            <div style="clear:both;"></div>
+                            Data rezerwacji: {{dane_rezerwacji.rezerwacja_dzien}}
+                            <div style="clear:both;"></div>
+                            Godzina rozpoczecia rezerwacji: {{dane_rezerwacji.time_begin}}
+                            <div style="clear:both;"></div>
+                            Godzina zakonczenia rezerwacji: {{dane_rezerwacji.time_end}}
+                            <div style="clear:both;"></div>
+
+                </form>
+            </div>
+            <div style="clear:both;"></div>
+            <div class="akceptuj">
+                Akceptuj
+            </div>
+    </section>
+    <!--</form>-->
+    </div>
+    </div>
+    </form>
+    </section>
+    <script>
+    $(document).ready(function () {
+            $('.slectOne').on('change', function () {
+                $('.slectOne').not(this).prop('checked', false);
+                $('#result').html($(this).data("id"));
+                if ($(this).is(":checked"))
+                    $('#result').html($(this).data("id"));
+                else
+                    $('#result').html('Empty...!');
+            });
+        });</script>
+    {% endblock content %}

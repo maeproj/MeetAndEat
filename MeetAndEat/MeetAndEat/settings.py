@@ -39,7 +39,7 @@ EMAIL_USE_SSL = False
 SENDSMS_BACKEND = 'sendsms.backends.console.SmsBackend'
 
 TWILIO_ACCOUNT_SID = 'AC76218dcf1df1a0331421dd116d8ebcfa'
-TWILIO_AUTH_TOKEN = '6d078db5e9d7ad443794d98852a4b004'
+TWILIO_AUTH_TOKEN = 'c071927d31d2a7cb69c8020e849f3084'
 TWILIO_NUMBER = '+16789091429'
 SMS_BROADCAST_TO_NUMBERS = [
     "",
@@ -50,6 +50,8 @@ SMS_BROADCAST_TO_NUMBERS = [
 BOOTSTRAP4 = {
     'include_jquery': True
     }
+
+PHONENUMBER_DEFAULT_REGION = 'PL'
 
 # Application definition
 
@@ -156,7 +158,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'login_user'
+LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 
 LOGOUT_REDIRECT_URL = 'home'

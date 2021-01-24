@@ -2,42 +2,50 @@
 {% load static %}
 {% block head %}
 <title>MeetAndEat - Kontakt</title>
-<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css" />
 {% endblock head %}
 {% block content %}
 <main>
-	<section>
-		<a href="#" class="scrollup"></a>
-		<div id="container">
-			<div id="strona_glowna">
-				<a href="https://www.facebook.com/" target="_blank" class="tilelink">
-					<div class="kontakt_window_facebook">
-						<i class="icon-facebook"></i>
+	<section class="main_field">
+		<div id="strona_glowna">
+			<div class="container px-0 py-0">
+				<div class="tlo_rejestracje col-12 px-5 py-5 pb-4">
+					<div class="row">
+						<div class="kontakt col-sm-12 mb-4">
+							<a href="https://www.facebook.com/" target="_blank" class="tilelink">
+								<div class="fb col-sm-8 mx-auto">
+									<i class="icon-facebook"></i>
+								</div>
+							</a>
+						</div>
+						<div class="kontakt col-sm-12 mb-4 ">
+							<a href="https://www.instagram.com/" target="_blank" class="tilelink">
+								<div class="ig col-sm-8 mx-auto">
+									<i class="icon-instagram"></i>
+								</div>
+							</a>
+						</div>
+						<div class="kontakt col-sm-12 mb-4">
+							<div class="adres col-sm-8 mx-auto">
+								<i class="demo-icon icon-home"></i>
+								</br>
+								</br>
+								Szczecin, ul.Projektowa 26
+							</div>
+						</div>
+						<div class="kontakt col-sm-12">
+							<div class="tel col-sm-8 mx-auto">
+								<i class="demo-icon icon-phone"></i>
+								</br>
+								</br>
+								+ 48 736 923 XXX
+							</div>
+						</div>
 					</div>
-				</a>
-
-				<div class="kontakt_window_adres">
-					<i class="demo-icon icon-home"></i>
-					</br>
-					Szczecin, ul.Projektowa 26
 				</div>
-
-				<div style="clear:both;"></div>
-
-				<div class="kontakt_window_tel">
-					<i class="demo-icon icon-phone"></i>
-					</br>
-					+ 48 736 923 XXX
-				</div>
-
-				<a href="https://www.instagram.com/" target="_blank" class="tilelink">
-					<div class="kontakt_window_insta">
-						<i class="icon-instagram"></i>
-					</div>
-				</a>
 			</div>
-			<div style="clear:both;"></div>
 		</div>
+		<div style="clear:both;"></div>
 	</section>
 </main>
 {% endblock content %}

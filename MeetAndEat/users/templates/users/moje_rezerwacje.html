@@ -1,25 +1,39 @@
 ﻿{% extends "home/base.html" %}
 {% load static %}
 {% block head %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css" />
 {% endblock head %}
-{% block scripts %}
-<div id="czat" onclick="otworz_czat()"><i class="icon-comment" style="font-size:40px;"></i></div>
-<div id="czat_okno">
-	<div id="miejsce_dla_jedruli"></div>
-</div>
-{% endblock scripts %}
 {% block content %}
-	<main>
-		<a href="#" class="scrollup"></a>
-		<div id="strona_glowna">
-			<div class="srodek_strona_glowna">
-				<section>
-					<div class="menu_tekst_duzy">Moje Rezerwacje</div>
-					</br>
-					<div class="moje_rezerwacje"></div>
-				</section>
+<main>
+	<section class="main_field">
+		<div class="container px-0 py-0">
+			<div class="tlo_rejestracje col-12 px-5 pb-4 text-justify">
+				<div class="menu_tekst_duzy pt-4">Moje Rezerwacje</div>
+				<div class="moje_rezerwacje col-12 pb-1 mx-auto">
+					<div class="col-11 text-left  mx-auto my-5 pb-5 " style="border: 1px solid black; -moz-border-radius: 10px; -webkit-border-radius: 10px;border-radius: 10px; background-color:#E6E5E0;">
+						<h4 style="margin-bottom: 0px; text-align:center; margin-top:10px;">
+							Rezerwacja 1 </h5> </br>
+							Data: </br>
+							Czas: </br>
+							Jedzonko:	</br>
+					</div>
+					<div class="col-11 text-left mx-auto my-5 pb-5 " style="border: 1px solid black; -moz-border-radius: 10px; -webkit-border-radius: 10px;border-radius: 10px; background-color:#E6E5E0;">
+						<h4 style="margin-bottom: 0px; text-align:center; margin-top:10px;">
+							Rezerwacja 2 </h5> </br>
+							Data: </br>
+							Czas: </br>
+							Jedzonko:	</br>
+					</div>
+					<div class="col-11 text-left mx-auto my-5 pb-5 " style="border: 1px solid black; -moz-border-radius: 10px; -webkit-border-radius: 10px;border-radius: 10px; background-color:#E6E5E0;">
+						<h4 style="margin-bottom: 0px; text-align:center; margin-top:10px;">
+							Rezerwacja 3 </h5> </br>
+							Data: </br>
+							Czas: </br>
+							Jedzonko:	</br>
+					</div>
+				</div>
 			</div>
 		</div>
-	</main>
+	</section>
+</main>
 {% endblock content %}
