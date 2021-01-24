@@ -1,0 +1,254 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<title>Rezerwacje</title>
+	<meta name="description" content="Tutaj wpisujemy opis" />
+	<meta name="keywords" content="słowa kluczowe, tagi, o czym strona" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="main.css" type="text/css" />
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="jquery.scrollTo.min.js"></script>
+	<link rel="stylesheet" href="font2/css/fontello.css" type="text/css" />
+	<script>
+	jQuery(function($)
+		{
+			//zresetuj scrolla
+			$.scrollTo(0);
+			$('.scrollup').click(function() { $.scrollTo($('body'), 1000); });
+		}
+		);
+	$(window).scroll(function()
+		{
+			if($(this).scrollTop()>300) $('.scrollup').fadeIn();
+			else $('.scrollup').fadeOut();		
+		}
+		);	
+	</script>
+	<script type="text/javascript">
+	function zamknij_okno()
+	{
+		document.getElementById("powiadomienia").style.display="none";
+	}
+	
+	function otworz_czat()
+	{
+		var x=document.getElementById("czat_okno").style.display
+		console.log(x);
+		if (x === "none" || !x)
+		{
+			document.getElementById("czat_okno").style.display="block";
+		}
+		else
+		{
+			document.getElementById("czat_okno").style.display="none";
+		}
+	}
+	</script>
+	
+</head>
+
+<body>
+	<header>
+		<div id="logo">
+			Meet&Eat </br>
+		</div> 
+		<nav>
+			<nav class="navbar navbar-light bg-navcolor navbar-expand-lg">
+				
+				<a class="navbar-brand d-lg-none ml-3" href="index.html"><div id="logo_mini">Meat&Eat</div></a>
+				
+				<button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false" aria-label="Przełącznik nawigacji">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				
+				<div class="collapse navbar-collapse" id="mainmenu">
+				
+					<ul class="navbar-nav mx-auto">
+						<li class="nav-item mx-2">
+							<a class="nav-link" href="index.html"> Strona główna </a>
+						</li>
+						<li class="nav-item mx-2">
+							<a class="nav-link" href="menu.html"> Menu </a>
+						</li>
+						<li class="nav-item mx-2">
+							<a class="nav-link" href="restauracja.html"> Restauracja </a>
+						</li>
+						<li class="nav-item mx-2">
+							<a class="nav-link" href="rezerwacje.html"> Zarezerwuj </a>
+						</li>
+						<li class="nav-item mx-2">
+							<a class="nav-link" href="kontakt.html"> Kontakt </a>
+						</li>
+						<li class="nav-item dropdown mx-2">
+							<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false" id="submenu" aria-haspopup="true">Moje Konto</a>
+							
+							<div class="dropdown-menu" aria-labelledby="submenu" style="text-align:center; background-color:#D5D5D3; border: none; font-size:18px">
+							
+								<a class="dropdown-item" href="profil.html"> Moje konto </a>
+								<a class="dropdown-item" href="moje_rezerwacje.html"> Moje rezerwacje </a>								
+							</div>						
+						</li>
+						<li class="nav-item d-lg-none mx-2">
+							<a class="nav-link" href="#"> Czat </a>
+						</li>
+						<li class="nav-item mx-2">
+							<a class="nav-link" href="logowanie.html"> Zaloguj się </a>
+						</li>
+						<li class="nav-item mx-2">
+							<a class="nav-link" href="rejestracja.html"> Zarejestruj się </a>
+						</li>
+					</ul>
+				
+				</div>
+			</nav>
+		</nav>
+	</header>
+	
+	<main>	
+		<section class="main_field">		
+			<div class="container px-0 mx-auto">	
+				<div class="row">				
+					<div class="col-12 col-lg-3 d-lg-inline-block">	
+						<div class="tlo_rejestracje">
+							<div class="parametry_zamowienia4 mt-3" style="height:904px"> 
+						<div class="menu_tekst pt-3">Uzupełnij dane</div>
+							<form action="" method="post">
+								
+								<div class="do_checkboxa col-12 text-justify ml-2">								
+									<fieldset>
+										<legend> Ile miejsc przy stoliku? </legend>
+										<div><label><input type="radio" value="1" name="miejsca" checked>Jedno</label></div>
+										<div><label><input type="radio" value="2" name="miejsca">Dwa</label></div>
+										<div><label><input type="radio" value="3" name="miejsca">Trzy</label></div>
+										<div><label><input type="radio" value="4" name="miejsca">Cztery</label></div>
+										<div><label><input type="radio" value="5" name="miejsca">Pięć</label></div>
+									</fieldset> 
+								</div>
+								
+								<div class="input_field col-12 mt-3  text-justify ml-2">
+									<fieldset>
+										<legend> Od której godziny?</br>  </legend>
+										<input type="time" name="czas-start" step="900" value="12:00">
+									</fieldset> 
+								</div>
+								
+								<div class="input_field col-12 mt-3  text-justify ml-2">
+									<fieldset>
+										<legend> Do której godziny? </br>  </legend>
+										<input type="time" name="czas-koniec" step="900" value="12:00">
+									</fieldset> 
+								</div>
+								
+								<div class="input_field col-12 mt-3  text-justify ml-2">
+									<fieldset>
+										<legend> Data dostawy </br>  </legend>
+										<input type="date" name="dzien"?>
+									</fieldset> 
+								</div>
+								<div class="input_field col-12 mt-3 "> 
+									<input type="submit"></input>
+								</div>
+								
+							</form>
+						
+						</div>
+						</div>
+					</div>
+					<div class="col-12 col-lg-9 d-lg-inline-block mt-3">
+						<div class="tlo_rejestracje">
+							<div class="menu_tekst py-3">Mapa restauracji</div>
+						</div>
+						<div class="tlo_rejestracje">
+							<img class="img-fluid" src="obrazy/restauracja z góry 3_2.png" alt="mapa">
+						</div>
+					</div>
+					
+				</div>
+				<div class="tlo_rejestracje mt-3 mb-3">
+				
+					<div class="menu_tekst pt-3">Dostępne stoliki</div>
+					<div class="col-12 mt-4">
+						<div class="row" style="font-size:20px;">
+							<div class="stolik_dostepnosc col-10 m-auto" style="background-color:#CCFFCC;">Stolik 1
+								<div class="col-10 p-3 mx-auto my-auto">
+									Siema siema, stolik dostepny byczku
+								</div>
+								<a href="moje_rezerwacje.html"><div class="rezerwuje col-6 col-lg-3  m-auto">Rezerwuje</div></a>
+							</div>
+							<div class="stolik_dostepnosc col-10 m-auto" style="background-color:#CCFFCC;">Stolik 2
+								<div class="col-10 p-3 mx-auto my-auto">
+									Siema siema, stolik dostepny byczku
+								</div>
+								<a href="moje_rezerwacje.html"><div class="rezerwuje col-6 col-lg-3 m-auto">Rezerwuje</div></a>
+							</div>
+							<div class="stolik_dostepnosc col-10 m-auto" style="background-color:#FF6666;">Stolik 3
+								<div class="col-10 p-3 mx-auto my-auto">
+									Stolik zajęty w danym terminie, proponujemy rezerwacje w godzinach:
+									21:37 - 22:30									
+								</div>
+								<a href="moje_rezerwacje.html"><div class="rezerwuje col-6 col-lg-3  m-auto">Rezerwuje</div></a>
+							</div>
+							<div class="stolik_dostepnosc col-10 d-lg-inline-block m-auto" style="background-color:#CCFFCC;">Stolik 4
+								<div class="col-10 p-3 mx-auto my-auto">
+									Siema siema, stolik dostepny byczku
+								</div>
+								<a href="moje_rezerwacje.html"><div class="rezerwuje col-6 col-lg-3 m-auto">Rezerwuje</div></a>
+							</div>
+							<div class="stolik_dostepnosc col-10 m-auto" style="background-color:#FF6666;">Stolik 5
+								<div class="col-10 p-3 mx-auto my-auto">
+									Stolik zajęty w danym terminie, proponujemy rezerwacje w godzinach:
+									21:37 - 22:30
+								</div>
+								<a href="moje_rezerwacje.html"><div class="rezerwuje col-6 col-lg-3 m-auto">Rezerwuje</div></a>
+							</div>
+						</div>
+					</div>
+				
+			</div>
+		</section>
+		
+	</main>
+	
+	<footer>
+		<div id="stopka">
+				Meet & Eat </br>
+		</div>
+	</footer>	
+	
+	<script src="jquery-1.11.3.min.js"></script>	
+		<script>
+			$(document).ready(function() {
+			var NavY = $('nav').offset().top;
+			 
+			var stickyNav = function(){
+			var ScrollY = $(window).scrollTop();
+				  
+			if (ScrollY > NavY) { 
+				$('nav').addClass('sticky');
+			} else {
+				$('nav').removeClass('sticky'); 
+			}
+			};
+			 
+			stickyNav();
+			 
+			$(window).scroll(function() {
+				stickyNav();
+			});
+			});
+		</script>
+		
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	
+	<script src="js/bootstrap.min.js"></script>
+	
+</body>
+</html>

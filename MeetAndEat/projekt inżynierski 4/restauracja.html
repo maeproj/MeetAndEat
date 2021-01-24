@@ -1,0 +1,226 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<title>Restauracja</title>
+	<meta name="description" content="Tutaj wpisujemy opis" />
+	<meta name="keywords" content="słowa kluczowe, tagi, o czym strona" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="main.css" type="text/css" />
+	<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="jquery.scrollTo.min.js"></script>
+	<link rel="stylesheet" href="font2/css/fontello.css" type="text/css" />
+	
+	<script>
+	jQuery(function($)
+		{
+			//zresetuj scrolla
+			$.scrollTo(0);
+			$('.scrollup').click(function() { $.scrollTo($('body'), 1000); });
+		}
+		);
+	$(window).scroll(function()
+		{
+			if($(this).scrollTop()>300) $('.scrollup').fadeIn();
+			else $('.scrollup').fadeOut();		
+		}
+		);	
+	</script>
+	
+	<script type="text/javascript">
+	function otworz_czat()
+	{
+		var x=document.getElementById("czat_okno").style.display
+		console.log(x);
+		if (x === "none" || !x)
+		{
+			document.getElementById("czat_okno").style.display="block";
+		}
+		else
+		{
+			document.getElementById("czat_okno").style.display="none";
+		}
+	}
+	</script>
+	
+	
+	<script type="text/javascript">
+		
+			var numer = 1
+			
+			function schowaj()
+			{
+				$("#slider1").fadeOut(300);
+				$("#slider2").fadeOut(300);
+				$("#slider3").fadeOut(300);
+				$("#slider4").fadeOut(300);
+				$("#slider5").fadeOut(300);
+			}
+		
+			function zmienslajd()
+			{
+				numer++; if (numer>2) numer=1;
+				var plik1 = "<img src=\"obrazy/stolik przy drzwiach " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
+				var plik2 = "<img src=\"obrazy/stolik w rogu " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
+				var plik3 = "<img src=\"obrazy/stolik na środku " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
+				var plik4 = "<img src=\"obrazy/stolik przy kuchni " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
+				var plik5 = "<img src=\"obrazy/stolik w wnęce " + numer + ".png\" alt=\"Italian Trulli\"  style=\"border: 1px solid black;\" />";
+				
+				document.getElementById("slider1").innerHTML = plik1;
+				document.getElementById("slider2").innerHTML = plik2;
+				document.getElementById("slider3").innerHTML = plik3;
+				document.getElementById("slider4").innerHTML = plik4;
+				document.getElementById("slider5").innerHTML = plik5;
+
+				$("#slider1").fadeIn(300); 
+				$("#slider2").fadeIn(300); 
+				$("#slider3").fadeIn(300); 
+				$("#slider4").fadeIn(300);
+				$("#slider5").fadeIn(300);
+				
+				setTimeout("zmienslajd()", 4000);
+				setTimeout("schowaj()", 3700);
+			
+			}
+			
+		</script>
+	
+</head>
+
+<body onload="zmienslajd()">
+
+	<header>
+		<div id="logo">
+			Meet&Eat </br>
+		</div> 
+		<nav>
+			<nav class="navbar navbar-light bg-navcolor navbar-expand-lg">
+				
+				<a class="navbar-brand d-lg-none ml-3" href="index.html"><div id="logo_mini">Meat&Eat</div></a>
+				
+				<button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#mainmenu" aria-controls="mainmenu" aria-expanded="false" aria-label="Przełącznik nawigacji">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				
+				<div class="collapse navbar-collapse" id="mainmenu">
+				
+					<ul class="navbar-nav mx-auto">
+						<li class="nav-item mx-2">
+							<a class="nav-link" href="index.html"> Strona główna </a>
+						</li>
+						<li class="nav-item mx-2">
+							<a class="nav-link" href="menu.html"> Menu </a>
+						</li>
+						<li class="nav-item mx-2">
+							<a class="nav-link" href="restauracja.html"> Restauracja </a>
+						</li>
+						<li class="nav-item mx-2">
+							<a class="nav-link" href="rezerwacje.html"> Zarezerwuj </a>
+						</li>
+						<li class="nav-item mx-2">
+							<a class="nav-link" href="kontakt.html"> Kontakt </a>
+						</li>
+						<li class="nav-item dropdown mx-2">
+							<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false" id="submenu" aria-haspopup="true">Moje Konto</a>
+							
+							<div class="dropdown-menu" aria-labelledby="submenu" style="text-align:center; background-color:#D5D5D3; border: none; font-size:18px">
+							
+								<a class="dropdown-item" href="profil.html"> Moje konto </a>
+								<a class="dropdown-item" href="moje_rezerwacje.html"> Moje rezerwacje </a>								
+							</div>						
+						</li>
+						<li class="nav-item d-lg-none mx-2">
+							<a class="nav-link" href="#"> Czat </a>
+						</li>
+						<li class="nav-item mx-2">
+							<a class="nav-link" href="logowanie.html"> Zaloguj się </a>
+						</li>
+						<li class="nav-item mx-2">
+							<a class="nav-link" href="rejestracja.html"> Zarejestruj się </a>
+						</li>
+					</ul>
+				
+				</div>
+			</nav>
+		</nav>
+	</header>
+	
+	<main>
+	<a href="#" class="scrollup"></a>
+		<section class="main_field">		
+			<div class="container px-0 py-0">
+				<div class="tlo_rejestracje col-12 px-5 pb-4">	
+						<div class="menu_tekst pt-3"> Plan restauracji </div> </br>
+						<img class="img-fluid" src="obrazy/restauracja z góry 3.png" alt="Italian Trulli" style="width:800px; border: 1px solid black;">
+						<div class="menu_tekst pt-3"> Od strony obsługi </div> </br>
+						<img class="img-fluid" src="obrazy/widok zza lady.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
+						<div class="menu_tekst pt-3"> Z rogu </div> </br>
+						<img class="img-fluid" src="obrazy/widok z rogu.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
+						
+						<div class="menu_tekst pt-3"> Stolik 1 </div> </br>
+					
+						<img class="img-fluid" src="obrazy/stolik przy drzwiach 1.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
+						
+						<div class="menu_tekst pt-3"> Stolik 2 </div> </br>
+						
+						<img class="img-fluid" src="obrazy/stolik w rogu 1.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
+						
+						<div class="menu_tekst pt-3"> Stolik 3 </div> </br>
+						
+						<img class="img-fluid" src="obrazy/stolik na środku 1.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
+
+						<div class="menu_tekst pt-3"> Stolik 4 </div> </br>
+						
+						<img class="img-fluid" src="obrazy/stolik przy kuchni 1.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
+		
+						<div class="menu_tekst pt-3"> Stolik 5 </div> </br>
+						
+						<img class="img-fluid" src="obrazy/stolik w wnęce 1.png" alt="Italian Trulli"  style="width:800px; border: 1px solid black;">
+						</br></br>
+					</div>
+			</div>
+		</section>
+		
+	</main>
+	
+	<footer>
+		<div id="stopka">
+				Meet & Eat </br>
+		</div>
+	</footer>	
+	
+	<script src="jquery-1.11.3.min.js"></script>	
+		<script>
+			$(document).ready(function() {
+			var NavY = $('nav').offset().top;
+			 
+			var stickyNav = function(){
+			var ScrollY = $(window).scrollTop();
+				  
+			if (ScrollY > NavY) { 
+				$('nav').addClass('sticky');
+			} else {
+				$('nav').removeClass('sticky'); 
+			}
+			};
+			 
+			stickyNav();
+			 
+			$(window).scroll(function() {
+				stickyNav();
+			});
+			});
+		</script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+	<script src="js/bootstrap.min.js"></script>
+	
+</body>
+</html>
