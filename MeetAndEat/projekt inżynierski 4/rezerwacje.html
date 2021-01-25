@@ -31,10 +31,6 @@
 		);	
 	</script>
 	<script type="text/javascript">
-	function zamknij_okno()
-	{
-		document.getElementById("powiadomienia").style.display="none";
-	}
 	
 	function otworz_czat()
 	{
@@ -50,7 +46,12 @@
 		}
 	}
 	</script>
-	
+	<script type="text/javascript">
+	function zamknij_okno()
+	{
+		document.getElementById("powiadomienia").style.display="none";
+	}
+</script>
 </head>
 
 <body>
@@ -110,54 +111,58 @@
 		</nav>
 	</header>
 	
+	<ol class="col-12 d-none d-lg-block powiadomienia">
+			<li class="tekst">Siema! </br> Tutaj możesz sobie wpisac powiadomienie.</li>
+			<li class="zamknij" onclick="zamknij_okno()">Zamknij</li>
+	</ol>
+	
 	<main>	
 		<section class="main_field">		
 			<div class="container px-0 mx-auto">	
 				<div class="row">				
 					<div class="col-12 col-lg-3 d-lg-inline-block">	
-						<div class="tlo_rejestracje">
-							<div class="parametry_zamowienia4 mt-3" style="height:904px"> 
-						<div class="menu_tekst pt-3">Uzupełnij dane</div>
-							<form action="" method="post">
-								
-								<div class="do_checkboxa col-12 text-justify ml-2">								
-									<fieldset>
-										<legend> Ile miejsc przy stoliku? </legend>
-										<div><label><input type="radio" value="1" name="miejsca" checked>Jedno</label></div>
-										<div><label><input type="radio" value="2" name="miejsca">Dwa</label></div>
-										<div><label><input type="radio" value="3" name="miejsca">Trzy</label></div>
-										<div><label><input type="radio" value="4" name="miejsca">Cztery</label></div>
-										<div><label><input type="radio" value="5" name="miejsca">Pięć</label></div>
-									</fieldset> 
-								</div>
-								
-								<div class="input_field col-12 mt-3  text-justify ml-2">
-									<fieldset>
-										<legend> Od której godziny?</br>  </legend>
-										<input type="time" name="czas-start" step="900" value="12:00">
-									</fieldset> 
-								</div>
-								
-								<div class="input_field col-12 mt-3  text-justify ml-2">
-									<fieldset>
-										<legend> Do której godziny? </br>  </legend>
-										<input type="time" name="czas-koniec" step="900" value="12:00">
-									</fieldset> 
-								</div>
-								
-								<div class="input_field col-12 mt-3  text-justify ml-2">
-									<fieldset>
-										<legend> Data dostawy </br>  </legend>
-										<input type="date" name="dzien"?>
-									</fieldset> 
-								</div>
-								<div class="input_field col-12 mt-3 "> 
-									<input type="submit"></input>
-								</div>
-								
-							</form>
-						
-						</div>
+						<div class="tlo_rejestracje " style="min-height:800px;">
+							<div class="parametry_zamowienia4 mt-3 p-3" style="height:904px"> 
+								<div class="menu_tekst pt-3">Uzupełnij dane</div>
+								<form action="" method="post">
+									
+									<div class="do_checkboxa col-10">								
+										<fieldset>
+											<legend> Ile miejsc przy stoliku? </legend>
+											<div><label><input type="radio" value="1" name="miejsca" checked>Jedno</label></div>
+											<div><label><input type="radio" value="2" name="miejsca">Dwa</label></div>
+											<div><label><input type="radio" value="3" name="miejsca">Trzy</label></div>
+											<div><label><input type="radio" value="4" name="miejsca">Cztery</label></div>
+											<div><label><input type="radio" value="5" name="miejsca">Pięć</label></div>
+										</fieldset> 
+									</div>
+									
+									<div class="input_field col-10 mt-3 ">
+										<fieldset>
+											<legend> Od której godziny?</br>  </legend>
+											<input type="time" name="czas-start" step="900" value="12:00">
+										</fieldset> 
+									</div>
+									
+									<div class="input_field col-10 mt-3 ">
+										<fieldset>
+											<legend> Do której godziny? </br>  </legend>
+											<input type="time" name="czas-koniec" step="900" value="12:00">
+										</fieldset> 
+									</div>
+									
+									<div class="input_field col-10 mt-3">
+										<fieldset>
+											<legend> Data dostawy </br>  </legend>
+											<input type="date" name="dzien"?>
+										</fieldset> 
+									</div>
+									<div class="col-12 mt-3 "> 
+										<input class="imput_legancki" type="submit"></input>
+									</div>
+									
+								</form>					
+							</div>
 						</div>
 					</div>
 					<div class="col-12 col-lg-9 d-lg-inline-block mt-3">
