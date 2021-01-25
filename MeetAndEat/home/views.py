@@ -13,6 +13,9 @@ from django.contrib.auth.models import User
 def home(request):
     return render(request, 'home/home.html')
 
+def chat(request):
+    return render(request, 'home/chat.html')
+
 def kontakt(request):
     return render(request, 'home/kontakt.html')
 

@@ -32,6 +32,7 @@ urlpatterns = [
     path('register/', user_views.register, name='register'),
     path('profile/', user_views.profile, name='profile'),
     path('home/', home_views.home, name='home'),
+    path('chat/', home_views.chat, name='chat'),
     path('login/', user_views.logowanie, name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('pass_change/', user_views.change_password, name='change_password'),

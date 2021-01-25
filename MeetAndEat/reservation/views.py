@@ -280,6 +280,7 @@ def reservation(request):
     dates = {'min': date.today().strftime('%Y-%m-%d'), 'max': (date.today() + timedelta(days=10)).strftime('%Y-%m-%d')}
     sug = {'suc': '', 'alt1': {}, 'alt2': {}, 'alt3': {}, 'alt4': {}, 'alt5': {}}
     short = ['alt' + str(i+1) for i in range(5)]
+    colors = []
     form2 = None
     if request.method == 'POST':
         if 'date_submit' in request.POST:
@@ -287,9 +288,9 @@ def reservation(request):
             if form.is_valid():
                 seats = form.cleaned_data['places_by_table']
                 try:
-                    time_begin = datetime.strptime(request.POST.get('czas-start'), '%H:%M').time()
-                    time_end = datetime.strptime(request.POST.get('czas-koniec'), '%H:%M').time()
-                    day = datetime.strptime(request.POST.get('dzien'), '%Y-%m-%d').date()
+                    time_begin = form.cleaned_data['time_begin']
+                    time_end = form.cleaned_data['time_end']
+                    day = form.cleaned_data['day']
                 except:
                     messages.error(request, 'Błąd w terminie')
                     AllActions.objects.create(user=request.user, action_id=23, action="Rezerwacja: źle podany termin")
@@ -360,6 +361,11 @@ def reservation(request):
                     for i in range(len(suggestions)):
                         if suggestions[i][1] == 'Brak możliwości na dany dzień':
                             continue
+
+                        if suggestions[i][1] == 'Stolik dostępny na wybrany termin':
+                            colors.append('#CCFFCC')
+                        else:
+                            colors.append('#FF6666')
                         temp_text.append(suggestions[i][1])
                         sug[short[i]] = {'first': suggestions[i][0], 'second': suggestions[i][1]}
                         request.session[short[i]] = {'first': suggestions[i][2], 'second': suggestions[i][3]}
@@ -380,7 +386,7 @@ def reservation(request):
     else:
         form = ReservationForm()
 
-    return render(request, 'reservation/rezerwacje.html', {'form_res':form, 'form2': form2, 'sugg':sug, 'dates': dates})
+    return render(request, 'reservation/rezerwacje.html', {'form_res':form, 'form2': form2, 'sugg':sug, 'colors': colors, 'dates': dates})
 
 @login_required
 def reservation_items(request):

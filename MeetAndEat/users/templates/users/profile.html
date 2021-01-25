@@ -7,13 +7,13 @@
 {% block scripts %}
 <script type="text/javascript">
     function zamknij_otworz_okno_srodek() {
-		var y = document.getElementById("okno_srodek").style.display
-		if (y === "none" || !y) {
-			document.getElementById("okno_srodek").style.display = "block";
-		}
-		else {
-			document.getElementById("okno_srodek").style.display = "none";
-		}
+        var y = document.getElementById("okno_srodek").style.display
+        if (y === "none" || !y) {
+            document.getElementById("okno_srodek").style.display = "block";
+        }
+        else {
+            document.getElementById("okno_srodek").style.display = "none";
+        }
     }
     function zamknij_otworz_okno_srodek3() {
         var y = document.getElementById("okno_srodek4").style.display
@@ -51,10 +51,13 @@
             document.getElementById("okno_srodek7").style.display = "none";
         }
     }
+    function zmiana_html() {
+
+    }
 </script>
 {% endblock scripts %}
 {% block content %}
-<div id="okno_srodek">
+<div id="okno_srodek" col-12 mx-auto col-sm-8>
     Podaj haslo. Jesli bedzie poprawne, wyslemy na twoj email link do jego zmiany. </br>
     <form method="post">
         {% csrf_token %}
@@ -63,7 +66,7 @@
         </br><input class="rejestracja_input" type="submit" onclick="zamknij_otworz_okno_srodek()" name="pass_change_butt" value="Potwierdz" />
     </form>
 </div>
-<div id="okno_srodek4">
+<div id="okno_srodek4" col-12 mx-auto col-sm-8>
     Podaj nowy nick </br>
     <form method="post">
         {% csrf_token %}
@@ -72,7 +75,7 @@
         </br><input class="rejestracja_input" type="submit" onclick="zamknij_otworz_okno_srodek3()" name="nick_change_butt" value="Potwierdz" />
     </form>
 </div>
-<div id="okno_srodek5">
+<div id="okno_srodek5" col-12 mx-auto col-sm-8>
     Podaj nowe imie </br>
     <form method="post">
         {% csrf_token %}
@@ -81,7 +84,7 @@
         </br><input class="rejestracja_input" type="submit" onclick="zamknij_otworz_okno_srodek4()" name="name_change_butt" value="Potwierdz" />
     </form>
 </div>
-<div id="okno_srodek6">
+<div id="okno_srodek6" col-12 mx-auto col-sm-8>
     Podaj nowy email </br>
     <form method="post">
         {% csrf_token %}
@@ -90,7 +93,7 @@
         </br><input class="rejestracja_input" type="submit" onclick="zamknij_otworz_okno_srodek5()" name="mail_change_butt" value="Potwierdz" />
     </form>
 </div>
-<div id="okno_srodek7">
+<div id="okno_srodek7" col-12 mx-auto col-sm-8>
     Podaj nowy telefon </br>
     <form method="post">
         {% csrf_token %}
@@ -122,7 +125,7 @@
                     <div class="konto_maly col-3" onclick="zamknij_otworz_okno_srodek()">Zmien</div>
                     <div style="clear:both;"></div>
                     <div class="konto_element col-8 mx-auto">Moje rezerwacje</div>
-                    <div class="konto_maly col-3">Przejdz</div>
+                    <div class="konto_maly col-3" onclick="javascript: document.location.href = {% url 'moje_rezerwacje' %};">Przejdz</div>
                     <div style="clear:both;"></div>
                 </div>
             </div>

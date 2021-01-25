@@ -168,12 +168,6 @@ def profile(request):
     data['email'] = user.email
     data['first_name'] = user.first_name
 
-    if user_ex.pass_change_entries > 2:
-        if datetime.now(timezone.utc) - user_ex.pass_timeout >= timedelta(days=1):
-            user_ex.pass_change_entries = 0
-            user_ex.pass_timeout = None
-            user_ex.save()
-
     form = ChangePassClick()
     nick_form = NickChangeForm()
     name_form = NameChangeForm()
@@ -188,27 +182,34 @@ def profile(request):
                     if user_ex.pass_change_entries > 2:
                         if datetime.now(timezone.utc) - user_ex.pass_timeout < timedelta(days=1):
                             messages.error('Prośba o zmianę hasła zablokowana, blokada zniknie po 24h')
-                        else:
-                            uid = urlsafe_base64_encode(force_bytes(user.pk))
-                            token = account_activation_token.make_token(user)
-                            subject = 'Zmiana hasła'
-                            from_email = EMAIL_HOST_USER
-                            plain_text = get_template('email.txt')
-                            htmly = get_template('email.html')
-                            d = {'username': user, 'url': reverse('auth_pass_change', kwargs={'uidb64': str(uid), 'token': token})}
-                            text_content = plain_text.render(d)
-                            html_content = htmly.render(d)
-                            msg = EmailMultiAlternatives(subject, text_content, from_email, ['ooracuchoo@gmail.com'])
-                            msg.attach_alternative(html_content, 'text/html')
-                            msg.send()
-                            AllActions.objects.create(user=user, action_id=23, action="PROFIL: Wniesienie o zmianę hasła")
-                            try:
-                                sms_model_delete = SMSModel.objects.get(user=request.user, to_delete=True)
-                                sms_model_delete.delete()
-                            except:
-                                pass
-
+                            AllActions.objects.create(user=user, action_id=24, action="PROFIL: Próba prośby o zmiane hasła przy blokadzie")
                             return redirect('profile')
+                        else:
+                            AllActions.objects.create(user=user, action_id=25, action="PROFIL: Wyzerowanie użytkownikowi licznika prób zmiany hasła")
+                            user_ex.pass_change_entries = 0
+                            user_ex.pass_timeout = None
+                            user_ex.save()
+
+                    uid = urlsafe_base64_encode(force_bytes(user.pk))
+                    token = account_activation_token.make_token(user)
+                    subject = 'Zmiana hasła'
+                    from_email = EMAIL_HOST_USER
+                    plain_text = get_template('email.txt')
+                    htmly = get_template('email.html')
+                    d = {'username': user, 'url': reverse('auth_pass_change', kwargs={'uidb64': str(uid), 'token': token})}
+                    text_content = plain_text.render(d)
+                    html_content = htmly.render(d)
+                    msg = EmailMultiAlternatives(subject, text_content, from_email, ['ooracuchoo@gmail.com'])
+                    msg.attach_alternative(html_content, 'text/html')
+                    msg.send()
+                    AllActions.objects.create(user=user, action_id=23, action="PROFIL: Wniesienie o zmianę hasła")
+                    try:
+                        sms_model_delete = SMSModel.objects.get(user=request.user, to_delete=True)
+                        sms_model_delete.delete()
+                    except:
+                        pass
+
+                    return redirect('profile')
                 else:
                     messages.error(request, 'Podano złe hasło')
 
@@ -236,9 +237,12 @@ def profile(request):
         elif 'phone_change_butt' in request.POST:
             phone_form = PhoneChangeForm(request.POST)
             if phone_form.is_valid():
-                person = NewUser.objects.get(user=request.user)
-                person.phone = phone_form.cleaned_data['telefon']
-                person.save()
+                try:
+                    person = NewUser.objects.get(user=request.user)
+                    person.phone = phone_form.cleaned_data['telefon']
+                    person.save()
+                except:
+                    messages.warning(request, 'Podany numer jest już zarejestrowany')
                 return redirect('profile')
 
     return render(request, 'users/profile.html', {'data': data, 'nick_form': nick_form, 'name_form': name_form, 'mail_form': mail_form, 'phone_form': phone_form, 'form_prof': form})
@@ -313,7 +317,6 @@ def auth_change_password(request, uidb64, token):
                 else:
                     user = form.save()
                     person = NewUser.objects.get(user=user)
-                    breakpoint()
                     if re.search('[A-ZĄĆĘŁÓŃŻŹŚ]', form.cleaned_data['new_password1']) is not None:
                         if re.search('[.@#$&^_]', form.cleaned_data['new_password1']) is not None:
                             if re.search('[0-9]', form.cleaned_data['new_password1']) is not None:

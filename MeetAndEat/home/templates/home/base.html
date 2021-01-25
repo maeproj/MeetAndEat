@@ -10,6 +10,7 @@
 	{% block head %}{% endblock %}
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/fontello.css' %}" type="text/css" />
+	<link rel="stylesheet" href="{% static 'font2/css/fontello.css' %}" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="{% static 'js/jquery.scrollTo.min.js' %}"></script>
@@ -59,15 +60,21 @@
 				document.getElementById("okno_srodek2").style.display = "none";
 			}
 		}
+
+		function otworz_czat() {
+			var x = document.getElementById("czat_okno2").style.display
+			if (x === "none" || !x) {
+				document.getElementById("czat_okno2").style.display = "block";
+			}
+			else {
+				document.getElementById("czat_okno2").style.display = "none";
+			}
+		}
 	</script>
 
 	{% block scripts %}{% endblock %}
 
 </head>
-	<div id="czat" onclick="otworz_czat()"><i class="icon-comment" style="font-size:40px;"></i></div>
-	<div id="czat_okno">
-		<div id="miejsce_dla_jedruli"></div>
-	</div>
 	<body onload="zmienslajd(); ">
 		<header>
 			<div id="logo">
@@ -117,13 +124,19 @@
 
 							</li>
 							<li class="nav-item d-lg-none mx-2">
-								<a class="nav-link" href="#"> Czat </a>
+								<a class="nav-link" href="{% url 'chat' %}"> Czat </a>
 							</li>
 						</ul>
 					</div>
 				</nav>
 			</nav>
 		</header>
+
+		<a href="#" class="d-none d-lg-block czat2 scrollup"></a>
+		<div class="d-none d-lg-block czat2" onclick="otworz_czat()"><i class="icon-comment" style="font-size:40px;"></i></div>
+		<div class="czat_okno2" onclick="otworz_czat();">
+			<div class="miejsce_dla_jedruli"></div>
+		</div>
 
 		{% if messages %}
 		<ol id="powiadomienia">
