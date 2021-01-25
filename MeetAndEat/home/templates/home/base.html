@@ -41,16 +41,6 @@
 			document.getElementById("powiadomienia").style.display = "none";
 		}
 
-		function otworz_czat() {
-			var x = document.getElementById("czat_okno").style.display
-			if (x === "none" || !x) {
-				document.getElementById("czat_okno").style.display = "block";
-			}
-			else {
-				document.getElementById("czat_okno").style.display = "none";
-			}
-		}
-
 		function zamknij_otworz_okno_srodek2() {
 			var y = document.getElementById("okno_srodek2").style.display
 			if (y === "none" || !y) {
@@ -134,7 +124,7 @@
 
 		<a href="#" class="d-none d-lg-block czat2 scrollup"></a>
 		<div class="d-none d-lg-block czat2" onclick="otworz_czat()"><i class="icon-comment" style="font-size:40px;"></i></div>
-		<div class="czat_okno2" onclick="otworz_czat();">
+		<div id="czat_okno2">
 			<div class="miejsce_dla_jedruli"></div>
 		</div>
 

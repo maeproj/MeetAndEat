@@ -5,13 +5,8 @@
     "\\home\\templates",
     "\\MeetAndEat",
     "\\projekt inżynierski 4",
-    "\\reservation\\templates",
-    "\\reservation\\templates\\reservation",
     "\\static",
-    "\\static\\css",
-    "\\users\\templates",
-    "\\users\\templates\\users"
+    "\\static\\css"
   ],
-  "SelectedNode": "\\static\\css\\main.css",
   "PreviewInSolutionExplorer": false
 }
