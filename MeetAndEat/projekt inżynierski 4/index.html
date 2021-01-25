@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
 
@@ -14,6 +14,7 @@
 	
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="font2/css/fontello.css" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="jquery.scrollTo.min.js"></script>
@@ -25,6 +26,37 @@
 	<!--[if lt IE 9]>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<![endif]-->
+	
+	<script>
+	jQuery(function($)
+		{
+			//zresetuj scrolla
+			$.scrollTo(0);
+			$('.scrollup').click(function() { $.scrollTo($('body'), 1000); });
+		}
+		);
+	$(window).scroll(function()
+		{
+			if($(this).scrollTop()>300) $('.scrollup').fadeIn();
+			else $('.scrollup').fadeOut();		
+		}
+		);	
+	</script>
+	
+	<script type="text/javascript">
+		function otworz_czat()
+		{
+			var x=document.getElementById("czat_okno2").style.display
+			if (x === "none" || !x)
+			{
+				document.getElementById("czat_okno2").style.display="block";
+			}
+			else
+			{
+				document.getElementById("czat_okno2").style.display="none";
+			}
+		}
+	</script>
 	
 </head>
 
@@ -70,7 +102,7 @@
 							</div>						
 						</li>
 						<li class="nav-item d-lg-none mx-2">
-							<a class="nav-link" href="#"> Czat </a>
+							<a class="nav-link" href="czat.html"> Czat </a>
 						</li>
 						<li class="nav-item mx-2">
 							<a class="nav-link" href="logowanie.html"> Zaloguj się </a>
@@ -85,6 +117,11 @@
 		</nav>
 	</header>
 	<main>	
+		<a href="#" class="d-none d-lg-block czat2 scrollup"></a>
+		<div class="d-none d-lg-block czat2" onclick="otworz_czat()"><i class="icon-comment" style="font-size:40px;"></i></div>
+		<div class="czat_okno2">
+			<div class="miejsce_dla_jedruli"></div>
+		</div>
 		<section class="main_field">		
 			<div class="container px-0 py-0">
 				<div class="tlo_rejestracje col-12 px-5 pb-4 text-justify">	
@@ -126,9 +163,6 @@
 		</div>
 	</footer>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	
 	<script src="jquery-1.11.3.min.js"></script>	
 		<script>
@@ -152,6 +186,9 @@
 			});
 			});
 	</script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	
 	<script src="js/bootstrap.min.js"></script>
 	

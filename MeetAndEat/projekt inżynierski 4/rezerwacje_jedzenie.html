@@ -4,7 +4,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
-	<title>Menu</title>
+	<title>Rezerwacje_jedzenie</title>
 	<meta name="description" content="Tutaj wpisujemy opis" />
 	<meta name="keywords" content="słowa kluczowe, tagi, o czym strona" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -31,25 +31,10 @@
 		}
 		);	
 	</script>
-	
-	<script type="text/javascript">
-	function otworz_czat()
-	{
-		var x=document.getElementById("czat_okno").style.display
-		console.log(x);
-		if (x === "none" || !x)
-		{
-			document.getElementById("czat_okno").style.display="block";
-		}
-		else
-		{
-			document.getElementById("czat_okno").style.display="none";
-		}
-	}
-	</script>
+
 	
 </head>
-
+	
 <body>
 	<header>
 		<div id="logo">
@@ -110,18 +95,18 @@
 	<main>
 		<section class="main_field">		
 			<div class="container">	
-				<div class="row">				
-					<div class="col-3 d-none d-lg-inline-block">	
-						<div class="tlo_rejestracje">
-							<img class="img-fluid" src="obrazy/lewo.png" alt="lewo obraz"></a>
+				<div class="row">						
+					<div class="zam1 col-12 col-lg-3 my-1" style="min-height:200px;">	
+						<div class="tlo_rejestracje" style="min-height:200px;">
+							<div class="menu_tekst">Dania</div>
 						</div>
 					</div>
-					
-					<div class="col-12 col-lg-6 px-0 py-0">	
-						 <div class="tlo_menu col-12 mx-auto">
-							<div class="menu_tekst pt-3">Menu</div>
+					<div class="zam2 col-12 col-lg-6 my-1" style="min-height:200px">
+						<div class="tlo_rejestracje" style="min-height:500px;">
 							<div class="row">
-								<div class="col-4 col-lg-4" >
+								<div class="menu_tekst col-12">Wybierz danie</div>
+								<div class="col-4 col-lg-4">
+								
 									<ol class="lista_jedzenie">
 										<li class="element_jedzenie">Pizza Wiejska
 											<ul class="dymek">
@@ -139,7 +124,7 @@
 										</li>
 									</ol>	
 								</div>
-								<div class="col-4 col-lg-4" >
+								<div class="col-4 col-lg-4 " >
 									<ol class="lista_jedzenie">
 										<li class="element_jedzenie">Pizza Wiejska
 											<ul class="dymek">
@@ -178,17 +163,60 @@
 							</div>
 						</div>
 					</div>
-					
-					<div class="col-3 d-none d-lg-inline-block">
+					<div class="zam3 col-12 col-lg-3 my-1" style="min-height:200px;">	
 						<div class="tlo_rejestracje">
-							<img class="img-fluid" src="obrazy/prawo.png" alt="lewo obraz"></a>
+							<form action="" method="post">
+								<div class="menu_tekst">Edytuj danie</div>
+								
+								<div id="do_checkboxa">	
+									<fieldset>
+											<legend> Dodatki mięsne </legend>
+											<div><label><input type="checkbox" value="1" name="dodatki">Szynka +4zł</label></div>
+											<div><label><input type="checkbox" value="2" name="dodatki">Salami +4zł</label></div>
+											<div><label><input type="checkbox" value="3" name="dodatki">Boczek +4zł</label></div>
+											<div><label><input type="checkbox" value="4" name="dodatki">Pepperoni +5zł</label></div>
+											<div><label><input type="checkbox" value="5" name="dodatki">Kurczak +5zł</label></div>
+											<div><label><input type="checkbox" value="6" name="dodatki">Kiełasa +3zł</label></div>
+									</fieldset>  
+								</div>
+								<div id="do_checkboxa">	
+									<fieldset>
+											<legend> Dodatki warzywne </legend>
+											<div><label><input type="checkbox" value="7" name="dodatki">Papryka +3zł</label></div>
+											<div><label><input type="checkbox" value="8" name="dodatki">Brokuł +3zł</label></div>
+											<div><label><input type="checkbox" value="9" name="dodatki">Rukola +2zł</label></div>
+											<div><label><input type="checkbox" value="10" name="dodatki">Pomidor +3zł</label></div>
+											<div><label><input type="checkbox" value="11" name="dodatki">Zieminaki +2zł</label></div>
+											<div><label><input type="checkbox" value="12" name="dodatki">Kapary  +4zł</label></div>
+									</fieldset>  
+								</div>
+								<div id="do_checkboxa">	
+									<fieldset>
+											<legend> Inne dodatki </legend>
+											<div><label><input type="checkbox" value="13" name="dodatki">Krewetki +7zł</label></div>
+											<div><label><input type="checkbox" value="14" name="dodatki">Małże +6zł</label></div>
+											<div><label><input type="checkbox" value="15" name="dodatki">Ananas +3zł</label></div>
+									</fieldset>  
+								</div>
+								<div id="do_checkboxa">	
+									<fieldset>
+											<legend> Skład Pizzy </legend>
+											<div><label><input type="checkbox" value="1" name="sklad" checked>ser </label></div>
+											<div><label><input type="checkbox" value="2" name="sklad" checked>sos</label></div>
+											<div><label><input type="checkbox" value="3" name="sklad" checked>szynka</label></div>
+											<div><label><input type="checkbox" value="4" name="sklad" checked>pieczarki </label></div>
+									</fieldset>  
+								</div>
+								<div class="input_field2"> 
+									<input type="submit"></input>
+								</div>
+							</div>
 						</div>
-					</div>				
+					</div>
 				</div>
 			</div>
-		</section>
-		
-	</main>
+		</div>
+	
 	
 	<footer>
 		<div id="stopka">
@@ -222,7 +250,7 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-
+	
 	<script src="js/bootstrap.min.js"></script>
 	
 </body>
