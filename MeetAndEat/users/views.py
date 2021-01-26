@@ -32,8 +32,12 @@ def register(request):
                     if re.search('[0-9]', form.cleaned_data['password1']) is not None:
                         if re.match('^[a-zA-ZĄĆĘŁÓŃŻŹŚ.@#&^_0-9]+$', form.cleaned_data['password1']):
                             users.save()
-                            newuser = NewUser.objects.create(user=users, phone=form.cleaned_data['telefon'], password_history = form.cleaned_data['password1'])
-                            newuser.save()
+                            try:
+                                newuser = NewUser.objects.create(user=users, phone=form.cleaned_data['telefon'], password_history = form.cleaned_data['password1'])
+                                newuser.save()
+                            except:
+                                messages.error(request, 'Numer telefonu został już zarejestrowany w bazie')
+                                return redirect('register')
                             messages.success(request, 'Twoje konto zostało założone, możesz sie teraz zalogować!')
                             AllActions.objects.create(user=users, action_id=1, action=f"założenie konta")
                             return redirect('home')
@@ -313,13 +317,15 @@ def auth_change_password(request, uidb64, token):
                     return redirect('auth_pass_change', uidb64 = uidb64, token=token)
 
                 if form.cleaned_data['new_password1'] == form.cleaned_data['old_password']:
-                    messages.error(request, 'Nieprawidłowe dane :(')
+                    messages.error(request, 'Hasło nie może się powtarzać :(')
+                    return redirect('auth_pass_change', uidb64 = uidb64, token=token)
                 else:
                     user = form.save()
                     person = NewUser.objects.get(user=user)
                     if re.search('[A-ZĄĆĘŁÓŃŻŹŚ]', form.cleaned_data['new_password1']) is not None:
                         if re.search('[.@#$&^_]', form.cleaned_data['new_password1']) is not None:
                             if re.search('[0-9]', form.cleaned_data['new_password1']) is not None:
+                                breakpoint()
                                 if form.cleaned_data['old_password'] not in person.password_history:
                                     AllActions.objects.create(user=user, action_id=17, action="AUTH: Błąd przy zmianie hasła: stare hasło nie pasuje")
                                     messages.error(request, 'Błędne stare hasło')

@@ -1,12 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\home",
     "\\home\\templates",
     "\\MeetAndEat",
-    "\\projekt inżynierski 4",
-    "\\static",
-    "\\static\\css"
+    "\\users"
   ],
+  "SelectedNode": "\\MeetAndEat\\settings.py",
   "PreviewInSolutionExplorer": false
 }
